@@ -23,7 +23,7 @@ class SignupViewController: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.setupDelegates()
+        self.setupDelegates()            
     }
 
     override func didReceiveMemoryWarning() {
