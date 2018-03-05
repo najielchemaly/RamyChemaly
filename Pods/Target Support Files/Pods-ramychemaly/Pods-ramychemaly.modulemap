@@ -1,0 +1,6 @@
+framework module Pods_ramychemaly {
+  umbrella header "Pods-ramychemaly-umbrella.h"
+
+  export *
+  module * { export * }
+}
