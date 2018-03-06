@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class LoadingViewController: BaseViewController {
 
@@ -19,10 +20,11 @@ class LoadingViewController: BaseViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        progressView.progress = 0
-        progressView.transform = progressView.transform.scaledBy(x: 1, y: 2)
+//        self.setupProgressView()
         
-        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector:#selector(setProgressBar), userInfo: nil, repeats: true)
+        self.showLoader(message: "LOADING")
+        
+        _ = Timer.scheduledTimer(timeInterval: 2, target: self, selector:#selector(navigateToLogin), userInfo: nil, repeats: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,7 +32,19 @@ class LoadingViewController: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
    
-    @objc func setProgressBar()
+    @objc func navigateToLogin() {
+        self.hideLoader()
+        self.redirectToVC(storyboardId: StoryboardIds.LoginViewController, type: .push)
+    }
+    
+    func setupProgressView() {
+        progressView.progress = 0
+        progressView.transform = progressView.transform.scaledBy(x: 1, y: 2)
+        
+        timer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector:#selector(updateProgress), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateProgress()
     {
         indexProgress += 0.05
         progressView.setProgress(indexProgress/3, animated: true)

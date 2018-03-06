@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 protocol ImagePickerDelegate {
     func didFinishPickingMedia(data: UIImage?)
@@ -127,6 +128,16 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             
             // set login as root
         }
+    }
+    
+    func showLoader(message: String? = nil, type: NVActivityIndicatorType? = .lineScaleParty,
+                    color: UIColor? = nil , textColor: UIColor? = nil) {
+        let activityData = ActivityData(message: message, type: type, color: color, textColor: textColor)
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+    }
+    
+    func hideLoader() {
+        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
     }
     
     /*

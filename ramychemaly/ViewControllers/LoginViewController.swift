@@ -38,8 +38,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     @IBAction func buttonLoginTapped(_ sender: Any) {
         if isValidData() {
-            let activityData = ActivityData(type: .lineScale)
-            NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+            self.showLoader()
             
             _ = Timer.scheduledTimer(timeInterval: 2, target: self, selector:#selector(navigateToHome), userInfo: nil, repeats: false)
             
@@ -187,7 +186,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc func navigateToHome() {
-        NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+        self.hideLoader()
         self.redirectToVC(storyboardId: StoryboardIds.InitialMenuViewController, type: .present)
     }
     

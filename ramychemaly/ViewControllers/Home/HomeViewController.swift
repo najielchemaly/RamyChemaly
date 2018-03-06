@@ -18,6 +18,7 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     @IBOutlet weak var buttonBiography: UIButton!
     @IBOutlet weak var buttonDiscography: UIButton!
     @IBOutlet weak var labelBadge: UILabel!
+    @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
     
     override func viewDidLoad() {
@@ -31,6 +32,10 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
         // Dispose of any resources that can be recreated.
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
+    
     @IBAction func buttonMenuTapped(_ sender: Any) {
         self.showSideMenu()
     }
