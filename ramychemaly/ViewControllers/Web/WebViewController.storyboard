@@ -17,9 +17,24 @@
                     <view key="view" contentMode="scaleToFill" id="heh-td-lqm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sfL-PU-YVc">
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
+                                <color key="backgroundColor" red="0.94184064869999995" green="0.95676451920000005" blue="0.96122664209999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="sfL-PU-YVc" firstAttribute="leading" secondItem="gcT-iQ-bbw" secondAttribute="leading" id="FMV-4z-qZu"/>
+                            <constraint firstItem="gcT-iQ-bbw" firstAttribute="trailing" secondItem="sfL-PU-YVc" secondAttribute="trailing" id="Laf-sW-Afk"/>
+                            <constraint firstItem="gcT-iQ-bbw" firstAttribute="bottom" secondItem="sfL-PU-YVc" secondAttribute="bottom" id="TXW-Ha-yez"/>
+                            <constraint firstItem="sfL-PU-YVc" firstAttribute="top" secondItem="gcT-iQ-bbw" secondAttribute="top" constant="60" id="ZJ0-IO-eLL"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gcT-iQ-bbw"/>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="sfL-PU-YVc" id="TAp-T0-ZAd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oUH-VB-w52" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

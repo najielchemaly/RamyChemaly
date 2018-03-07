@@ -15,6 +15,9 @@
         <array key="Montserrat-Bold.ttf">
             <string>Montserrat-Bold</string>
         </array>
+        <array key="Montserrat-Light.ttf">
+            <string>Montserrat-Light</string>
+        </array>
         <array key="Montserrat-Medium.ttf">
             <string>Montserrat-Medium</string>
         </array>
@@ -215,6 +218,154 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cmP-IH-u24" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="828" y="828.93553223388312"/>
+        </scene>
+        <!--Discography View Controller-->
+        <scene sceneID="kjm-Yh-5ws">
+            <objects>
+                <viewController storyboardIdentifier="DiscographyViewController" id="T2h-4t-NQE" customClass="DiscographyViewController" customModule="ramychemaly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="X5M-2j-et3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kWQ-tt-fya">
+                                <rect key="frame" x="0.0" y="70" width="375" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NhV-k1-Jn1">
+                                        <rect key="frame" x="0.0" y="0.0" width="125" height="40"/>
+                                        <color key="backgroundColor" red="0.89085310699999998" green="0.90571790929999996" blue="0.91457635159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="16"/>
+                                        <state key="normal" title="IMAGES">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" red="0.89085310699999998" green="0.90571790929999996" blue="0.91457635159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonImagesTapped:" destination="T2h-4t-NQE" eventType="touchUpInside" id="qbz-EC-noU"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhY-m6-i44">
+                                        <rect key="frame" x="125" y="0.0" width="125" height="40"/>
+                                        <color key="backgroundColor" red="0.8901960784313725" green="0.90588235294117647" blue="0.9137254901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="16"/>
+                                        <state key="normal" title="VIDEOS">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" red="0.89085310699999998" green="0.90571790929999996" blue="0.91457635159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonVideosTapped:" destination="T2h-4t-NQE" eventType="touchUpInside" id="7By-8a-1Ni"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTb-3S-AGf">
+                                        <rect key="frame" x="250" y="0.0" width="125" height="40"/>
+                                        <color key="backgroundColor" red="0.89085310699999998" green="0.90571790929999996" blue="0.91457635159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Light" family="Montserrat" pointSize="16"/>
+                                        <state key="normal" title="SOCIALS">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <state key="selected">
+                                            <color key="titleColor" red="0.89085310699999998" green="0.90571790929999996" blue="0.91457635159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="buttonYoutubeTapped:" destination="T2h-4t-NQE" eventType="touchUpInside" id="XP8-CD-ExY"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.89085310697555542" green="0.90571790933609009" blue="0.91457635164260864" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="YHK-7i-a4K"/>
+                                </constraints>
+                            </stackView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="17d-uY-7Tq">
+                                <rect key="frame" x="20" y="130" width="335" height="517"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jcp-SI-GIF">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="vlr-sS-iYz">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="31t-WH-IUI">
+                                <rect key="frame" x="20" y="130" width="335" height="517"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="17d-uY-7Tq" firstAttribute="leading" secondItem="jkN-UN-EXF" secondAttribute="leading" constant="20" id="349-d3-r2Q"/>
+                            <constraint firstItem="jkN-UN-EXF" firstAttribute="trailing" secondItem="17d-uY-7Tq" secondAttribute="trailing" constant="20" id="9Ln-0u-KgG"/>
+                            <constraint firstItem="jkN-UN-EXF" firstAttribute="trailing" secondItem="31t-WH-IUI" secondAttribute="trailing" constant="20" id="9fl-IT-A8A"/>
+                            <constraint firstItem="31t-WH-IUI" firstAttribute="top" secondItem="kWQ-tt-fya" secondAttribute="bottom" constant="20" id="IAU-Al-N1n"/>
+                            <constraint firstItem="kWQ-tt-fya" firstAttribute="leading" secondItem="jkN-UN-EXF" secondAttribute="leading" id="KoS-u2-JNs"/>
+                            <constraint firstItem="jkN-UN-EXF" firstAttribute="trailing" secondItem="kWQ-tt-fya" secondAttribute="trailing" id="StT-9Y-cCb"/>
+                            <constraint firstItem="jkN-UN-EXF" firstAttribute="bottom" secondItem="17d-uY-7Tq" secondAttribute="bottom" constant="20" id="Xyn-dc-cV4"/>
+                            <constraint firstItem="31t-WH-IUI" firstAttribute="leading" secondItem="jkN-UN-EXF" secondAttribute="leading" constant="20" id="bBk-Ot-IKF"/>
+                            <constraint firstItem="17d-uY-7Tq" firstAttribute="top" secondItem="kWQ-tt-fya" secondAttribute="bottom" constant="20" id="faw-E6-FDw"/>
+                            <constraint firstItem="jkN-UN-EXF" firstAttribute="bottom" secondItem="31t-WH-IUI" secondAttribute="bottom" constant="20" id="mcN-Qb-hDI"/>
+                            <constraint firstItem="kWQ-tt-fya" firstAttribute="top" secondItem="jkN-UN-EXF" secondAttribute="top" constant="50" id="rYi-Ec-8Zz"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="jkN-UN-EXF"/>
+                    </view>
+                    <connections>
+                        <outlet property="buttonImages" destination="NhV-k1-Jn1" id="BXU-Yr-gvZ"/>
+                        <outlet property="buttonVideos" destination="KhY-m6-i44" id="KUY-s4-Gje"/>
+                        <outlet property="buttonYoutube" destination="BTb-3S-AGf" id="wUo-sh-eKq"/>
+                        <outlet property="collectionView" destination="17d-uY-7Tq" id="HWm-Nq-7on"/>
+                        <outlet property="tableView" destination="31t-WH-IUI" id="Q1L-bi-BK6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FAY-Uc-A0w" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1557.5999999999999" y="828.93553223388312"/>
+        </scene>
+        <!--Bread Of Life View Controller-->
+        <scene sceneID="AI5-sq-XOb">
+            <objects>
+                <viewController storyboardIdentifier="BreadOfLifeViewController" id="lpd-Wz-FD5" customClass="BreadOfLifeViewController" customModule="ramychemaly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uVn-xV-Olq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="breadoflife_background" translatesAutoresizingMaskIntoConstraints="NO" id="pqu-W2-fWM">
+                                <rect key="frame" x="0.0" y="70" width="375" height="597"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qha-fZ-xwO" customClass="FSPagerView" customModule="FSPagerView">
+                                <rect key="frame" x="20" y="90" width="335" height="557"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qha-fZ-xwO" firstAttribute="top" secondItem="iNn-Ac-7o6" secondAttribute="top" constant="70" id="2TH-zl-oVa"/>
+                            <constraint firstItem="pqu-W2-fWM" firstAttribute="leading" secondItem="iNn-Ac-7o6" secondAttribute="leading" id="AsI-1e-owY"/>
+                            <constraint firstItem="iNn-Ac-7o6" firstAttribute="trailing" secondItem="qha-fZ-xwO" secondAttribute="trailing" constant="20" id="Osd-5q-8lo"/>
+                            <constraint firstItem="iNn-Ac-7o6" firstAttribute="bottom" secondItem="qha-fZ-xwO" secondAttribute="bottom" constant="20" id="Ot6-lu-Gpj"/>
+                            <constraint firstItem="iNn-Ac-7o6" firstAttribute="trailing" secondItem="pqu-W2-fWM" secondAttribute="trailing" id="PP3-R1-Mro"/>
+                            <constraint firstItem="iNn-Ac-7o6" firstAttribute="bottom" secondItem="pqu-W2-fWM" secondAttribute="bottom" id="R8b-mH-CKu"/>
+                            <constraint firstItem="qha-fZ-xwO" firstAttribute="leading" secondItem="iNn-Ac-7o6" secondAttribute="leading" constant="20" id="aJD-sn-Pmy"/>
+                            <constraint firstItem="pqu-W2-fWM" firstAttribute="top" secondItem="iNn-Ac-7o6" secondAttribute="top" constant="50" id="gUF-4z-4a0"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iNn-Ac-7o6"/>
+                    </view>
+                    <connections>
+                        <outlet property="pagerView" destination="qha-fZ-xwO" id="tTw-5q-wCz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7to-AW-Wul" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2285.5999999999999" y="828.93553223388312"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -675,6 +826,7 @@
     </scenes>
     <resources>
         <image name="background" width="1080" height="1920"/>
+        <image name="breadoflife_background" width="1080" height="1920"/>
         <image name="button_background_blue" width="980" height="149"/>
         <image name="button_background_blue_light" width="980" height="149"/>
         <image name="button_background_white" width="980" height="149"/>

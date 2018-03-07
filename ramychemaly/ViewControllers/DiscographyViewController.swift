@@ -1,27 +1,31 @@
 //
-//  ContactUsViewController.swift
+//  DiscographyViewController.swift
 //  ramychemaly
 //
-//  Created by MR.CHEMALY on 3/5/18.
+//  Created by MR.CHEMALY on 3/7/18.
 //  Copyright © 2018 we-devapp. All rights reserved.
 //
 
 import UIKit
 
-class ContactUsViewController: BaseViewController, Storyboardable {
+class DiscographyViewController: BaseViewController {
 
-    @IBOutlet weak var textFieldFullname: UITextField!
-    @IBOutlet weak var textFieldEmailAddress: UITextField!
-    @IBOutlet weak var textFieldPhoneNumber: UITextField!
-    @IBOutlet weak var textViewMessage: UITextView!
-    @IBOutlet weak var buttonSubmit: UIButton!
-    @IBOutlet weak var buttonClose: UIButton!
+    @IBOutlet weak var buttonImages: UIButton!
+    @IBOutlet weak var buttonVideos: UIButton!
+    @IBOutlet weak var buttonYoutube: UIButton!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.initializeViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.toolbarView.labelTitle.text = "DISCOGRAPHY"
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,16 +33,16 @@ class ContactUsViewController: BaseViewController, Storyboardable {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func buttonSubmitTapped(_ sender: Any) {
+    @IBAction func buttonImagesTapped(_ sender: Any) {
         
     }
     
-    @IBAction func buttonCloseTapped(_ sender: Any) {
-        self.dismissVC()
+    @IBAction func buttonVideosTapped(_ sender: Any) {
+        
     }
     
-    func initializeViews() {
-        self.textViewMessage.layer.cornerRadius = 30
+    @IBAction func buttonYoutubeTapped(_ sender: Any) {
+        
     }
     
     /*

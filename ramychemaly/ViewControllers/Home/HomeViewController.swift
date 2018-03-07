@@ -36,6 +36,10 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
         super.viewWillLayoutSubviews()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
     @IBAction func buttonMenuTapped(_ sender: Any) {
         self.showSideMenu()
     }
@@ -45,7 +49,7 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     }
     
     @IBAction func buttonBreadOfLifeTapped(_ sender: Any) {
-        
+        self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.BreadOfLifeViewController, type: .present)
     }
     
     @IBAction func buttonLogoutTapped(_ sender: Any) {
@@ -58,11 +62,11 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     }
     
     @IBAction func buttonBiographyTapped(_ sender: Any) {
-        self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.BiographyViewController, type: .push)
+        self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.BiographyViewController, type: .present)
     }
     
     @IBAction func buttonDiscographyTapped(_ sender: Any) {
-        
+        self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.DiscographyViewController, type: .present)
     }
     
     /*

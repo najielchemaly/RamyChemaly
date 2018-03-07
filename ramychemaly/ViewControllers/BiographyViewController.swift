@@ -147,6 +147,9 @@ class BiographyViewController: BaseViewController, FSPagerViewDataSource, FSPage
             let itemWidth = Int(self.barWidthConstraint.constant)
             let barX = ((self.itemSpacing*index+1)+(index*itemWidth)+self.itemSpacing)
             self.barLeadingConstraint.constant = CGFloat(barX)
+            UIView.animate(withDuration: 0.3) {
+                self.view.layoutIfNeeded()
+            }
         }
     }
     

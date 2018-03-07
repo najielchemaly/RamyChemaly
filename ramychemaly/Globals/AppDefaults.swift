@@ -27,8 +27,9 @@ var appDelegate: AppDelegate {
 }
 
 enum AppStoryboard : String {
-    
     case Main
+    case WebViewController
+    case ContactUsViewController
     
     var instance : UIStoryboard {
         return UIStoryboard(name: self.rawValue, bundle: Bundle.main)
@@ -36,9 +37,10 @@ enum AppStoryboard : String {
 }
 
 let mainStoryboard = AppStoryboard.Main.instance
+let webStoryboard = AppStoryboard.WebViewController.instance
+let contactStoryboard = AppStoryboard.ContactUsViewController.instance
 
 struct Colors {
-    
     static let appBlue: UIColor = UIColor(hexString: "#278eb6")!
     static let appRed: UIColor = UIColor(hexString: "#e65e14")!
     static let textDark: UIColor = UIColor(hexString: "#192226")!
@@ -50,11 +52,9 @@ struct Colors {
     static let lightBlue: UIColor = UIColor(hexString: "#6fd1ef")!
     static let unreadNotif: UIColor = UIColor(hexString: "#d4dadd")!
     static let readNotif: UIColor = UIColor(hexString: "#dfe5e8")!
-    
 }
 
 struct Fonts {
-    
     static let names: [String?] = UIFont.fontNames(forFamilyName: "Montserrat")
     
     static var textFont_Regular: UIFont {
@@ -96,11 +96,9 @@ struct Fonts {
             return UIFont.init()
         }
     }
-    
 }
 
 struct StoryboardIds {
-    
     static let SelectLanguageViewController: String = "SelectLanguageViewController"
     static let SignupViewController: String = "SignupViewController"
     static let NewsViewController: String = "NewsViewController"
@@ -119,32 +117,27 @@ struct StoryboardIds {
     static let WebViewController: String = "WebViewController"
     static let InitialMenuViewController: String = "InitialMenuViewController"
     static let BiographyViewController: String = "BiographyViewController"
-    
+    static let DiscographyViewController: String = "DiscographyViewController"
+    static let BreadOfLifeViewController: String = "BreadOfLifeViewController"
 }
 
 struct CellIdentifiers {
-    
     static let NotificationTableViewCell: String = "NotificationTableViewCell"
-    
 }
 
 enum Keys: String {
-    
     case AccessToken = "TOKEN"
     case AppLanguage = "APP-LANGUAGE"
     case AppVersion = "APP-VERSION"
     case DeviceId = "ID"
-    
 }
 
 enum SegueId: String {
-    
     case None
     
     var identifier: String {
         return String(describing: self).lowercased()
     }
-    
 }
 
 enum Language: Int {
@@ -155,13 +148,17 @@ enum Language: Int {
 }
 
 enum NewsType {
-    
     case None
     
     var identifier: String {
         return String(describing: self).lowercased()
     }
-    
+}
+
+public enum WebViewComingFrom {
+    case none
+    case terms
+    case privacy
 }
 
 func getYears() -> NSMutableArray {

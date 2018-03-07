@@ -10,6 +10,10 @@ import UIKit
 
 class WebViewController: BaseViewController, Storyboardable {
 
+    @IBOutlet weak var webView: UIWebView!
+
+    static var comingFrom = WebViewComingFrom.none
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,7 +25,19 @@ class WebViewController: BaseViewController, Storyboardable {
         // Dispose of any resources that can be recreated.
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if WebViewController.comingFrom.hashValue == WebViewComingFrom.terms.hashValue {
+            self.toolbarView.labelTitle.text = "TERMS & CONDITIONS"
+        } else if WebViewController.comingFrom.hashValue == WebViewComingFrom.privacy.hashValue {
+            self.toolbarView.labelTitle.text = "PRIVACY POLICY"
+        }
+        
+        self.toolbarView.buttonBack.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+        self.toolbarView.buttonBack.tag = 1
+    }
+    
     /*
     // MARK: - Navigation
 

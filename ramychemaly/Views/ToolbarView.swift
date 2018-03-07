@@ -15,7 +15,11 @@ class ToolbarView: UIView {
     
     @IBAction func buttonBackTapped(_ sender: Any) {
         if let baseVC = currentVC as? BaseViewController {
-            baseVC.popVC()
+            if buttonBack.tag == 0 {
+                baseVC.dismissVC()
+            } else {
+                baseVC.popVC()
+            }
         }
     }
     

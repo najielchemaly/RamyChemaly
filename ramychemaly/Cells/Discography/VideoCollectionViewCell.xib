@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Bold.ttf">
+            <string>Montserrat-Bold</string>
+        </array>
+        <array key="Montserrat-Medium.ttf">
+            <string>Montserrat-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCollectionViewCell" id="gTV-IL-0wX" customClass="VideoCollectionViewCell" customModule="ramychemaly" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="180"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="180"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pL7-e6-FUd">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9ti-Zl-paJ">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xp8-bg-ykh">
+                        <rect key="frame" x="52.5" y="52.5" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="XXi-9Y-jFw"/>
+                            <constraint firstAttribute="width" constant="45" id="iMf-q6-Mqp"/>
+                        </constraints>
+                        <state key="normal" image="play"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmS-yZ-rtY">
+                        <rect key="frame" x="4" y="150" width="102" height="30"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2:34" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6xZ-iM-AB1">
+                        <rect key="frame" x="110" y="150" width="40" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="THQ-GW-C0G"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="9ti-Zl-paJ" secondAttribute="trailing" id="3C0-bP-rJz"/>
+                <constraint firstItem="pL7-e6-FUd" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="3Lx-tP-bjr"/>
+                <constraint firstItem="xp8-bg-ykh" firstAttribute="centerX" secondItem="9ti-Zl-paJ" secondAttribute="centerX" id="3b5-Vu-TS3"/>
+                <constraint firstItem="9ti-Zl-paJ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="3oA-bM-lCG"/>
+                <constraint firstAttribute="bottom" secondItem="6xZ-iM-AB1" secondAttribute="bottom" id="4bO-93-0rq"/>
+                <constraint firstItem="lmS-yZ-rtY" firstAttribute="top" secondItem="pL7-e6-FUd" secondAttribute="bottom" id="54K-0l-9ew"/>
+                <constraint firstAttribute="trailing" secondItem="pL7-e6-FUd" secondAttribute="trailing" id="5EQ-zT-TcF"/>
+                <constraint firstItem="9ti-Zl-paJ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8B6-OF-Oyu"/>
+                <constraint firstItem="xp8-bg-ykh" firstAttribute="centerY" secondItem="9ti-Zl-paJ" secondAttribute="centerY" id="Bjg-Ib-REy"/>
+                <constraint firstAttribute="trailing" secondItem="6xZ-iM-AB1" secondAttribute="trailing" id="C4C-4I-OnN"/>
+                <constraint firstAttribute="bottom" secondItem="lmS-yZ-rtY" secondAttribute="bottom" id="Hxj-r0-qJ9"/>
+                <constraint firstItem="pL7-e6-FUd" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="RLy-Fq-ue0"/>
+                <constraint firstItem="6xZ-iM-AB1" firstAttribute="top" secondItem="pL7-e6-FUd" secondAttribute="bottom" id="ev3-aC-bN0"/>
+                <constraint firstItem="lmS-yZ-rtY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="mWG-bU-2hs"/>
+                <constraint firstAttribute="bottom" secondItem="pL7-e6-FUd" secondAttribute="bottom" constant="30" id="pXe-0x-jiS"/>
+                <constraint firstItem="6xZ-iM-AB1" firstAttribute="leading" secondItem="lmS-yZ-rtY" secondAttribute="trailing" constant="4" id="qyz-PX-97d"/>
+                <constraint firstAttribute="bottom" secondItem="9ti-Zl-paJ" secondAttribute="bottom" constant="30" id="wze-7l-ZfE"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="buttonPlay" destination="xp8-bg-ykh" id="vLO-Dy-gc0"/>
+                <outlet property="imageViewIcon" destination="pL7-e6-FUd" id="Qto-ez-EZ3"/>
+                <outlet property="labelTime" destination="6xZ-iM-AB1" id="bWd-H3-gTJ"/>
+                <outlet property="labelTitle" destination="lmS-yZ-rtY" id="4QB-XL-9Fc"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="play" width="128" height="128"/>
+    </resources>
+</document>

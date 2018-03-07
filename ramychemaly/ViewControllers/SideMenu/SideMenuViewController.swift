@@ -77,7 +77,6 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         switch indexPath.row {
         case 0:
-            cell.isUserInteractionEnabled = false
             cell.switchNotification.isHidden = false
             cell.titleLabel.text = "Allow notifications"
             cell.selectionStyle = .none
@@ -99,15 +98,28 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            return
-        }
-        
         guard let menuContainerViewController = self.menuContainerViewController else {
             return
         }
-//        menuContainerViewController.selectContentViewController(menuContainerViewController.contentViewControllers[indexPath.row])
-        menuContainerViewController.hideSideMenu()
+
+        switch indexPath.row {
+        case 0:
+            return
+        case 1:
+            menuContainerViewController.hideSideMenu()
+        case 2:
+            menuContainerViewController.hideSideMenu()
+            WebViewController.comingFrom = WebViewComingFrom.terms
+            self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .push)
+        case 3:
+            menuContainerViewController.hideSideMenu()
+            WebViewController.comingFrom = WebViewComingFrom.privacy
+            self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .push)
+        case 4:
+            self.redirectToVC(storyboard: contactStoryboard, storyboardId: StoryboardIds.ContactUsViewController, type: .present)
+        default:
+            break
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

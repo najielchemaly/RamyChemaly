@@ -89,7 +89,7 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func hasToolBar() -> Bool {
-        if self is BiographyViewController {
+        if self is BiographyViewController || self is DiscographyViewController || self is BreadOfLifeViewController || self is WebViewController {
             return true
         }
         

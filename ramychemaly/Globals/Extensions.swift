@@ -163,7 +163,7 @@ extension UIViewController {
                 destinationVC.navigationItem.backBarButtonItem?.title = backTitle
                 destinationVC.navigationItem.title = title
                 
-                self.navigationController?.pushViewController(destinationVC, animated: animated)
+                currentVC.navigationController?.pushViewController(destinationVC, animated: animated)
                 break
             case .present:
                 self.present(destinationVC, animated: animated, completion: nil)
@@ -184,8 +184,8 @@ extension UIViewController {
                 transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
                 transition.type = kCATransitionPush;
                 transition.subtype = kCATransitionFromTop;
-                self.navigationController?.view.layer.add(transition, forKey: kCATransition)
-                self.navigationController?.pushViewController(destinationVC, animated: false)
+                currentVC.navigationController?.view.layer.add(transition, forKey: kCATransition)
+                currentVC.navigationController?.pushViewController(destinationVC, animated: false)
                 break
             }
         }
