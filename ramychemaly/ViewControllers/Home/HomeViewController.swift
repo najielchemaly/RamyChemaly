@@ -58,7 +58,7 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     }
     
     @IBAction func buttonBiographyTapped(_ sender: Any) {
-        
+        self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.BiographyViewController, type: .push)
     }
     
     @IBAction func buttonDiscographyTapped(_ sender: Any) {

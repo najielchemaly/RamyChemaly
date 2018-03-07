@@ -118,6 +118,7 @@ struct StoryboardIds {
     static let LoginNavigationController: String = "LoginNavigationController"
     static let WebViewController: String = "WebViewController"
     static let InitialMenuViewController: String = "InitialMenuViewController"
+    static let BiographyViewController: String = "BiographyViewController"
     
 }
 

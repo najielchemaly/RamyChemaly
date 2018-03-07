@@ -38,6 +38,14 @@
 		42A45553204ED1C5002F207D /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A45552204ED1C5002F207D /* EmptyView.xib */; };
 		42A45555204ED61F002F207D /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A45554204ED61F002F207D /* EmptyView.swift */; };
 		42A45558204ED67C002F207D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A45557204ED67C002F207D /* Notification.swift */; };
+		42A4555A204FD3C9002F207D /* ToolbarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A45559204FD3C9002F207D /* ToolbarView.xib */; };
+		42A4555C204FD3DA002F207D /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4555B204FD3DA002F207D /* ToolbarView.swift */; };
+		42A45567204FDAD1002F207D /* BiographyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A45566204FDAD1002F207D /* BiographyViewController.swift */; };
+		42A4556F204FEA13002F207D /* BioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4556D204FEA13002F207D /* BioCollectionViewCell.swift */; };
+		42A45570204FEA13002F207D /* BioCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A4556E204FEA13002F207D /* BioCollectionViewCell.xib */; };
+		42A45573204FED74002F207D /* BioPagerViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A45571204FED74002F207D /* BioPagerViewCell.swift */; };
+		42A45574204FED74002F207D /* BioPagerViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A45572204FED74002F207D /* BioPagerViewCell.xib */; };
+		42A45576204FF00F002F207D /* Biography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A45575204FF00F002F207D /* Biography.swift */; };
 		42B1BAD8204D49FB001E06F5 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BAD7204D49FB001E06F5 /* ForgotPasswordViewController.swift */; };
 		42B1BADA204D4A06001E06F5 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BAD9204D4A06001E06F5 /* SignupViewController.swift */; };
 		42B1BADC204D664B001E06F5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BADB204D664B001E06F5 /* HomeViewController.swift */; };
@@ -46,6 +54,19 @@
 		42B1BAE4204D73FD001E06F5 /* SideMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42B1BAE3204D73FD001E06F5 /* SideMenuViewController.storyboard */; };
 		42B1BAE6204D74FA001E06F5 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BAE5204D74FA001E06F5 /* MenuTableViewCell.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		42A4556C204FDB63002F207D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		426CFB5C204D799B00D3B85E /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +102,14 @@
 		42A45552204ED1C5002F207D /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
 		42A45554204ED61F002F207D /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		42A45557204ED67C002F207D /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		42A45559204FD3C9002F207D /* ToolbarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToolbarView.xib; sourceTree = "<group>"; };
+		42A4555B204FD3DA002F207D /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		42A45566204FDAD1002F207D /* BiographyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiographyViewController.swift; sourceTree = "<group>"; };
+		42A4556D204FEA13002F207D /* BioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioCollectionViewCell.swift; sourceTree = "<group>"; };
+		42A4556E204FEA13002F207D /* BioCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BioCollectionViewCell.xib; sourceTree = "<group>"; };
+		42A45571204FED74002F207D /* BioPagerViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioPagerViewCell.swift; sourceTree = "<group>"; };
+		42A45572204FED74002F207D /* BioPagerViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BioPagerViewCell.xib; sourceTree = "<group>"; };
+		42A45575204FF00F002F207D /* Biography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biography.swift; sourceTree = "<group>"; };
 		42B1BAD7204D49FB001E06F5 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		42B1BAD9204D4A06001E06F5 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		42B1BADB204D664B001E06F5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -208,6 +237,7 @@
 				42B1BAD7204D49FB001E06F5 /* ForgotPasswordViewController.swift */,
 				42B1BAD9204D4A06001E06F5 /* SignupViewController.swift */,
 				42A4554F204ECFF6002F207D /* NotificationsViewController.swift */,
+				42A45566204FDAD1002F207D /* BiographyViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -217,6 +247,10 @@
 			children = (
 				42A4554B204EAC25002F207D /* NotificationTableViewCell.swift */,
 				42A4554C204EAC25002F207D /* NotificationTableViewCell.xib */,
+				42A4556D204FEA13002F207D /* BioCollectionViewCell.swift */,
+				42A4556E204FEA13002F207D /* BioCollectionViewCell.xib */,
+				42A45571204FED74002F207D /* BioPagerViewCell.swift */,
+				42A45572204FED74002F207D /* BioPagerViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -226,6 +260,8 @@
 			children = (
 				42A45552204ED1C5002F207D /* EmptyView.xib */,
 				42A45554204ED61F002F207D /* EmptyView.swift */,
+				42A45559204FD3C9002F207D /* ToolbarView.xib */,
+				42A4555B204FD3DA002F207D /* ToolbarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -234,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				42A45557204ED67C002F207D /* Notification.swift */,
+				42A45575204FF00F002F207D /* Biography.swift */,
 			);
 			path = DatabaseObjects;
 			sourceTree = "<group>";
@@ -279,6 +316,7 @@
 				4273023E204C825D00982453 /* Resources */,
 				6D2DFDE8B71DEE6BBA9C0C53 /* [CP] Embed Pods Frameworks */,
 				BE51E73131F9B9B78C08F235 /* [CP] Copy Pods Resources */,
+				42A4556C204FDB63002F207D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -337,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				426CFB69204D7A3500D3B85E /* ContactUsViewController.storyboard in Resources */,
+				42A4555A204FD3C9002F207D /* ToolbarView.xib in Resources */,
 				4273026A204C952100982453 /* Montserrat-Regular.ttf in Resources */,
 				4273026D204C992700982453 /* GoogleService-Info.plist in Resources */,
 				42B1BAE4204D73FD001E06F5 /* SideMenuViewController.storyboard in Resources */,
@@ -346,10 +385,12 @@
 				42A4554E204EAC25002F207D /* NotificationTableViewCell.xib in Resources */,
 				42730251204C825D00982453 /* LaunchScreen.storyboard in Resources */,
 				426CFB6C204D7A6D00D3B85E /* HomeViewController.storyboard in Resources */,
+				42A45570204FEA13002F207D /* BioCollectionViewCell.xib in Resources */,
 				42A45553204ED1C5002F207D /* EmptyView.xib in Resources */,
 				4273024E204C825D00982453 /* Assets.xcassets in Resources */,
 				42730249204C825D00982453 /* Main.storyboard in Resources */,
 				4273026B204C952100982453 /* Montserrat-Bold.ttf in Resources */,
+				42A45574204FED74002F207D /* BioPagerViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,6 +414,7 @@
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -389,6 +431,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -440,6 +483,7 @@
 			files = (
 				4273025C204C8BD900982453 /* Extensions.swift in Sources */,
 				42730260204C8DC000982453 /* Localization.swift in Sources */,
+				42A4555C204FD3DA002F207D /* ToolbarView.swift in Sources */,
 				42A45555204ED61F002F207D /* EmptyView.swift in Sources */,
 				42A45558204ED67C002F207D /* Notification.swift in Sources */,
 				42B1BAD8204D49FB001E06F5 /* ForgotPasswordViewController.swift in Sources */,
@@ -452,15 +496,19 @@
 				42730262204C8FCA00982453 /* Services.swift in Sources */,
 				42B1BAE6204D74FA001E06F5 /* MenuTableViewCell.swift in Sources */,
 				4273024C204C825D00982453 /* ramychemaly.xcdatamodeld in Sources */,
+				42A45576204FF00F002F207D /* Biography.swift in Sources */,
 				42A45550204ECFF6002F207D /* NotificationsViewController.swift in Sources */,
 				426CFB5E204D799B00D3B85E /* WebViewController.swift in Sources */,
+				42A4556F204FEA13002F207D /* BioCollectionViewCell.swift in Sources */,
 				42730275204CA77B00982453 /* LoginViewController.swift in Sources */,
 				42B1BADC204D664B001E06F5 /* HomeViewController.swift in Sources */,
 				426CFB6E204D7AD800D3B85E /* InitialMenuViewController.swift in Sources */,
+				42A45573204FED74002F207D /* BioPagerViewCell.swift in Sources */,
 				42A4554D204EAC25002F207D /* NotificationTableViewCell.swift in Sources */,
 				42B1BAE1204D7383001E06F5 /* Storyboardable.swift in Sources */,
 				42730244204C825D00982453 /* AppDelegate.swift in Sources */,
 				426CFB64204D79C700D3B85E /* ContactUsViewController.swift in Sources */,
+				42A45567204FDAD1002F207D /* BiographyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,6 +649,10 @@
 				CODE_SIGN_ENTITLEMENTS = ramychemaly/ramychemaly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3KBRZU6ZDH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ramychemaly/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -619,6 +671,10 @@
 				CODE_SIGN_ENTITLEMENTS = ramychemaly/ramychemaly.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3KBRZU6ZDH;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ramychemaly/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

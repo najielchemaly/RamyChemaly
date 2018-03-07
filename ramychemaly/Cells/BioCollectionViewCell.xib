@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Bold.ttf">
+            <string>Montserrat-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BioCollectionViewCell" id="gTV-IL-0wX" customClass="BioCollectionViewCell" customModule="ramychemaly" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Frf-qB-NN4">
+                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXA-vM-jjy">
+                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hRf-Ya-m2Y">
+                        <rect key="frame" x="2" y="2" width="56" height="56"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Frf-qB-NN4" secondAttribute="trailing" id="BqE-CG-UTc"/>
+                <constraint firstItem="KXA-vM-jjy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="I7N-Wh-chs"/>
+                <constraint firstItem="KXA-vM-jjy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="JSC-WD-PYP"/>
+                <constraint firstItem="hRf-Ya-m2Y" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="RYo-yB-cyF"/>
+                <constraint firstAttribute="trailing" secondItem="KXA-vM-jjy" secondAttribute="trailing" id="TCn-BD-D0z"/>
+                <constraint firstItem="Frf-qB-NN4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="YUv-Cb-pHa"/>
+                <constraint firstAttribute="bottom" secondItem="hRf-Ya-m2Y" secondAttribute="bottom" constant="2" id="oPI-Vj-PDL"/>
+                <constraint firstAttribute="bottom" secondItem="Frf-qB-NN4" secondAttribute="bottom" id="pGo-Rj-8sZ"/>
+                <constraint firstItem="hRf-Ya-m2Y" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="qAi-2T-kO2"/>
+                <constraint firstAttribute="bottom" secondItem="KXA-vM-jjy" secondAttribute="bottom" id="tiw-g7-niQ"/>
+                <constraint firstAttribute="trailing" secondItem="hRf-Ya-m2Y" secondAttribute="trailing" constant="2" id="yJP-A4-bXg"/>
+                <constraint firstItem="Frf-qB-NN4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="z7I-Qs-9ma"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="imageViewIcon" destination="Frf-qB-NN4" id="2Sh-qs-0m9"/>
+                <outlet property="labelTitle" destination="hRf-Ya-m2Y" id="H6b-Xh-EcT"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

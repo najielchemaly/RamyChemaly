@@ -26,6 +26,10 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         swipe.direction = .down
         self.view.addGestureRecognizer(swipe)
+        
+        if hasToolBar() {
+            self.setupToolBarView()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,6 +89,10 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func hasToolBar() -> Bool {
+        if self is BiographyViewController {
+            return true
+        }
+        
         return false
     }
     
@@ -158,6 +166,17 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     func removeEmptyView() {
         if self.emptyView != nil {
             self.emptyView.removeFromSuperview()
+        }
+    }
+    
+    var toolbarView: ToolbarView!
+    func setupToolBarView() {
+        let view = Bundle.main.loadNibNamed("ToolbarView", owner: self.view, options: nil)
+        if let toolbarView = view?.first as? ToolbarView {
+            self.toolbarView = toolbarView
+            self.toolbarView.frame.size.width = self.view.frame.size.width
+            self.toolbarView.frame.origin = CGPoint(x: 0, y: 0)
+            self.view.addSubview(self.toolbarView)
         }
     }
     

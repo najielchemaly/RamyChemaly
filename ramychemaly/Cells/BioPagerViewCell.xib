@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Bold.ttf">
+            <string>Montserrat-Bold</string>
+        </array>
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BioPagerViewCell" id="gTV-IL-0wX" customClass="BioPagerViewCell" customModule="ramychemaly" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="514"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="514"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XYk-ju-09A">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="230" id="Mzr-fF-7u2"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ThS-X4-mAc">
+                        <rect key="frame" x="167" y="240" width="41" height="22"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
+                        <color key="textColor" red="0.1529411765" green="0.5568627451" blue="0.71764705880000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Description" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="z9k-y9-mt7">
+                        <rect key="frame" x="4" y="266" width="367" height="248"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="XYk-ju-09A" secondAttribute="trailing" id="G9J-bF-wFj"/>
+                <constraint firstItem="z9k-y9-mt7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="Jgw-Aq-5lB"/>
+                <constraint firstAttribute="bottom" secondItem="z9k-y9-mt7" secondAttribute="bottom" id="OmE-TL-U4o"/>
+                <constraint firstAttribute="trailing" secondItem="z9k-y9-mt7" secondAttribute="trailing" constant="4" id="XAT-Pn-MnF"/>
+                <constraint firstItem="XYk-ju-09A" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="aBf-6J-7T1"/>
+                <constraint firstItem="XYk-ju-09A" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jak-dO-etT"/>
+                <constraint firstItem="z9k-y9-mt7" firstAttribute="top" secondItem="ThS-X4-mAc" secondAttribute="bottom" constant="4" id="oXQ-XC-jqm"/>
+                <constraint firstItem="ThS-X4-mAc" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="sxk-2r-0hx"/>
+                <constraint firstItem="ThS-X4-mAc" firstAttribute="top" secondItem="XYk-ju-09A" secondAttribute="bottom" constant="10" id="xzg-cZ-Mz0"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="375" height="514"/>
+            <connections>
+                <outlet property="imageViewBio" destination="XYk-ju-09A" id="qw3-23-wda"/>
+                <outlet property="labelTitle" destination="ThS-X4-mAc" id="5bi-9L-b0l"/>
+                <outlet property="textViewDescription" destination="z9k-y9-mt7" id="nq6-Om-q9r"/>
+            </connections>
+            <point key="canvasLocation" x="32.5" y="166"/>
+        </collectionViewCell>
+    </objects>
+</document>

@@ -187,7 +187,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     @objc func navigateToHome() {
         self.hideLoader()
-        self.redirectToVC(storyboardId: StoryboardIds.InitialMenuViewController, type: .present)
+        self.redirectToVC(storyboardId: StoryboardIds.InitialMenuViewController, type: .push)
     }
     
     /*

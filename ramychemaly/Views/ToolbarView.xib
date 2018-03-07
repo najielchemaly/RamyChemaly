@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Bold.ttf">
+            <string>Montserrat-Bold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="ToolbarView" id="iN0-l3-epB" customClass="ToolbarView" customModule="ramychemaly" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="toolbar_background" translatesAutoresizingMaskIntoConstraints="NO" id="cnt-PH-4UO">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTd-wN-61D">
+                    <rect key="frame" x="0.0" y="0.0" width="50" height="70"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="wJm-Lg-lBf"/>
+                    </constraints>
+                    <state key="normal" image="back"/>
+                    <connections>
+                        <action selector="buttonBackTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="mPE-9Y-AAX"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjG-jR-cuj">
+                    <rect key="frame" x="169" y="0.0" width="37.5" height="70"/>
+                    <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cnt-PH-4UO" secondAttribute="trailing" id="5RL-b5-VgZ"/>
+                <constraint firstItem="dTd-wN-61D" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6BM-mY-aE4"/>
+                <constraint firstItem="dTd-wN-61D" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="7Rr-3H-LNH"/>
+                <constraint firstItem="cnt-PH-4UO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8Om-Tp-4of"/>
+                <constraint firstAttribute="bottom" secondItem="cnt-PH-4UO" secondAttribute="bottom" id="9xq-WW-uQ8"/>
+                <constraint firstItem="cnt-PH-4UO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Sug-8g-dFZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="cjG-jR-cuj" secondAttribute="bottom" id="YbK-YX-wmV"/>
+                <constraint firstItem="dTd-wN-61D" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="drd-gl-QZe"/>
+                <constraint firstItem="cjG-jR-cuj" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="kVZ-Ca-iYO"/>
+                <constraint firstItem="cjG-jR-cuj" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="lzr-yB-5pU"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="buttonBack" destination="dTd-wN-61D" id="eQ7-JR-hKN"/>
+                <outlet property="labelTitle" destination="cjG-jR-cuj" id="2xD-cd-5U8"/>
+            </connections>
+            <point key="canvasLocation" x="32.5" y="97"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="back" width="19" height="30"/>
+        <image name="toolbar_background" width="1080" height="190"/>
+    </resources>
+</document>
