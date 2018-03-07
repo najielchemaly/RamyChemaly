@@ -140,6 +140,27 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
     }
     
+    private var emptyView: EmptyView!
+    func addEmptyView(message: String? = nil, frame: CGRect? = nil) {
+        if self.emptyView == nil {
+            let view = Bundle.main.loadNibNamed("EmptyView", owner: self.view, options: nil)
+            if let emptyView = view?.first as? EmptyView {
+                self.emptyView = emptyView
+                self.view.addSubview(self.emptyView)
+            }
+        }
+        
+        self.emptyView.frame = frame ?? self.view.frame
+        self.emptyView.labelTitle.text = message
+        self.emptyView.isUserInteractionEnabled = false
+    }
+    
+    func removeEmptyView() {
+        if self.emptyView != nil {
+            self.emptyView.removeFromSuperview()
+        }
+    }
+    
     /*
     // MARK: - Navigation
 

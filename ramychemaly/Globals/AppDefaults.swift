@@ -26,6 +26,17 @@ var appDelegate: AppDelegate {
     }
 }
 
+enum AppStoryboard : String {
+    
+    case Main
+    
+    var instance : UIStoryboard {
+        return UIStoryboard(name: self.rawValue, bundle: Bundle.main)
+    }
+}
+
+let mainStoryboard = AppStoryboard.Main.instance
+
 struct Colors {
     
     static let appBlue: UIColor = UIColor(hexString: "#278eb6")!
@@ -37,6 +48,8 @@ struct Colors {
     static let white: UIColor = UIColor(hexString: "#ffffff")!
     static let darkBlue: UIColor = UIColor(hexString: "#062d72")!
     static let lightBlue: UIColor = UIColor(hexString: "#6fd1ef")!
+    static let unreadNotif: UIColor = UIColor(hexString: "#d4dadd")!
+    static let readNotif: UIColor = UIColor(hexString: "#dfe5e8")!
     
 }
 
@@ -105,6 +118,12 @@ struct StoryboardIds {
     static let LoginNavigationController: String = "LoginNavigationController"
     static let WebViewController: String = "WebViewController"
     static let InitialMenuViewController: String = "InitialMenuViewController"
+    
+}
+
+struct CellIdentifiers {
+    
+    static let NotificationTableViewCell: String = "NotificationTableViewCell"
     
 }
 

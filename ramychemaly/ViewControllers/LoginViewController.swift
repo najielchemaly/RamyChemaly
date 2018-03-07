@@ -125,7 +125,7 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                                     }
                                 }
                             }
-                        } else if response?.status == ResponseStatus.FACEBOOK_UNAUTHORIZED.rawValue {
+                        } else if response?.status == ResponseStatus.UNAUTHORIZED.rawValue {
                             DispatchQueue.main.async {
                                 
                             }

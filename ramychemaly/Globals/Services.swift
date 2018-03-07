@@ -32,7 +32,7 @@ enum ResponseStatus: Int {
     case SUCCESS = 1
     case FAILURE = 0
     case CONNECTION_TIMEOUT = -1
-    case FACEBOOK_UNAUTHORIZED = -2
+    case UNAUTHORIZED = -2
     
 }
 
@@ -54,7 +54,7 @@ class ResponseData {
 
 class Services {
     
-    private let BaseUrl = ""
+    private let BaseUrl = "http://www.jdeidetmarjeyoun.com/api"
     private let Suffix = ""
     private static var _AccessToken: String = ""
     var ACCESS_TOKEN: String {
@@ -314,7 +314,7 @@ class Services {
         
         let configuration = URLSessionConfiguration.default
         configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
-        configuration.timeoutIntervalForRequest = 30
+        configuration.timeoutIntervalForRequest = 5
         return SessionManager(configuration: configuration)
         
     }()

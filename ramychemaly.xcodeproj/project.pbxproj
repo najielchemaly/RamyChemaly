@@ -32,6 +32,12 @@
 		42730271204C9A6600982453 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42730270204C9A6600982453 /* LoadingViewController.swift */; };
 		42730273204C9BEF00982453 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42730272204C9BEF00982453 /* BaseViewController.swift */; };
 		42730275204CA77B00982453 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42730274204CA77B00982453 /* LoginViewController.swift */; };
+		42A4554D204EAC25002F207D /* NotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4554B204EAC25002F207D /* NotificationTableViewCell.swift */; };
+		42A4554E204EAC25002F207D /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A4554C204EAC25002F207D /* NotificationTableViewCell.xib */; };
+		42A45550204ECFF6002F207D /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A4554F204ECFF6002F207D /* NotificationsViewController.swift */; };
+		42A45553204ED1C5002F207D /* EmptyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42A45552204ED1C5002F207D /* EmptyView.xib */; };
+		42A45555204ED61F002F207D /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A45554204ED61F002F207D /* EmptyView.swift */; };
+		42A45558204ED67C002F207D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42A45557204ED67C002F207D /* Notification.swift */; };
 		42B1BAD8204D49FB001E06F5 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BAD7204D49FB001E06F5 /* ForgotPasswordViewController.swift */; };
 		42B1BADA204D4A06001E06F5 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BAD9204D4A06001E06F5 /* SignupViewController.swift */; };
 		42B1BADC204D664B001E06F5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BADB204D664B001E06F5 /* HomeViewController.swift */; };
@@ -69,6 +75,12 @@
 		42730270204C9A6600982453 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		42730272204C9BEF00982453 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		42730274204CA77B00982453 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		42A4554B204EAC25002F207D /* NotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTableViewCell.swift; sourceTree = "<group>"; };
+		42A4554C204EAC25002F207D /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
+		42A4554F204ECFF6002F207D /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		42A45552204ED1C5002F207D /* EmptyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmptyView.xib; sourceTree = "<group>"; };
+		42A45554204ED61F002F207D /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		42A45557204ED67C002F207D /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		42B1BAD7204D49FB001E06F5 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		42B1BAD9204D4A06001E06F5 /* SignupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		42B1BADB204D664B001E06F5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +153,9 @@
 		42730242204C825D00982453 /* ramychemaly */ = {
 			isa = PBXGroup;
 			children = (
+				42A45556204ED654002F207D /* DatabaseObjects */,
+				42A45551204ED1B1002F207D /* Views */,
+				42A4554A204EAC03002F207D /* Cells */,
 				4273026F204C9A5300982453 /* ViewControllers */,
 				4273026E204C99CF00982453 /* ramychemaly.entitlements */,
 				42730263204C94E600982453 /* AppFonts */,
@@ -192,8 +207,35 @@
 				42730274204CA77B00982453 /* LoginViewController.swift */,
 				42B1BAD7204D49FB001E06F5 /* ForgotPasswordViewController.swift */,
 				42B1BAD9204D4A06001E06F5 /* SignupViewController.swift */,
+				42A4554F204ECFF6002F207D /* NotificationsViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		42A4554A204EAC03002F207D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				42A4554B204EAC25002F207D /* NotificationTableViewCell.swift */,
+				42A4554C204EAC25002F207D /* NotificationTableViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		42A45551204ED1B1002F207D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				42A45552204ED1C5002F207D /* EmptyView.xib */,
+				42A45554204ED61F002F207D /* EmptyView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		42A45556204ED654002F207D /* DatabaseObjects */ = {
+			isa = PBXGroup;
+			children = (
+				42A45557204ED67C002F207D /* Notification.swift */,
+			);
+			path = DatabaseObjects;
 			sourceTree = "<group>";
 		};
 		42B1BAE2204D73CB001E06F5 /* SideMenu */ = {
@@ -301,8 +343,10 @@
 				426CFB67204D7A1300D3B85E /* WebViewController.storyboard in Resources */,
 				42730268204C952100982453 /* Montserrat-Light.ttf in Resources */,
 				42730269204C952100982453 /* Montserrat-Medium.ttf in Resources */,
+				42A4554E204EAC25002F207D /* NotificationTableViewCell.xib in Resources */,
 				42730251204C825D00982453 /* LaunchScreen.storyboard in Resources */,
 				426CFB6C204D7A6D00D3B85E /* HomeViewController.storyboard in Resources */,
+				42A45553204ED1C5002F207D /* EmptyView.xib in Resources */,
 				4273024E204C825D00982453 /* Assets.xcassets in Resources */,
 				42730249204C825D00982453 /* Main.storyboard in Resources */,
 				4273026B204C952100982453 /* Montserrat-Bold.ttf in Resources */,
@@ -396,6 +440,8 @@
 			files = (
 				4273025C204C8BD900982453 /* Extensions.swift in Sources */,
 				42730260204C8DC000982453 /* Localization.swift in Sources */,
+				42A45555204ED61F002F207D /* EmptyView.swift in Sources */,
+				42A45558204ED67C002F207D /* Notification.swift in Sources */,
 				42B1BAD8204D49FB001E06F5 /* ForgotPasswordViewController.swift in Sources */,
 				42B1BADF204D731B001E06F5 /* SideMenuViewController.swift in Sources */,
 				4273025E204C8BF200982453 /* Alamofire+Synchronous.swift in Sources */,
@@ -406,10 +452,12 @@
 				42730262204C8FCA00982453 /* Services.swift in Sources */,
 				42B1BAE6204D74FA001E06F5 /* MenuTableViewCell.swift in Sources */,
 				4273024C204C825D00982453 /* ramychemaly.xcdatamodeld in Sources */,
+				42A45550204ECFF6002F207D /* NotificationsViewController.swift in Sources */,
 				426CFB5E204D799B00D3B85E /* WebViewController.swift in Sources */,
 				42730275204CA77B00982453 /* LoginViewController.swift in Sources */,
 				42B1BADC204D664B001E06F5 /* HomeViewController.swift in Sources */,
 				426CFB6E204D7AD800D3B85E /* InitialMenuViewController.swift in Sources */,
+				42A4554D204EAC25002F207D /* NotificationTableViewCell.swift in Sources */,
 				42B1BAE1204D7383001E06F5 /* Storyboardable.swift in Sources */,
 				42730244204C825D00982453 /* AppDelegate.swift in Sources */,
 				426CFB64204D79C700D3B85E /* ContactUsViewController.swift in Sources */,

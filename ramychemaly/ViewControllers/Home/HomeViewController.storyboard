@@ -76,14 +76,14 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WELCOME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6J-gd-mlb">
-                                <rect key="frame" x="138" y="168" width="99.5" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="WELCOME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6J-gd-mlb">
+                                <rect key="frame" x="142" y="168" width="91.5" height="22"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAJI CHEMALY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO3-nb-JyK">
-                                <rect key="frame" x="109" y="190" width="158" height="24.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NAJI CHEMALY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO3-nb-JyK">
+                                <rect key="frame" x="117" y="190" width="142" height="24.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -180,6 +180,7 @@
                             <constraint firstItem="odF-lr-ITW" firstAttribute="trailing" secondItem="D7D-Bq-IGq" secondAttribute="trailing" constant="16" id="NbO-fR-YWV"/>
                             <constraint firstItem="H4l-48-iIg" firstAttribute="leading" secondItem="odF-lr-ITW" secondAttribute="leading" constant="10" id="O3p-UQ-kLN"/>
                             <constraint firstItem="cbB-pi-XOf" firstAttribute="top" secondItem="odF-lr-ITW" secondAttribute="top" constant="20" id="Pha-Xe-tU3"/>
+                            <constraint firstItem="H4l-48-iIg" firstAttribute="top" secondItem="cbB-pi-XOf" secondAttribute="bottom" constant="64.5" id="Qba-OU-a2w"/>
                             <constraint firstAttribute="trailing" secondItem="H4l-48-iIg" secondAttribute="trailing" constant="10" id="ROv-Ii-avn"/>
                             <constraint firstItem="yPD-Wd-TN1" firstAttribute="centerY" secondItem="cbB-pi-XOf" secondAttribute="centerY" id="USX-wq-Vut"/>
                             <constraint firstItem="7Dd-t2-4CH" firstAttribute="leading" secondItem="D7D-Bq-IGq" secondAttribute="trailing" constant="-21" id="WfN-UR-9uw"/>

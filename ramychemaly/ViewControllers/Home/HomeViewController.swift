@@ -41,7 +41,7 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     }
     
     @IBAction func buttonAlertTapped(_ sender: Any) {
-        
+        self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.NotificationsViewController, type: .present)
     }
     
     @IBAction func buttonBreadOfLifeTapped(_ sender: Any) {

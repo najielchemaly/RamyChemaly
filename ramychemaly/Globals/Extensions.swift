@@ -155,7 +155,8 @@ extension UIViewController {
         case fromBottom = "FROM BOTTOM"
     }
     
-    func redirectToVC(storyboardId: String, type: NavigationType, newsType: NewsType = NewsType.None, animated: Bool = true, title: String? = nil, backTitle: String? = "BACK", delegate: UIPopoverPresentationControllerDelegate? = nil) {
+    func redirectToVC(storyboard: UIStoryboard? = nil, storyboardId: String, type: NavigationType, newsType: NewsType = NewsType.None, animated: Bool = true, title: String? = nil, backTitle: String? = "BACK", delegate: UIPopoverPresentationControllerDelegate? = nil) {
+        let storyboard = storyboard ?? self.storyboard
         if let destinationVC = storyboard?.instantiateViewController(withIdentifier: storyboardId) {
             switch type {
             case .push:
