@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Bold.ttf">
+            <string>Montserrat-Bold</string>
+        </array>
+        <array key="Montserrat-Medium.ttf">
+            <string>Montserrat-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="AlertView" id="iN0-l3-epB" customClass="AlertView" customModule="ramychemaly" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQj-BK-O2Q">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.352112676056338" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fOx-cP-KLO">
+                    <rect key="frame" x="37" y="243.5" width="300" height="200"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OOPS!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7c-lK-1Ku">
+                            <rect key="frame" x="8" y="8" width="284" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="iDD-CF-AiQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
+                            <color key="textColor" red="0.34509803919999998" green="0.34509803919999998" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dd1-Oq-RA5">
+                            <rect key="frame" x="16" y="48" width="268" height="99"/>
+                            <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
+                            <color key="textColor" red="0.34509803919999998" green="0.34509803919999998" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Zgy-8D-Ulc">
+                            <rect key="frame" x="5" y="155" width="290" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZId-JU-LWy">
+                                    <rect key="frame" x="0.0" y="0.0" width="142.5" height="40"/>
+                                    <color key="backgroundColor" red="0.20317992570000001" green="0.58061903719999997" blue="0.72301834819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="15"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="buttonCancelTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="DF0-QM-O83"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zua-CN-Bq1">
+                                    <rect key="frame" x="147.5" y="0.0" width="142.5" height="40"/>
+                                    <color key="backgroundColor" red="0.20317992570000001" green="0.58061903719999997" blue="0.72301834819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="15"/>
+                                    <state key="normal" title="Done">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="buttonDoneTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="2a5-m2-jLO"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="nSN-xK-Dg9"/>
+                            </constraints>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Dd1-Oq-RA5" firstAttribute="top" secondItem="fOx-cP-KLO" secondAttribute="top" constant="8" id="4uS-QF-hpv"/>
+                        <constraint firstItem="m7c-lK-1Ku" firstAttribute="leading" secondItem="fOx-cP-KLO" secondAttribute="leading" constant="8" id="5YC-9e-GFQ"/>
+                        <constraint firstItem="m7c-lK-1Ku" firstAttribute="top" secondItem="fOx-cP-KLO" secondAttribute="top" constant="8" id="A8b-OQ-7GA"/>
+                        <constraint firstItem="Zgy-8D-Ulc" firstAttribute="top" secondItem="Dd1-Oq-RA5" secondAttribute="bottom" constant="8" id="GI3-pU-wCv"/>
+                        <constraint firstAttribute="bottom" secondItem="Zgy-8D-Ulc" secondAttribute="bottom" constant="5" id="O43-Bb-QBY"/>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="200" id="Rop-ih-4Op"/>
+                        <constraint firstAttribute="trailing" secondItem="Zgy-8D-Ulc" secondAttribute="trailing" constant="5" id="TQ5-GQ-UoE"/>
+                        <constraint firstItem="Dd1-Oq-RA5" firstAttribute="top" secondItem="m7c-lK-1Ku" secondAttribute="bottom" id="Uay-Ok-STR"/>
+                        <constraint firstItem="Dd1-Oq-RA5" firstAttribute="leading" secondItem="fOx-cP-KLO" secondAttribute="leading" constant="16" id="c8I-gx-3Rk"/>
+                        <constraint firstAttribute="trailing" secondItem="Dd1-Oq-RA5" secondAttribute="trailing" constant="16" id="ggd-r9-Cpn"/>
+                        <constraint firstAttribute="width" constant="300" id="lYp-nX-FDI"/>
+                        <constraint firstAttribute="trailing" secondItem="m7c-lK-1Ku" secondAttribute="trailing" constant="8" id="tI3-o7-XnZ"/>
+                        <constraint firstItem="Zgy-8D-Ulc" firstAttribute="leading" secondItem="fOx-cP-KLO" secondAttribute="leading" constant="5" id="vYo-Fz-IO3"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Rop-ih-4Op"/>
+                            <exclude reference="lYp-nX-FDI"/>
+                            <exclude reference="4uS-QF-hpv"/>
+                        </mask>
+                    </variation>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fOx-cP-KLO" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="37.5" id="3OE-zm-gjL"/>
+                <constraint firstItem="fOx-cP-KLO" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="223.5" id="83Y-cA-Bdw"/>
+                <constraint firstItem="oQj-BK-O2Q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IbB-E5-cbX"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="fOx-cP-KLO" secondAttribute="trailing" constant="37.5" id="LHg-gr-Djo"/>
+                <constraint firstItem="oQj-BK-O2Q" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Ybj-ec-w7f"/>
+                <constraint firstItem="fOx-cP-KLO" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="hap-yV-kb5"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="fOx-cP-KLO" secondAttribute="bottom" constant="223.5" id="jwF-Zz-9ky"/>
+                <constraint firstItem="oQj-BK-O2Q" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="r9h-pK-ObC"/>
+                <constraint firstItem="oQj-BK-O2Q" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="rkj-eq-dSh"/>
+                <constraint firstItem="fOx-cP-KLO" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="zKL-up-8LB"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="hap-yV-kb5"/>
+                    <exclude reference="zKL-up-8LB"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="buttonCancel" destination="ZId-JU-LWy" id="VRm-Ml-91n"/>
+                <outlet property="buttonDone" destination="Zua-CN-Bq1" id="fon-kO-aQb"/>
+                <outlet property="contentTopConstraint" destination="83Y-cA-Bdw" id="qUX-J6-AFw"/>
+                <outlet property="labelMessage" destination="Dd1-Oq-RA5" id="Z5B-sB-YDH"/>
+                <outlet property="labelTitle" destination="m7c-lK-1Ku" id="LyY-Q3-jea"/>
+                <outlet property="viewContent" destination="fOx-cP-KLO" id="EaI-1p-hJm"/>
+                <outlet property="viewOverlay" destination="oQj-BK-O2Q" id="J7g-TJ-aIo"/>
+            </connections>
+            <point key="canvasLocation" x="45.5" y="111.5"/>
+        </view>
+    </objects>
+</document>

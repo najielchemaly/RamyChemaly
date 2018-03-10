@@ -119,10 +119,23 @@ struct StoryboardIds {
     static let BiographyViewController: String = "BiographyViewController"
     static let DiscographyViewController: String = "DiscographyViewController"
     static let BreadOfLifeViewController: String = "BreadOfLifeViewController"
+    static let ChangePasswordViewController: String = "ChangePasswordViewController"
+    static let MediaViewController: String = "MediaViewController"
+    static let SelectAvatarViewController: String = "SelectAvatarViewController"
+    static let NotificationDetailViewController: String = "NotificationDetailViewController"
 }
 
 struct CellIdentifiers {
     static let NotificationTableViewCell: String = "NotificationTableViewCell"
+    static let SocialTableViewCell: String = "SocialTableViewCell"
+    static let BioPagerViewCell: String = "BioPagerViewCell"
+    static let BioCollectionViewCell: String = "BioCollectionViewCell"
+    static let ImageCollectionViewCell: String = "ImageCollectionViewCell"
+    static let VideoCollectionViewCell: String = "VideoCollectionViewCell"
+    static let GalleryCollectionViewCell: String = "GalleryCollectionViewCell"
+    static let BreadOfLifeViewCell: String = "BreadOfLifeViewCell"
+    static let AvatarCollectionViewCell: String = "AvatarCollectionViewCell"
+    static let ImageFullCollectionViewCell: String = "ImageFullCollectionViewCell"
 }
 
 enum Keys: String {
@@ -161,6 +174,12 @@ public enum WebViewComingFrom {
     case privacy
 }
 
+enum MediaComingFrom {
+    case none
+    case photos
+    case videos
+}
+
 func getYears() -> NSMutableArray {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy"
@@ -175,4 +194,14 @@ func getYears() -> NSMutableArray {
     }
     
     return NSMutableArray()
+}
+
+func getYearsFrom(yearString: String) -> String {
+    let currentYearString = Calendar.current.component(Calendar.Component.year, from: Date())
+    if let year = Int(yearString) {
+        let currentYear = Int(currentYearString)
+        return String(currentYear-year)
+    }
+    
+    return yearString
 }

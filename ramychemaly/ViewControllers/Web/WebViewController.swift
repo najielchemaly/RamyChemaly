@@ -33,9 +33,6 @@ class WebViewController: BaseViewController, Storyboardable {
         } else if WebViewController.comingFrom.hashValue == WebViewComingFrom.privacy.hashValue {
             self.toolbarView.labelTitle.text = "PRIVACY POLICY"
         }
-        
-        self.toolbarView.buttonBack.setImage(#imageLiteral(resourceName: "back"), for: .normal)
-        self.toolbarView.buttonBack.tag = 1
     }
     
     /*

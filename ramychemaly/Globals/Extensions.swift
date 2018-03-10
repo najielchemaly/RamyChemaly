@@ -191,8 +191,8 @@ extension UIViewController {
         }
     }
     
-    func showAlert(title: String = NSLocalizedString("Alert", comment: ""), message: String, style: UIAlertControllerStyle, popVC: Bool = false, dismissVC: Bool = false, custom: Bool = false) {
-        
+    func showAlert(title: String = NSLocalizedString("Alert", comment: ""), message: String, style: UIAlertControllerStyle, popVC: Bool = false, dismissVC: Bool = false) {
+
         let alert = UIAlertController(title: title, message: message, preferredStyle: style)
         alert.addAction(UIAlertAction(title: NSLocalizedString("Ok", comment: ""), style: .default, handler: { action in
             if popVC {
@@ -244,6 +244,24 @@ extension UIButton {
         let attrString = NSMutableAttributedString(string: secondText, attributes:secondAttrs)
         attributedString.append(attrString)
         self.setAttributedTitle(attributedString, for: .normal)
+    }
+    
+    func setSelected(value: Bool) {
+        if value {
+            self.backgroundColor = Colors.appBlue
+            self.setTitleColor(Colors.lightGray, for: .normal)
+        } else {
+            self.backgroundColor = Colors.lightGray
+            self.setTitleColor(Colors.textDark, for: .normal)
+        }
+    }
+    
+    func isSelected() -> Bool {
+        if self.backgroundColor == Colors.appBlue {
+            return true
+        } else {
+            return false
+        }
     }
     
 }
@@ -325,6 +343,24 @@ extension UIImage {
     /// - returns: A data object containing the JPEG data, or nil if there was a problem generating the data. This function may return nil if the image has no data or if the underlying CGImageRef contains data in an unsupported bitmap format.
     func jpeg(_ quality: JPEGQuality) -> Data? {
         return UIImageJPEGRepresentation(self, quality.rawValue)
+    }
+    
+}
+
+extension Date {
+    
+    func getMonthName() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
+        let strMonth = dateFormatter.string(from: self)
+        return strMonth
+    }
+    
+    func getMonthFrom(number: Int) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMMM"
+        let strMonth = dateFormatter.monthSymbols[number-1]
+        return strMonth
     }
     
 }

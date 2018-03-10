@@ -53,12 +53,11 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     }
     
     @IBAction func buttonLogoutTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "LOGOUT", message: "Are you sure you want to logout?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Logout", style: .default, handler: { action in
-            self.logout()
-        }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
+        self.showAlertView(title: "LOGOUT", message: "Are you sure you want to logout?", cancelTitle: "Cancel", doneTitle: "Logout")
+        
+        if let alertView = self.alertView {
+            alertView.buttonDone.addTarget(self, action: #selector(self.logout), for: .touchUpInside)
+        }
     }
     
     @IBAction func buttonBiographyTapped(_ sender: Any) {

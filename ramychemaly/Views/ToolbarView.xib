@@ -34,8 +34,8 @@
                         <action selector="buttonBackTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="mPE-9Y-AAX"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjG-jR-cuj">
-                    <rect key="frame" x="169" y="0.0" width="37.5" height="70"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="cjG-jR-cuj">
+                    <rect key="frame" x="188" y="0.0" width="0.0" height="70"/>
                     <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -46,6 +46,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cnt-PH-4UO" secondAttribute="trailing" id="5RL-b5-VgZ"/>
                 <constraint firstItem="dTd-wN-61D" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6BM-mY-aE4"/>
                 <constraint firstItem="dTd-wN-61D" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="7Rr-3H-LNH"/>
+                <constraint firstItem="cjG-jR-cuj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dTd-wN-61D" secondAttribute="trailing" constant="-8" id="7st-vg-lmg"/>
                 <constraint firstItem="cnt-PH-4UO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8Om-Tp-4of"/>
                 <constraint firstAttribute="bottom" secondItem="cnt-PH-4UO" secondAttribute="bottom" id="9xq-WW-uQ8"/>
                 <constraint firstItem="cnt-PH-4UO" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Sug-8g-dFZ"/>

@@ -89,7 +89,7 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func hasToolBar() -> Bool {
-        if self is BiographyViewController || self is DiscographyViewController || self is BreadOfLifeViewController || self is WebViewController {
+        if self is BiographyViewController || self is DiscographyViewController || self is BreadOfLifeViewController || self is WebViewController || self is MediaViewController || self is SelectAvatarViewController || self is NotificationDetailViewController {
             return true
         }
         
@@ -126,15 +126,17 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
     }
 
-    func logout() {
+    @objc func logout() {
         DispatchQueue.main.async {
             let userDefaults = UserDefaults.standard
             userDefaults.removeObject(forKey: "user")
             userDefaults.synchronize()
-            
-            // hide loader
-            
-            // set login as root
+
+            if let window = appDelegate.window {
+                if let loginNavigationController = mainStoryboard.instantiateViewController(withIdentifier: StoryboardIds.LoginNavigationController) as? UINavigationController  {
+                    window.rootViewController = loginNavigationController
+                }
+            }
         }
     }
     
@@ -177,6 +179,107 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
             self.toolbarView.frame.size.width = self.view.frame.size.width
             self.toolbarView.frame.origin = CGPoint(x: 0, y: 0)
             self.view.addSubview(self.toolbarView)
+        }
+    }
+    
+    var imageFullView: ImageFullView!
+    func showImageFullView(photos: [Photo], currentIndex: Int) {
+        let view = Bundle.main.loadNibNamed("ImageFullView", owner: self.view, options: nil)
+        if let imageFullView = view?.first as? ImageFullView {
+            self.imageFullView = imageFullView
+        }
+        
+        self.imageFullView.setupPagerView(photos: photos)
+        
+        self.imageFullView.frame = self.view.bounds
+        let originalImageViewY = self.imageFullView.pagerTopConstraint.constant
+        self.imageFullView.pagerTopConstraint.constant = self.imageFullView.frame.size.height
+        self.imageFullView.overlayView.alpha = 0
+        self.view.addSubview(self.imageFullView)
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.imageFullView.overlayView.alpha = 1
+        }, completion: { success in
+            self.imageFullView.pagerView.scrollToItem(at: currentIndex, animated: false)
+            self.imageFullView.pagerTopConstraint.constant = originalImageViewY
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { success in
+                
+            })
+        })
+        
+        self.dismissKeyboard()
+    }
+    
+    func hideImageFullView() {
+        if self.imageFullView != nil {
+            UIView.animate(withDuration: 0.1, animations: {
+                self.imageFullView.overlayView.alpha = 0
+            }, completion: { success in
+                self.imageFullView.pagerTopConstraint.constant = self.imageFullView.frame.size.height
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: { success in
+                    self.imageFullView.removeFromSuperview()
+                })
+            })
+        }
+    }
+    
+    var alertView: AlertView!
+    func showAlertView(title: String? = nil, message: String, cancelTitle: String? = nil, doneTitle: String? = nil) {
+        let view = Bundle.main.loadNibNamed("AlertView", owner: self.view, options: nil)
+        if let alertView = view?.first as? AlertView {
+            self.alertView = alertView
+        }
+        
+        self.alertView.labelMessage.text = message.uppercased()
+        
+        if title != nil {
+            self.alertView.labelTitle.text = title
+        }
+        
+        if cancelTitle != nil {
+            self.alertView.buttonCancel.setTitle(cancelTitle?.uppercased(), for: .normal)
+        } else {
+            self.alertView.buttonCancel.removeFromSuperview()
+        }
+        
+        if doneTitle != nil {
+            self.alertView.buttonDone.setTitle(doneTitle?.uppercased(), for: .normal)
+        }
+        
+        self.alertView.buttonCancel.layer.cornerRadius = 20
+        self.alertView.buttonDone.layer.cornerRadius = 20
+        self.alertView.viewContent.layer.cornerRadius = 20
+        self.alertView.frame = self.view.bounds
+        self.alertView.viewOverlay.alpha = 0
+        self.view.addSubview(self.alertView)
+        
+        let originalTopConstraint = self.alertView.contentTopConstraint.constant
+        self.alertView.contentTopConstraint.constant = self.alertView.frame.size.height
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.alertView.viewOverlay.alpha = 1
+        }, completion: { success in
+            self.alertView.contentTopConstraint.constant = originalTopConstraint
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            })
+        })
+        
+        self.dismissKeyboard()
+    }
+    
+    func hideAlertView() {
+        if self.alertView != nil {
+            self.alertView.contentTopConstraint.constant = self.alertView.frame.size.height
+            UIView.animate(withDuration: 0.2, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { success in
+                self.alertView.removeFromSuperview()
+            })
         }
     }
     

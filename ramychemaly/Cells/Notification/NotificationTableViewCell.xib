@@ -69,12 +69,24 @@
                             <constraint firstAttribute="height" constant="13" id="xZh-zL-X7b"/>
                         </constraints>
                     </imageView>
+                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GHJ-Jh-jva">
+                        <rect key="frame" x="297" y="44" width="62" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Nul-7I-KjQ"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="12"/>
+                        <state key="normal" title="See more...">
+                            <color key="titleColor" red="0.2793879533678757" green="0.2793879533678757" blue="0.2793879533678757" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="MuZ-9z-iNx" firstAttribute="top" secondItem="Tmb-fA-9bj" secondAttribute="bottom" constant="4" id="Az2-Rh-xah"/>
+                    <constraint firstItem="GHJ-Jh-jva" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="GeL-M9-MwL"/>
                     <constraint firstItem="Tmb-fA-9bj" firstAttribute="leading" secondItem="ViL-6G-YY9" secondAttribute="trailing" constant="10" id="NIk-AK-cnb"/>
                     <constraint firstItem="Jbf-Mo-iYY" firstAttribute="centerY" secondItem="MuZ-9z-iNx" secondAttribute="centerY" id="UIa-HN-rBS"/>
                     <constraint firstItem="Tmb-fA-9bj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="UiZ-So-8pd"/>
+                    <constraint firstItem="GHJ-Jh-jva" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="VjP-Mu-5Jy"/>
                     <constraint firstItem="Jbf-Mo-iYY" firstAttribute="leading" secondItem="Tmb-fA-9bj" secondAttribute="leading" id="ZbA-69-gPt"/>
                     <constraint firstItem="ViL-6G-YY9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="f33-Mh-g2O"/>
                     <constraint firstItem="MuZ-9z-iNx" firstAttribute="leading" secondItem="Jbf-Mo-iYY" secondAttribute="trailing" constant="8" id="isT-pP-Sor"/>
@@ -84,6 +96,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="buttonSeeMore" destination="GHJ-Jh-jva" id="VFL-dh-c8b"/>
                 <outlet property="descriptionTopConstraint" destination="UiZ-So-8pd" id="Rik-u6-BWD"/>
                 <outlet property="labelDescription" destination="Tmb-fA-9bj" id="xe9-nP-eLy"/>
                 <outlet property="labelTime" destination="MuZ-9z-iNx" id="KAa-fS-ysK"/>

@@ -48,6 +48,12 @@ public class BreadOfLife {
      - returns: Notifications Instance.
      */
     
+    public init(title: String, description: String, date: String) {
+        self.title = title
+        self.description = description
+        self.date = date
+    }
+    
     required public init() {
         
     }

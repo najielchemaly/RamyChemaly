@@ -14,6 +14,7 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var labelTime: UILabel!
     @IBOutlet weak var unreadView: UIView!
     @IBOutlet weak var descriptionTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonSeeMore: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

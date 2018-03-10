@@ -44,7 +44,7 @@ class BiographyViewController: BaseViewController, FSPagerViewDataSource, FSPage
     }
     
     func setupCollectionView() {
-        self.collectionView.register(UINib.init(nibName: "BioCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "BioCollectionViewCell")
+        self.collectionView.register(UINib.init(nibName: CellIdentifiers.BioCollectionViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifiers.BioCollectionViewCell)
         
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
@@ -55,7 +55,7 @@ class BiographyViewController: BaseViewController, FSPagerViewDataSource, FSPage
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BioCollectionViewCell", for: indexPath) as? BioCollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.BioCollectionViewCell, for: indexPath) as? BioCollectionViewCell {
             
             let biography = biographies[indexPath.row]
             if let imageThumb = biography.img_thumb {
@@ -97,7 +97,7 @@ class BiographyViewController: BaseViewController, FSPagerViewDataSource, FSPage
     }
     
     func setupPagerView() {
-        self.pagerView.register(UINib.init(nibName: "BioPagerViewCell", bundle: nil), forCellWithReuseIdentifier: "BioPagerViewCell")
+        self.pagerView.register(UINib.init(nibName: CellIdentifiers.BioPagerViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifiers.BioPagerViewCell)
         
         self.pagerView.dataSource = self
         self.pagerView.delegate = self
@@ -105,7 +105,7 @@ class BiographyViewController: BaseViewController, FSPagerViewDataSource, FSPage
     
     func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         
-        if let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "BioPagerViewCell", at: index) as? BioPagerViewCell {
+        if let cell = pagerView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.BioPagerViewCell, at: index) as? BioPagerViewCell {
             
             let biography = biographies[index]
             if let imageUrl = biography.img_url {
@@ -191,7 +191,7 @@ class BiographyViewController: BaseViewController, FSPagerViewDataSource, FSPage
         biography.title_long = "Ramy's Eternal Life"
         biography.img_thumb = ""
         biography.img_url = ""
-        biography.description = "On the day of 8th July 2010, Ramy passed away in a car crash during his first trip outside Lebanon to Cairo. \nHis death came as a shocking news in the arab world  & still after almost 4 years. \nRamy our beloved son, brother, friend and shining star on the earth & in the sky, we will always love you.. \n\n..Until We Meet Again.."
+        biography.description = "On the day of 8th July 2010, Ramy passed away in a car crash during his first trip outside Lebanon to Cairo. \nHis death came as a shocking news in the arab world & still after almost " + getYearsFrom(yearString: "2010") + " years. \nRamy our beloved son, brother, friend and shining star on the earth & in the sky, we will always love you.. \n\n..Until We Meet Again.."
         biographies.append(biography)
     }
     

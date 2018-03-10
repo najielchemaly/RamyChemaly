@@ -64,7 +64,7 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let count = menuContainerViewController?.contentViewControllers.count {
-            return count + 2
+            return count + 4
         }
         
         return  0
@@ -83,10 +83,14 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             cell.titleLabel.text = "Home"
         case 2:
-            cell.titleLabel.text = "Terms & conditions"
+            cell.titleLabel.text = "Edit my profile"
         case 3:
-            cell.titleLabel.text = "Privacy policy"
+            cell.titleLabel.text = "Change my password"
         case 4:
+            cell.titleLabel.text = "Terms & conditions"
+        case 5:
+            cell.titleLabel.text = "Privacy policy"
+        case 6:
             cell.titleLabel.text = "Contact us"
         default:
             break
@@ -108,14 +112,16 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
         case 1:
             menuContainerViewController.hideSideMenu()
         case 2:
-            menuContainerViewController.hideSideMenu()
-            WebViewController.comingFrom = WebViewComingFrom.terms
-            self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .push)
+            self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.EditProfileViewController, type: .present)
         case 3:
-            menuContainerViewController.hideSideMenu()
-            WebViewController.comingFrom = WebViewComingFrom.privacy
-            self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .push)
+            self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.ChangePasswordViewController, type: .present)
         case 4:
+            WebViewController.comingFrom = WebViewComingFrom.terms
+            self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .present)
+        case 5:
+            WebViewController.comingFrom = WebViewComingFrom.privacy
+            self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .present)
+        case 6:
             self.redirectToVC(storyboard: contactStoryboard, storyboardId: StoryboardIds.ContactUsViewController, type: .present)
         default:
             break

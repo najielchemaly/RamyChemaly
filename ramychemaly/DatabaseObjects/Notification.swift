@@ -16,6 +16,9 @@ public class Notification {
     public var date : String?
     public var rowHeight: CGFloat?
     public var isRead: Bool?
+    public var type: String?
+    public var location: String?
+    public var img_url: String?
     
     /**
      Returns an array of models based on given dictionary.
@@ -59,6 +62,9 @@ public class Notification {
         description = dictionary["description"] as? String
         date = dictionary["date"] as? String
         isRead = dictionary["isRead"] as? Bool
+        type = dictionary["type"] as? String
+        location = dictionary["location"] as? String
+        img_url = dictionary["img_url"] as? String
     }
     
     
@@ -76,6 +82,9 @@ public class Notification {
         dictionary.setValue(self.description, forKey: "description")
         dictionary.setValue(self.date, forKey: "date")
         dictionary.setValue(self.isRead, forKey: "isRead")
+        dictionary.setValue(self.type, forKey: "type")
+        dictionary.setValue(self.location, forKey: "location")
+        dictionary.setValue(self.img_url, forKey: "img_url")
         
         return dictionary
     }
