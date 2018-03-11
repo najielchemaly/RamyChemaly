@@ -40,7 +40,7 @@
                             <constraint firstAttribute="height" constant="45" id="XXi-9Y-jFw"/>
                             <constraint firstAttribute="width" constant="45" id="iMf-q6-Mqp"/>
                         </constraints>
-                        <state key="normal" image="play"/>
+                        <state key="normal" image="play_filled"/>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lmS-yZ-rtY">
                         <rect key="frame" x="4" y="150" width="102" height="30"/>
@@ -91,6 +91,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="play" width="128" height="128"/>
+        <image name="play_filled" width="128" height="128"/>
     </resources>
 </document>
