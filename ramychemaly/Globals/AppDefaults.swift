@@ -123,6 +123,8 @@ struct StoryboardIds {
     static let MediaViewController: String = "MediaViewController"
     static let SelectAvatarViewController: String = "SelectAvatarViewController"
     static let NotificationDetailViewController: String = "NotificationDetailViewController"
+    static let YoutubePlayerViewController: String = "YoutubePlayerViewController"
+    static let AudioPlayerViewController: String = "AudioPlayerViewController"
 }
 
 struct CellIdentifiers {
@@ -136,6 +138,7 @@ struct CellIdentifiers {
     static let BreadOfLifeViewCell: String = "BreadOfLifeViewCell"
     static let AvatarCollectionViewCell: String = "AvatarCollectionViewCell"
     static let ImageFullCollectionViewCell: String = "ImageFullCollectionViewCell"
+    static let AudioTableViewCell: String = "AudioTableViewCell"
 }
 
 enum Keys: String {

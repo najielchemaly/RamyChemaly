@@ -133,9 +133,10 @@ class MediaViewController: BaseViewController, UICollectionViewDelegate, UIColle
         if let link = video.link {
             let linkArray = link.split(separator: "=")
             if let videoId = linkArray.last {
-                let youtubePlayer = YTPlayerView(frame: self.view.bounds)
-                youtubePlayer.load(withVideoId: String(videoId))
-                self.view.addSubview(youtubePlayer)
+                if let youtubePlayerViewController = storyboard?.instantiateViewController(withIdentifier: StoryboardIds.YoutubePlayerViewController) as? YoutubePlayerViewController {
+                    youtubePlayerViewController.videoId = String(videoId)
+                    self.present(youtubePlayerViewController, animated: true, completion: nil)
+                }
             }
         }
     }

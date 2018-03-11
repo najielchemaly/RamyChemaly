@@ -20,11 +20,16 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     @IBOutlet weak var labelBadge: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
+    
+    let padding: CGFloat = 10
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.        
+        // Do any additional setup after loading the view.
+        let screenWidth = self.view.frame.size.width
+        self.stackViewHeightConstraint.constant = (screenWidth-padding)*1.1
     }
 
     override func didReceiveMemoryWarning() {

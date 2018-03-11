@@ -15,12 +15,16 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var buttonSocials: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var buttonAudios: UIButton!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
     
     var socials: [Social] = [Social]()
     var mediaGallery: [MediaGallery] = [MediaGallery]()
     
     var photosGallery: [MediaGallery] = [MediaGallery]()
     var videosGallery: [MediaGallery] = [MediaGallery]()
+    var audios: [Audio] = [Audio]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +54,7 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
         self.collectionView.reloadData()
         
         self.tableView.isHidden = true
+        self.collectionView.isHidden = false
     }
     
     @IBAction func buttonVideosTapped(_ sender: Any) {
@@ -59,13 +64,27 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
         self.collectionView.reloadData()
         
         self.tableView.isHidden = true
+        self.collectionView.isHidden = false
     }
     
     @IBAction func buttonSocialsTapped(_ sender: Any) {
         self.unselectButtons()
         self.buttonSocials.setSelected(value: true)
         
+        self.tableView.reloadData()
         self.tableView.isHidden = false
+        self.collectionView.isHidden = true
+    }
+    
+    @IBAction func buttonAudiosTapped(_ sender: Any) {
+        self.unselectButtons()
+        self.buttonAudios.setSelected(value: true)
+        
+        self.tableView.reloadData()
+        self.tableView.isHidden = false
+        self.collectionView.isHidden = true
+        
+        self.searchBarTopConstraint.constant = 55
     }
     
     func initializeViews() {
@@ -76,16 +95,24 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
         
         self.photosGallery = self.mediaGallery.filter { $0.type?.lowercased() == "photos" }
         self.videosGallery = self.mediaGallery.filter { $0.type?.lowercased() == "videos" }
+        
+        if let audios = self.mediaGallery.first?.audios {
+            self.audios = audios
+        }
     }
     
     func unselectButtons() {
         buttonImages.setSelected(value: false)
         buttonVideos.setSelected(value: false)
         buttonSocials.setSelected(value: false)
+        buttonAudios.setSelected(value: false)
+        
+        searchBarTopConstraint.constant = 0
     }
     
     func setupTableView() {
         self.tableView.register(UINib.init(nibName: CellIdentifiers.SocialTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifiers.SocialTableViewCell)
+        self.tableView.register(UINib.init(nibName: CellIdentifiers.AudioTableViewCell, bundle: nil), forCellReuseIdentifier: CellIdentifiers.AudioTableViewCell)
         self.tableView.tableFooterView = UIView()
         
         self.tableView.delegate = self
@@ -93,53 +120,95 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return socials.count
+        if buttonAudios.isSelected() {
+            return audios.count
+        } else if buttonSocials.isSelected() {
+            return socials.count
+        }
+        
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 85
+        if buttonAudios.isSelected() {
+            return 70
+        } else if buttonSocials.isSelected() {
+            return 85
+        }
+        
+        return UITableViewAutomaticDimension
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let social = socials[indexPath.row]
-        
-        var urlString: String!
-        if let link = social.link {
-            if !link.contains("http://") {
-                urlString = "http://" + link
-            } else {
-                urlString = link
+    @objc func didSelectRow(sender: UITapGestureRecognizer) {
+        if let view = sender.view {
+            if buttonAudios.isSelected() {
+                self.redirectToVC(storyboardId: StoryboardIds.AudioPlayerViewController, type: .present)
+            } else if buttonSocials.isSelected() {
+                let social = socials[view.tag]
+                
+                var urlString: String!
+                if let link = social.link {
+                    if !link.contains("http://") {
+                        urlString = "http://" + link
+                    } else {
+                        urlString = link
+                    }
+                }
+                
+                guard let url = URL(string: urlString) else {
+                    return
+                }
+                
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
             }
-        }
-        
-        guard let url = URL(string: urlString) else {
-            return
-        }
-        
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-        } else {
-            UIApplication.shared.openURL(url)
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.SocialTableViewCell) as? SocialTableViewCell {
-            
-            let social = socials[indexPath.row]
-            if let imageThumb = social.img_thumb {
-                cell.imageViewIcon.kf.setImage(with: URL(string: imageThumb))
+        if buttonAudios.isSelected() {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.AudioTableViewCell) as? AudioTableViewCell {
+                
+                let audio = audios[indexPath.row]
+                cell.labelTitle.text = audio.title
+                
+                if let view = cell.contentView.subviews.first {
+                    view.layer.cornerRadius = 10
+                }
+                
+                let tap = UITapGestureRecognizer(target: self, action: #selector(didSelectRow(sender:)))
+                cell.addGestureRecognizer(tap)
+                cell.tag = indexPath.row
+                
+                return cell
             }
-            
-            if let image = social.image {
-                cell.imageViewIcon.image = image
+        } else if buttonSocials.isSelected() {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.SocialTableViewCell) as? SocialTableViewCell {
+                
+                let social = socials[indexPath.row]
+                if let imageThumb = social.img_thumb {
+                    cell.imageViewIcon.kf.setImage(with: URL(string: imageThumb))
+                }
+                
+                if let image = social.image {
+                    cell.imageViewIcon.image = image
+                }
+                
+                cell.labelTitle.text = social.title
+                
+                if let view = cell.contentView.subviews.first {
+                    view.layer.cornerRadius = 10
+                }
+                
+                let tap = UITapGestureRecognizer(target: self, action: #selector(didSelectRow(sender:)))
+                cell.addGestureRecognizer(tap)
+                cell.tag = indexPath.row
+                
+                return cell
             }
-            
-            cell.labelTitle.text = social.title
-            
-            return cell
         }
         
         return UITableViewCell()
@@ -293,6 +362,12 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
             Social.init(image: #imageLiteral(resourceName: "fb_icon"), title: "Let's Pray With Ramy Chemaly and for Him", link: "https://www.facebook.com/154008231300143/videos/10150282402985637/"),
             Social.init(image: #imageLiteral(resourceName: "fb_icon_gray"), title: "Rami Chemaly الصفحة الرسمية", link: "https://www.facebook.com/Rami.Chemaly.Official.Page/"),
             Social.init(image:#imageLiteral(resourceName: "twitter_icon"), title: "Rami Chemaly", link: "https://twitter.com/ramichemaly?lang=en")
+        ]
+        
+        audios = [
+            Audio.init(title: "Audio test 1"),
+            Audio.init(title: "Audio test 2"),
+            Audio.init(title: "Audio test 3")
         ]
     }
     

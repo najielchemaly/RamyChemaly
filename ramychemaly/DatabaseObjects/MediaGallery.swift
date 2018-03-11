@@ -14,7 +14,8 @@ public class MediaGallery {
     public var title : String?
     public var img_thumb : String?
     public var photos : [Photo]?
-    public var videos : Array<Video>? 
+    public var videos : Array<Video>?
+    public var audios : Array<Audio>?
     public var type : String?
     
     /**
@@ -62,6 +63,9 @@ public class MediaGallery {
         }
         if (dictionary["videos"] != nil) {
             videos = Video.modelsFromDictionaryArray(array: dictionary["videos"] as! NSArray)
+        }
+        if (dictionary["audios"] != nil) {
+            audios = Audio.modelsFromDictionaryArray(array: dictionary["audios"] as! NSArray)
         }
     }
     

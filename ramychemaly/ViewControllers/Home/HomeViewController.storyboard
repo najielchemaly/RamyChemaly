@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -31,7 +32,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="cbB-pi-XOf">
-                                <rect key="frame" x="128" y="40" width="120" height="120"/>
+                                <rect key="frame" x="127.5" y="40" width="120" height="120"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="8id-3X-XP4"/>
                                     <constraint firstAttribute="width" secondItem="cbB-pi-XOf" secondAttribute="height" multiplier="1:1" id="Vuf-9t-Xni"/>
@@ -76,26 +77,26 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="WELCOME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6J-gd-mlb">
-                                <rect key="frame" x="142" y="168" width="91.5" height="22"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WELCOME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C6J-gd-mlb">
+                                <rect key="frame" x="142" y="168" width="91.5" height="21"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="NAJI CHEMALY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO3-nb-JyK">
-                                <rect key="frame" x="117" y="190" width="142" height="24.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAJI CHEMALY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VO3-nb-JyK">
+                                <rect key="frame" x="116.5" y="189" width="142" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-48-iIg">
-                                <rect key="frame" x="10" y="224.5" width="355" height="432.5"/>
+                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-48-iIg">
+                                <rect key="frame" x="10" y="244.5" width="355" height="412.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ins-1n-Mbt">
-                                        <rect key="frame" x="0.0" y="0.0" width="355" height="211.5"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ins-1n-Mbt">
+                                        <rect key="frame" x="0.0" y="0.0" width="355" height="196.5"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cP-Sa-x8S">
-                                                <rect key="frame" x="0.0" y="0.0" width="172.5" height="211.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="173.5" height="196.5"/>
                                                 <state key="normal" image="main_biography"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
@@ -107,7 +108,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W02-wC-wag">
-                                                <rect key="frame" x="182.5" y="0.0" width="172.5" height="211.5"/>
+                                                <rect key="frame" x="181.5" y="0.0" width="173.5" height="196.5"/>
                                                 <state key="normal" image="main_discography"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
@@ -128,11 +129,11 @@
                                             </mask>
                                         </variation>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="VeZ-r3-Wzp">
-                                        <rect key="frame" x="0.0" y="221.5" width="355" height="211"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VeZ-r3-Wzp">
+                                        <rect key="frame" x="0.0" y="216.5" width="355" height="196"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hcn-La-EFQ">
-                                                <rect key="frame" x="0.0" y="0.0" width="172.5" height="211"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="173.5" height="196"/>
                                                 <state key="normal" image="main_breadoflife"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
@@ -144,7 +145,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUc-0N-c72">
-                                                <rect key="frame" x="182.5" y="0.0" width="172.5" height="211"/>
+                                                <rect key="frame" x="181.5" y="0.0" width="173.5" height="196"/>
                                                 <state key="normal" image="main_logout"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="self.imageView.contentMode">
@@ -166,6 +167,9 @@
                                         </variation>
                                     </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="412.5" id="9bi-Xu-hmN"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -191,8 +195,16 @@
                             <constraint firstItem="VO3-nb-JyK" firstAttribute="top" secondItem="C6J-gd-mlb" secondAttribute="bottom" id="pwD-Mj-Vnf"/>
                             <constraint firstItem="cbB-pi-XOf" firstAttribute="centerX" secondItem="odF-lr-ITW" secondAttribute="centerX" id="uE9-vN-v77"/>
                             <constraint firstItem="C6J-gd-mlb" firstAttribute="top" secondItem="cbB-pi-XOf" secondAttribute="bottom" constant="8" id="xBe-7V-ujo"/>
+                            <constraint firstItem="odF-lr-ITW" firstAttribute="bottom" secondItem="H4l-48-iIg" secondAttribute="bottom" constant="10" id="ygV-FU-zQE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="odF-lr-ITW"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="3vM-r5-M7s"/>
+                                <exclude reference="MRO-b6-vk8"/>
+                                <exclude reference="Qba-OU-a2w"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="buttonAlert" destination="D7D-Bq-IGq" id="GfR-U6-Hdm"/>
@@ -204,6 +216,7 @@
                         <outlet property="imageViewTopConstraint" destination="Pha-Xe-tU3" id="X9b-BO-Ot5"/>
                         <outlet property="labelBadge" destination="7Dd-t2-4CH" id="xxI-od-uVk"/>
                         <outlet property="labelUsername" destination="VO3-nb-JyK" id="3LQ-1J-8MA"/>
+                        <outlet property="stackViewHeightConstraint" destination="9bi-Xu-hmN" id="Zs3-PI-nd4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yV-3S-ffe" userLabel="First Responder" sceneMemberID="firstResponder"/>
