@@ -226,7 +226,7 @@ extension UIViewController {
         }
     }
     
-    func dismissVC() {
+    @objc func dismissVC() {
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -312,6 +312,11 @@ extension String {
         return boundingBox.height
     }
     
+    func safeAddingPercentEncoding(withAllowedCharacters allowedCharacters: CharacterSet) -> String? {
+        let allowedCharacters = CharacterSet(bitmapRepresentation: allowedCharacters.bitmapRepresentation)
+        return addingPercentEncoding(withAllowedCharacters: allowedCharacters)
+    }
+    
 }
 
 extension FSPageControl {
@@ -373,7 +378,7 @@ protocol Bluring {
 extension Bluring where Self: UIView {
     func addBlur(_ alpha: CGFloat = 0.5) {
         // create effect
-        let effect = UIBlurEffect(style: .light)
+        let effect = UIBlurEffect(style: .dark)
         let effectView = UIVisualEffectView(effect: effect)
         
         // set boundry and alpha

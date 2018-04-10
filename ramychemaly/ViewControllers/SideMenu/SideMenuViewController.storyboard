@@ -29,10 +29,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D5K-du-ebz" userLabel="Avatar Container">
-                                <rect key="frame" x="0.0" y="20" width="375" height="200"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="150"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="qQ9-Ri-ZuO">
-                                        <rect key="frame" x="127" y="40" width="120" height="120"/>
+                                        <rect key="frame" x="127" y="15" width="120" height="120"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="qQ9-Ri-ZuO" secondAttribute="height" multiplier="1:1" id="AUS-XC-qwq"/>
                                             <constraint firstAttribute="width" constant="120" id="dU2-Tk-wO7"/>
@@ -41,12 +41,12 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="qQ9-Ri-ZuO" firstAttribute="centerX" secondItem="D5K-du-ebz" secondAttribute="centerX" id="30T-nO-1KY"/>
-                                    <constraint firstAttribute="height" constant="200" id="TfW-FQ-x1t"/>
+                                    <constraint firstAttribute="height" constant="150" id="TfW-FQ-x1t"/>
                                     <constraint firstItem="qQ9-Ri-ZuO" firstAttribute="centerY" secondItem="D5K-du-ebz" secondAttribute="centerY" id="qQo-eZ-f3f"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dCt-AU-SvS">
-                                <rect key="frame" x="0.0" y="220" width="375" height="447"/>
+                                <rect key="frame" x="0.0" y="178" width="375" height="421"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MenuTableViewCell" id="b1R-qp-U60" customClass="MenuTableViewCell" customModule="ramychemaly" customModuleProvider="target">
@@ -104,31 +104,55 @@
                                     <outlet property="delegate" destination="RUM-XF-4gV" id="vgv-pW-0xN"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gic-FY-4Iu">
+                                <rect key="frame" x="50" y="607" width="225" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="AeH-Og-Peq"/>
+                                </constraints>
+                                <state key="normal" title="Upload Bread of Life" backgroundImage="button_background_blue">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="buttonUploadTapped:" destination="RUM-XF-4gV" eventType="touchUpInside" id="2HV-Tj-eJc"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="D5K-du-ebz" firstAttribute="leading" secondItem="Vgd-pV-zbi" secondAttribute="leading" id="2Z4-rX-K0s"/>
                             <constraint firstItem="dCt-AU-SvS" firstAttribute="leading" secondItem="Vgd-pV-zbi" secondAttribute="leading" id="9FS-hE-hg9"/>
                             <constraint firstAttribute="trailing" secondItem="dCt-AU-SvS" secondAttribute="trailing" id="EEg-pU-aN8"/>
-                            <constraint firstItem="MS8-1S-Cmi" firstAttribute="top" secondItem="dCt-AU-SvS" secondAttribute="bottom" id="KVu-6J-iI5"/>
+                            <constraint firstItem="gic-FY-4Iu" firstAttribute="leading" secondItem="QQU-li-enc" secondAttribute="leading" constant="50" id="Enj-0b-ag2"/>
+                            <constraint firstItem="MS8-1S-Cmi" firstAttribute="top" secondItem="gic-FY-4Iu" secondAttribute="bottom" constant="20" id="K57-GK-d7O"/>
+                            <constraint firstItem="MS8-1S-Cmi" firstAttribute="top" secondItem="dCt-AU-SvS" secondAttribute="bottom" constant="124" id="KVu-6J-iI5"/>
                             <constraint firstAttribute="trailing" secondItem="D5K-du-ebz" secondAttribute="trailing" id="eeX-Ql-xxx"/>
-                            <constraint firstItem="dCt-AU-SvS" firstAttribute="top" secondItem="D5K-du-ebz" secondAttribute="bottom" id="ghi-Pa-DGo"/>
+                            <constraint firstItem="gic-FY-4Iu" firstAttribute="top" secondItem="dCt-AU-SvS" secondAttribute="bottom" constant="8" id="fKR-GZ-AO1"/>
+                            <constraint firstItem="dCt-AU-SvS" firstAttribute="top" secondItem="D5K-du-ebz" secondAttribute="bottom" constant="8" id="ghi-Pa-DGo"/>
                             <constraint firstItem="D5K-du-ebz" firstAttribute="top" secondItem="Byq-IM-1uD" secondAttribute="bottom" id="i0e-Tn-mgU"/>
+                            <constraint firstItem="QQU-li-enc" firstAttribute="trailing" secondItem="gic-FY-4Iu" secondAttribute="trailing" constant="100" id="kJz-K9-KLm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="QQU-li-enc"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="KVu-6J-iI5"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
                         <outlet property="avatarImageView" destination="qQ9-Ri-ZuO" id="6Ie-hx-kil"/>
                         <outlet property="avatarImageViewCenterXConstraint" destination="30T-nO-1KY" id="muT-vZ-mgD"/>
+                        <outlet property="buttonUpload" destination="gic-FY-4Iu" id="Ssr-Qj-hdL"/>
+                        <outlet property="buttonUploadHeightConstraint" destination="AeH-Og-Peq" id="Rzg-av-rlV"/>
                         <outlet property="tableView" destination="dCt-AU-SvS" id="wrc-JU-Prl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HtE-Nb-CGt" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1769" y="139"/>
+            <point key="canvasLocation" x="1768.8" y="138.98050974512745"/>
         </scene>
     </scenes>
     <resources>
+        <image name="button_background_blue" width="980" height="149"/>
         <image name="logo" width="257" height="256"/>
     </resources>
 </document>

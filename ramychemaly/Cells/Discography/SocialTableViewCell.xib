@@ -35,7 +35,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BMU-b9-NEY">
-                                <rect key="frame" x="68" y="16" width="269" height="0.0"/>
+                                <rect key="frame" x="68" y="16" width="269" height="42.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="16"/>
                                 <color key="textColor" red="0.20317992568016052" green="0.58061903715133667" blue="0.7230183482170105" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -50,6 +50,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.89085310699999998" green="0.90571790929999996" blue="0.91457635159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="BMU-b9-NEY" secondAttribute="bottom" constant="16" id="HiP-zo-aqP"/>
                             <constraint firstItem="BMU-b9-NEY" firstAttribute="top" secondItem="G87-j5-6e7" secondAttribute="top" constant="16" id="MGk-fW-V7Y"/>
                             <constraint firstItem="ffl-r8-Wnq" firstAttribute="centerY" secondItem="G87-j5-6e7" secondAttribute="centerY" id="NfA-DM-k3m"/>
                             <constraint firstItem="BMU-b9-NEY" firstAttribute="leading" secondItem="ffl-r8-Wnq" secondAttribute="trailing" constant="8" id="Nr2-8N-zxd"/>

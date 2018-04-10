@@ -13,17 +13,22 @@ import SwiftyJSON
 
 struct ServiceName {
     
-    static let getGlobalVariables = "/getGlobalVariables/"
     static let getNews = "/getNews/"
     static let getAboutUs = "/getAboutUs/"
     static let registerUser = "/registerUser/"
     static let getNotifications = "/getNotifications/"
     static let changePassword = "/changePassword/"
-    static let editProfile = "/editProfile/"
+    static let editUser = "/editUser/"
     static let login = "/login/"
     static let logout = "/logout/"
     static let forgotPassword = "/forgotPassword/"
     static let facebookLogin = "/facebookLogin/"
+    static let updateAvatar = "/updateAvatar/"
+    static let contactUs = "/contactUs/"
+    static let getBiography = "/getBiography/"
+    static let getDiscography = "/getDiscography/"
+    static let getBreadOfLife = "/getBreadOfLife/"
+    static let uploadBreadOfLife = "/uploadBreadOfLife/"
     
 }
 
@@ -54,8 +59,6 @@ class ResponseData {
 
 class Services {
     
-    private let BaseUrl = "http://www.jdeidetmarjeyoun.com/api"
-    private let Suffix = ""
     private static var _AccessToken: String = ""
     var ACCESS_TOKEN: String {
         get {
@@ -66,6 +69,20 @@ class Services {
             return Services._AccessToken
         }
     }
+    
+    static let ConfigUrl = "http://config.ramychemaly.com/"
+//    private let ConfigUrl = "http://localhost/ramychemaly/services/getConfig/"
+    
+    private static var _BaseUrl: String = ""
+    var BaseUrl: String {
+        get {
+            return Services._BaseUrl
+        }
+        set {
+            Services._BaseUrl = newValue
+        }
+    }
+    
     private static var _MediaUrl: String = ""
     var MediaUrl: String {
         get {
@@ -76,29 +93,27 @@ class Services {
         }
     }
     
-    func getGlobalVariables() -> ResponseData? {
-        
-        let serviceName = ServiceName.getGlobalVariables + "?lang=" //+ Localization.currentLanguage()
-        return makeHttpRequest(method: .get, serviceName: serviceName)
+    func getConfig() -> ResponseData? {
+        return makeHttpRequest(method: .post, isConfig: true)
     }
     
     func getNews(type: String) -> ResponseData? {
         
-        let serviceName = ServiceName.getNews + "?lang=" //+ Localization.currentLanguage() + "&type=" + type
+        let serviceName = ServiceName.getNews
         return makeHttpRequest(method: .get, serviceName: serviceName)
     }
     
     func getAboutUs() -> ResponseData? {
         
-        let serviceName = ServiceName.getAboutUs + "?lang=" //+ Localization.currentLanguage()
+        let serviceName = ServiceName.getAboutUs
         return makeHttpRequest(method: .get, serviceName: serviceName)
     }
     
-    func registerUser(fullName: String, username: String, password: String, phoneNumber: String) -> ResponseData? {
+    func registerUser(fullname: String, email: String, password: String, phoneNumber: String) -> ResponseData? {
         
         let parameters = [
-            "fullName": fullName,
-            "userName": username,
+            "fullname": fullname,
+            "email": email,
             "password": password,
             "phoneNumber": phoneNumber
         ]
@@ -109,15 +124,50 @@ class Services {
 
     func getNotifications() -> ResponseData? {
         
-        let serviceName = ServiceName.getNotifications + "?lang=" //+ Localization.currentLanguage()
-        return makeHttpRequest(method: .get, serviceName: serviceName)
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + ACCESS_TOKEN
+        ]
+        
+        let serviceName = ServiceName.getNotifications //+ "?lang=" + Localization.currentLanguage()
+        return makeHttpRequest(method: .post, serviceName: serviceName, headers: headers)
+    }
+    
+    func getBiography() -> ResponseData? {
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + ACCESS_TOKEN
+        ]
+        
+        let serviceName = ServiceName.getBiography //+ "?lang=" + Localization.currentLanguage()
+        return makeHttpRequest(method: .post, serviceName: serviceName, headers: headers)
+    }
+    
+    func getDiscography() -> ResponseData? {
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + ACCESS_TOKEN
+        ]
+        
+        let serviceName = ServiceName.getDiscography //+ "?lang=" + Localization.currentLanguage()
+        return makeHttpRequest(method: .post, serviceName: serviceName, headers: headers)
+    }
+    
+    func getBreadOfLife() -> ResponseData? {
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + ACCESS_TOKEN
+        ]
+        
+        let serviceName = ServiceName.getBreadOfLife //+ "?lang=" + Localization.currentLanguage()
+        return makeHttpRequest(method: .post, serviceName: serviceName, headers: headers)
     }
 
-    func changePassword(id: String, password: String) -> ResponseData? {
+    func changePassword(id: String, oldPassword: String, newPassword: String) -> ResponseData? {
         
         let parameters: Parameters = [
             "id": id,
-            "password": password
+            "oldPassword": oldPassword,
+            "newPassword": newPassword
         ]
         
         let headers: HTTPHeaders = [
@@ -128,28 +178,27 @@ class Services {
         return makeHttpRequest(method: .post, serviceName: serviceName, parameters: parameters, headers: headers)
     }
     
-    func editProfile(id: String, fullName: String, phoneNumber: String, email: String, address: String) -> ResponseData? {
+    func editUser(id: String, fullname: String, phoneNumber: String, email: String) -> ResponseData? {
         
         let parameters: Parameters = [
             "id": id,
-            "fullName": fullName,
+            "fullname": fullname,
             "phoneNumber": phoneNumber,
-            "email": email,
-            "address": address
+            "email": email
         ]
         
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + ACCESS_TOKEN
         ]
         
-        let serviceName = ServiceName.editProfile
+        let serviceName = ServiceName.editUser
         return makeHttpRequest(method: .post, serviceName: serviceName, parameters: parameters, headers: headers)
     }
     
-    func login(username: String, password: String) -> ResponseData? {
+    func login(email: String, password: String) -> ResponseData? {
         
         let parameters: Parameters = [
-            "userName": username,
+            "email": email,
             "password": password
         ]
         
@@ -157,14 +206,18 @@ class Services {
         return makeHttpRequest(method: .post, serviceName: serviceName, parameters: parameters)
     }
     
-    func logout(userId: String) -> ResponseData? {
+    func logout(id: String) -> ResponseData? {
         
         let parameters: Parameters = [
-            "userId": userId
+            "id": id
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + ACCESS_TOKEN
         ]
         
         let serviceName = ServiceName.logout
-        return makeHttpRequest(method: .post, serviceName: serviceName, parameters: parameters)
+        return makeHttpRequest(method: .post, serviceName: serviceName, parameters: parameters, headers: headers)
     }
     
     func forgotPassword(email: String) -> ResponseData? {
@@ -177,36 +230,75 @@ class Services {
         return makeHttpRequest(method: .post, serviceName: serviceName, parameters: parameters)
     }
     
-    func facebookLogin() -> ResponseData? {
+    func facebookLogin(user: User) -> ResponseData? {
         
         let parameters: Parameters = [
-            "facebookID": "",
-            "facebookToken": "",
-            "firstName": "",
-            "email": "",
-            "gender": "",
-            ]
+            "facebook_id": user.facebook_id ?? "",
+            "facebook_token": user.facebook_token ?? "",
+            "fullname": user.fullname ?? "",
+            "email": user.email ?? "",
+            "gender": user.gender ?? "",
+        ]
         
         let serviceName = ServiceName.facebookLogin
         return makeHttpRequest(method: .post, serviceName: serviceName, parameters: parameters)
     }
-
-    func uploadImageData(imageFile : UIImage, completion:@escaping(_:ResponseData)->Void) {
+    
+    func contactUs(name: String, email: String, phone: String, message: String) -> ResponseData? {
         
-        let imageData = imageFile.jpeg(.medium)// UIImageJPEGRepresentation(imageFile , 0.5)
+        let parameters: Parameters = [
+            "fullname": name,
+            "email": email,
+            "phone": phone,
+            "message": message
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + ACCESS_TOKEN
+        ]
+        
+        let serviceName = ServiceName.contactUs
+        return makeHttpRequest(method: .post, serviceName: serviceName, parameters: parameters, headers: headers)
+    }
+    
+    func uploadBreadOfLife(type: String, title: String, message: String) -> ResponseData? {
+        
+        let parameters: Parameters = [
+            "type": type,
+            "title": title,
+            "message": message
+        ]
+        
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + ACCESS_TOKEN
+        ]
+        
+        let serviceName = ServiceName.uploadBreadOfLife
+        return makeHttpRequest(method: .post, serviceName: serviceName, parameters: parameters, headers: headers)
+    }
+    
+    func updateAvatar(userId: String, image : UIImage, completion:@escaping(_:ResponseData)->Void) {
+        self.uploadImageData(userId: userId, serviceName: ServiceName.updateAvatar, imageFile: image, completion: completion)
+    }
+
+    func uploadImageData(userId: String, serviceName: String, imageFile : UIImage, completion:@escaping(_:ResponseData)->Void) {
+        
+        let headers: HTTPHeaders = [
+            "User-Id": userId
+        ]
+        
+        let imageData = imageFile.jpeg(.medium)
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             multipartFormData.append(imageData!, withName: "file", fileName: "image.jpeg", mimeType: "image/jpeg")
-        }, to: BaseUrl + "/uploadImage/")
+        }, to: BaseUrl + serviceName, headers: headers)
         { (result) in
             let responseData = ResponseData()
             switch result {
             case .success(let upload, _, _):
-                
                 upload.uploadProgress(closure: { (Progress) in
                 })
                 
                 upload.responseJSON { response in
-                    
                     if let json = response.result.value as? NSDictionary {
                         responseData.status = ResponseStatus.SUCCESS.rawValue
                         responseData.json = [json]
@@ -219,7 +311,6 @@ class Services {
                         completion(responseData)
                     }
                 }
-                
             case .failure(let encodingError):
                 print(encodingError)
                 responseData.status = ResponseStatus.FAILURE.rawValue
@@ -231,9 +322,14 @@ class Services {
     
     // MARK: /************* SERVER REQUEST *************/
     
-    private func makeHttpRequest(method: HTTPMethod, serviceName: String, parameters: Parameters? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: HTTPHeaders? = nil) -> ResponseData {
+    private func makeHttpRequest(method: HTTPMethod, serviceName: String = "", parameters: Parameters? = nil, encoding: ParameterEncoding = URLEncoding.default, headers: HTTPHeaders? = nil, isConfig: Bool = false) -> ResponseData {
         
-        let response = manager.request(BaseUrl + Suffix + serviceName, method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON(options: .allowFragments)
+        var requestUrl = BaseUrl
+        if isConfig {
+            requestUrl = Services.ConfigUrl
+        }
+        
+        let response = manager.request(requestUrl + serviceName, method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON(options: .allowFragments)
         let responseData = ResponseData()
         responseData.status = ResponseStatus.FAILURE.rawValue
         responseData.message = ResponseMessage.SERVER_UNREACHABLE.rawValue
@@ -306,6 +402,12 @@ class Services {
             responseData.json = nil
         }
         
+        if responseData.status == ResponseStatus.UNAUTHORIZED.rawValue {
+            if let baseVC = currentVC as? BaseViewController {
+                baseVC.logout()
+            }
+        }
+        
         return responseData
         
     }
@@ -319,8 +421,12 @@ class Services {
         
     }()
     
-    func getBaseUrl() -> String {
-        return self.BaseUrl
+    static func getBaseUrl() -> String {
+        return _BaseUrl
+    }
+    
+    static func setBaseUrl(url: String) {
+        _BaseUrl = url
     }
     
     static func getMediaUrl() -> String {

@@ -45,6 +45,9 @@
                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="KzR-9f-Gt5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" red="0.89085310699999998" green="0.90571790929999996" blue="0.91457635159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -55,15 +58,21 @@
                 <constraint firstItem="MwE-hT-fGv" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="OdY-1o-RoC"/>
                 <constraint firstItem="SXx-R2-0Ja" firstAttribute="top" secondItem="AiW-im-R4k" secondAttribute="bottom" constant="4" id="VSk-LE-828"/>
                 <constraint firstAttribute="trailing" secondItem="MwE-hT-fGv" secondAttribute="trailing" constant="10" id="Vke-0a-vN9"/>
+                <constraint firstItem="KzR-9f-Gt5" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Vvq-I0-np5"/>
+                <constraint firstAttribute="bottom" secondItem="KzR-9f-Gt5" secondAttribute="bottom" id="eEC-zk-um8"/>
+                <constraint firstItem="KzR-9f-Gt5" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ngq-WS-oHB"/>
+                <constraint firstAttribute="trailing" secondItem="KzR-9f-Gt5" secondAttribute="trailing" id="oxi-wD-yhk"/>
                 <constraint firstItem="MwE-hT-fGv" firstAttribute="top" secondItem="SXx-R2-0Ja" secondAttribute="bottom" constant="8" id="pUd-O2-zOY"/>
                 <constraint firstItem="SXx-R2-0Ja" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="pmg-9q-qjL"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
+                <outlet property="imageViewIcon" destination="KzR-9f-Gt5" id="0h2-my-b9e"/>
                 <outlet property="labelDate" destination="SXx-R2-0Ja" id="ZCo-qC-nhJ"/>
                 <outlet property="labelTitle" destination="AiW-im-R4k" id="Mq4-gf-WD4"/>
                 <outlet property="textViewDescription" destination="MwE-hT-fGv" id="n2b-mF-ldZ"/>
             </connections>
+            <point key="canvasLocation" x="25.5" y="51.5"/>
         </collectionViewCell>
     </objects>
 </document>

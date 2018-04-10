@@ -9,13 +9,11 @@
 /* Begin PBXBuildFile section */
 		18477F29898D2F9390E748F5 /* Pods_ramychemaly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DC211E7E1B8C8C9B8476651 /* Pods_ramychemaly.framework */; };
 		4208253A205528EA000BCC28 /* AudioPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42082539205528EA000BCC28 /* AudioPlayerViewController.swift */; };
-		4259A24D2055A1F7002FE8AD /* list.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4259A24C2055A1F6002FE8AD /* list.plist */; };
-		4259A2512055A262002FE8AD /* Dalli D7aki.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4259A24E2055A261002FE8AD /* Dalli D7aki.mp3 */; };
-		4259A2522055A262002FE8AD /* Tiri.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4259A24F2055A262002FE8AD /* Tiri.mp3 */; };
-		4259A2532055A262002FE8AD /* Jereh Elli Baadou.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4259A2502055A262002FE8AD /* Jereh Elli Baadou.mp3 */; };
+		4252B6A42062A1F800AB8BCD /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4252B6A32062A1F700AB8BCD /* CircleProgressView.swift */; };
 		4259A2572055A7FF002FE8AD /* AudioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259A2552055A7FF002FE8AD /* AudioTableViewCell.swift */; };
 		4259A2582055A7FF002FE8AD /* AudioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4259A2562055A7FF002FE8AD /* AudioTableViewCell.xib */; };
 		4259A25A2055AA56002FE8AD /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4259A2592055AA56002FE8AD /* Audio.swift */; };
+		425ADC6C2057E4550015D336 /* UploadBreadOfLifeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 425ADC6B2057E4550015D336 /* UploadBreadOfLifeViewController.storyboard */; };
 		426AC4BF205120DE002601B7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426AC4BE205120DE002601B7 /* User.swift */; };
 		426AC4C12051262C002601B7 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426AC4C02051262C002601B7 /* EditProfileViewController.swift */; };
 		426AC4C320512648002601B7 /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426AC4C220512648002601B7 /* ChangePasswordViewController.swift */; };
@@ -35,6 +33,7 @@
 		426CFB69204D7A3500D3B85E /* ContactUsViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 426CFB68204D7A3500D3B85E /* ContactUsViewController.storyboard */; };
 		426CFB6C204D7A6D00D3B85E /* HomeViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 426CFB6B204D7A6D00D3B85E /* HomeViewController.storyboard */; };
 		426CFB6E204D7AD800D3B85E /* InitialMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426CFB6D204D7AD800D3B85E /* InitialMenuViewController.swift */; };
+		426D09C52057D1CE00EB145E /* UploadBreadOfLifeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 426D09C32057D1CE00EB145E /* UploadBreadOfLifeViewController.swift */; };
 		42730244204C825D00982453 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42730243204C825D00982453 /* AppDelegate.swift */; };
 		42730249204C825D00982453 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42730247204C825D00982453 /* Main.storyboard */; };
 		4273024C204C825D00982453 /* ramychemaly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4273024A204C825D00982453 /* ramychemaly.xcdatamodeld */; };
@@ -79,6 +78,7 @@
 		42B1BAE1204D7383001E06F5 /* Storyboardable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BAE0204D7383001E06F5 /* Storyboardable.swift */; };
 		42B1BAE4204D73FD001E06F5 /* SideMenuViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42B1BAE3204D73FD001E06F5 /* SideMenuViewController.storyboard */; };
 		42B1BAE6204D74FA001E06F5 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42B1BAE5204D74FA001E06F5 /* MenuTableViewCell.swift */; };
+		42BD7D1D205B090C00FBC613 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42BD7D1C205B090C00FBC613 /* Media.swift */; };
 		42D41012205085C8009FE8F6 /* DiscographyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D41011205085C8009FE8F6 /* DiscographyViewController.swift */; };
 		42D41015205086AA009FE8F6 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42D41013205086AA009FE8F6 /* GalleryCollectionViewCell.swift */; };
 		42D41016205086AA009FE8F6 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42D41014205086AA009FE8F6 /* GalleryCollectionViewCell.xib */; };
@@ -111,13 +111,12 @@
 
 /* Begin PBXFileReference section */
 		42082539205528EA000BCC28 /* AudioPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerViewController.swift; sourceTree = "<group>"; };
-		4259A24C2055A1F6002FE8AD /* list.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = list.plist; sourceTree = "<group>"; };
-		4259A24E2055A261002FE8AD /* Dalli D7aki.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Dalli D7aki.mp3"; sourceTree = "<group>"; };
-		4259A24F2055A262002FE8AD /* Tiri.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Tiri.mp3; sourceTree = "<group>"; };
-		4259A2502055A262002FE8AD /* Jereh Elli Baadou.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Jereh Elli Baadou.mp3"; sourceTree = "<group>"; };
+		4252B6A22062A1F700AB8BCD /* CircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleProgressView.h; sourceTree = "<group>"; };
+		4252B6A32062A1F700AB8BCD /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		4259A2552055A7FF002FE8AD /* AudioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioTableViewCell.swift; sourceTree = "<group>"; };
 		4259A2562055A7FF002FE8AD /* AudioTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AudioTableViewCell.xib; sourceTree = "<group>"; };
 		4259A2592055AA56002FE8AD /* Audio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Audio.swift; sourceTree = "<group>"; };
+		425ADC6B2057E4550015D336 /* UploadBreadOfLifeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UploadBreadOfLifeViewController.storyboard; sourceTree = "<group>"; };
 		426AC4BE205120DE002601B7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		426AC4C02051262C002601B7 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		426AC4C220512648002601B7 /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
@@ -137,6 +136,7 @@
 		426CFB68204D7A3500D3B85E /* ContactUsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ContactUsViewController.storyboard; sourceTree = "<group>"; };
 		426CFB6B204D7A6D00D3B85E /* HomeViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeViewController.storyboard; sourceTree = "<group>"; };
 		426CFB6D204D7AD800D3B85E /* InitialMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialMenuViewController.swift; sourceTree = "<group>"; };
+		426D09C32057D1CE00EB145E /* UploadBreadOfLifeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadBreadOfLifeViewController.swift; sourceTree = "<group>"; };
 		42730240204C825D00982453 /* ramychemaly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ramychemaly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42730243204C825D00982453 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		42730248204C825D00982453 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -184,6 +184,7 @@
 		42B1BAE0204D7383001E06F5 /* Storyboardable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboardable.swift; sourceTree = "<group>"; };
 		42B1BAE3204D73FD001E06F5 /* SideMenuViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SideMenuViewController.storyboard; sourceTree = "<group>"; };
 		42B1BAE5204D74FA001E06F5 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		42BD7D1C205B090C00FBC613 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		42D41011205085C8009FE8F6 /* DiscographyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscographyViewController.swift; sourceTree = "<group>"; };
 		42D41013205086AA009FE8F6 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		42D41014205086AA009FE8F6 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -216,25 +217,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4252B6A12062A1E300AB8BCD /* CircleProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				4252B6A22062A1F700AB8BCD /* CircleProgressView.h */,
+				4252B6A32062A1F700AB8BCD /* CircleProgressView.swift */,
+			);
+			path = CircleProgressView;
+			sourceTree = "<group>";
+		};
 		4259A24B2055A1D1002FE8AD /* MediaPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				4259A2542055A429002FE8AD /* Songs */,
 				4279D47220551D1F0098153F /* YoutubePlayerViewController.swift */,
 				42082539205528EA000BCC28 /* AudioPlayerViewController.swift */,
 			);
 			path = MediaPlayer;
-			sourceTree = "<group>";
-		};
-		4259A2542055A429002FE8AD /* Songs */ = {
-			isa = PBXGroup;
-			children = (
-				4259A24E2055A261002FE8AD /* Dalli D7aki.mp3 */,
-				4259A2502055A262002FE8AD /* Jereh Elli Baadou.mp3 */,
-				4259A24F2055A262002FE8AD /* Tiri.mp3 */,
-				4259A24C2055A1F6002FE8AD /* list.plist */,
-			);
-			path = Songs;
 			sourceTree = "<group>";
 		};
 		426C72D2205180360014491B /* Initial */ = {
@@ -285,6 +283,15 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		426D09C22057D1AE00EB145E /* UploadBreadOfLife */ = {
+			isa = PBXGroup;
+			children = (
+				426D09C32057D1CE00EB145E /* UploadBreadOfLifeViewController.swift */,
+				425ADC6B2057E4550015D336 /* UploadBreadOfLifeViewController.storyboard */,
+			);
+			path = UploadBreadOfLife;
+			sourceTree = "<group>";
+		};
 		42730237204C825D00982453 = {
 			isa = PBXGroup;
 			children = (
@@ -327,6 +334,7 @@
 		42730258204C8BC100982453 /* Globals */ = {
 			isa = PBXGroup;
 			children = (
+				4252B6A12062A1E300AB8BCD /* CircleProgressView */,
 				42730259204C8BD000982453 /* AppDefaults.swift */,
 				4273025B204C8BD900982453 /* Extensions.swift */,
 				4273025D204C8BF200982453 /* Alamofire+Synchronous.swift */,
@@ -351,6 +359,7 @@
 		4273026F204C9A5300982453 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				426D09C22057D1AE00EB145E /* UploadBreadOfLife */,
 				4259A24B2055A1D1002FE8AD /* MediaPlayer */,
 				4279D46F2052DA800098153F /* Notifications */,
 				426C72D2205180360014491B /* Initial */,
@@ -428,6 +437,7 @@
 				426AC4CA2051336C002601B7 /* MediaGallery.swift */,
 				429C1A7520518470005F35EE /* Avatar.swift */,
 				4259A2592055AA56002FE8AD /* Audio.swift */,
+				42BD7D1C205B090C00FBC613 /* Media.swift */,
 			);
 			path = DatabaseObjects;
 			sourceTree = "<group>";
@@ -578,21 +588,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				42D4102320508F2D009FE8F6 /* ImageFullView.xib in Resources */,
+				425ADC6C2057E4550015D336 /* UploadBreadOfLifeViewController.storyboard in Resources */,
 				426CFB69204D7A3500D3B85E /* ContactUsViewController.storyboard in Resources */,
 				42A4555A204FD3C9002F207D /* ToolbarView.xib in Resources */,
 				4273026A204C952100982453 /* Montserrat-Regular.ttf in Resources */,
 				4273026D204C992700982453 /* GoogleService-Info.plist in Resources */,
 				4279D46E2052BA5D0098153F /* ImageFullCollectionViewCell.xib in Resources */,
 				42B1BAE4204D73FD001E06F5 /* SideMenuViewController.storyboard in Resources */,
-				4259A24D2055A1F7002FE8AD /* list.plist in Resources */,
 				42D4101A205087EE009FE8F6 /* VideoCollectionViewCell.xib in Resources */,
 				426CFB67204D7A1300D3B85E /* WebViewController.storyboard in Resources */,
 				426C72D9205181330014491B /* AvatarCollectionViewCell.xib in Resources */,
-				4259A2512055A262002FE8AD /* Dalli D7aki.mp3 in Resources */,
 				42730268204C952100982453 /* Montserrat-Light.ttf in Resources */,
-				4259A2532055A262002FE8AD /* Jereh Elli Baadou.mp3 in Resources */,
 				426C72CF205169B80014491B /* AlertView.xib in Resources */,
-				4259A2522055A262002FE8AD /* Tiri.mp3 in Resources */,
 				42730269204C952100982453 /* Montserrat-Medium.ttf in Resources */,
 				42A4554E204EAC25002F207D /* NotificationTableViewCell.xib in Resources */,
 				4259A2582055A7FF002FE8AD /* AudioTableViewCell.xib in Resources */,
@@ -623,6 +630,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ramychemaly/Pods-ramychemaly-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/DownloadButton/DownloadButton.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FSPagerView/FSPagerView.framework",
@@ -641,6 +649,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DownloadButton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FSPagerView.framework",
@@ -707,6 +716,7 @@
 				42D4102020508C6A009FE8F6 /* ImageCollectionViewCell.swift in Sources */,
 				42D4102D205095F1009FE8F6 /* BreadOfLife.swift in Sources */,
 				42A4555C204FD3DA002F207D /* ToolbarView.swift in Sources */,
+				426D09C52057D1CE00EB145E /* UploadBreadOfLifeViewController.swift in Sources */,
 				42A45555204ED61F002F207D /* EmptyView.swift in Sources */,
 				4259A2572055A7FF002FE8AD /* AudioTableViewCell.swift in Sources */,
 				426AC4C720513164002601B7 /* Photo.swift in Sources */,
@@ -732,11 +742,13 @@
 				42A45576204FF00F002F207D /* Biography.swift in Sources */,
 				42A45550204ECFF6002F207D /* NotificationsViewController.swift in Sources */,
 				426C72D4205180640014491B /* SelectAvatarViewController.swift in Sources */,
+				4252B6A42062A1F800AB8BCD /* CircleProgressView.swift in Sources */,
 				426CFB5E204D799B00D3B85E /* WebViewController.swift in Sources */,
 				42A4556F204FEA13002F207D /* BioCollectionViewCell.swift in Sources */,
 				426AC4C12051262C002601B7 /* EditProfileViewController.swift in Sources */,
 				42730275204CA77B00982453 /* LoginViewController.swift in Sources */,
 				4279D4712052DAA40098153F /* NotificationDetailViewController.swift in Sources */,
+				42BD7D1D205B090C00FBC613 /* Media.swift in Sources */,
 				42B1BADC204D664B001E06F5 /* HomeViewController.swift in Sources */,
 				426CFB6E204D7AD800D3B85E /* InitialMenuViewController.swift in Sources */,
 				42A45573204FED74002F207D /* BioPagerViewCell.swift in Sources */,

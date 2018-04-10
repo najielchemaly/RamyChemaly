@@ -16,6 +16,7 @@ pod 'NVActivityIndicatorView'
 pod 'FBSDKLoginKit'
 pod 'InteractiveSideMenu'
 pod 'M13Checkbox'
+pod 'DownloadButton'
 pod "youtube-ios-player-helper", "~> 0.1.4"
 
 end

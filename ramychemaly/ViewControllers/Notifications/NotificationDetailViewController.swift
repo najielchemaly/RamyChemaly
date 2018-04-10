@@ -36,10 +36,10 @@ class NotificationDetailViewController: BaseViewController {
     
     func initializeViews() {
         if let imgUrl = notification.img_url {
-            self.imageViewIcon.kf.setImage(with: URL(string: imgUrl))
+            self.imageViewIcon.kf.setImage(with: URL(string: Services.getMediaUrl() + imgUrl))
         }
         
-        self.textViewDescription.text = notification.description
+        self.textViewDescription.text = notification.desc
     }
     
     @IBAction func buttonGetDirectionTapped(_ sender: Any) {

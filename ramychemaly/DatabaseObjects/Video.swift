@@ -9,12 +9,12 @@
 import Foundation
 import UIKit
 
-public class Video {
-    public var id : Int?
+public class Video: NSObject, NSCoding {
+    public var id : String?
     public var img_thumb : String?
     public var link : String?
     public var title : String?
-    public var gallery : String?
+    public var media_id : String?
     public var duration : String?
     
     /**
@@ -48,25 +48,41 @@ public class Video {
      - returns: Notifications Instance.
      */
     
-    public init(imgThumb: String, link: String, duration: String, gallery: String, title: String) {
+    public init(imgThumb: String, link: String, duration: String, media_id: String, title: String) {
         self.img_thumb = imgThumb
         self.link = link
         self.duration = duration
-        self.gallery = gallery
+        self.media_id = media_id
         self.title = title
     }
     
-    required public init() {
-        
+    required public override init() { }
+    
+    required public init(coder decoder: NSCoder) {
+        id = decoder.decodeObject(forKey:"id") as? String
+        img_thumb = decoder.decodeObject(forKey:"img_thumb") as? String
+        link = decoder.decodeObject(forKey:"link") as? String
+        duration = decoder.decodeObject(forKey:"duration") as? String
+        title = decoder.decodeObject(forKey:"title") as? String
+        media_id = decoder.decodeObject(forKey:"media_id") as? String
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(id, forKey: "id")
+        coder.encode(img_thumb, forKey: "img_thumb")
+        coder.encode(link, forKey: "link")
+        coder.encode(duration, forKey: "duration")
+        coder.encode(title, forKey: "title")
+        coder.encode(media_id, forKey: "media_id")
     }
     
     required public init?(dictionary: NSDictionary) {
         
-        id = dictionary["id"] as? Int
+        id = dictionary["id"] as? String
         img_thumb = dictionary["img_thumb"] as? String
         link = dictionary["link"] as? String
         title = dictionary["title"] as? String
-        gallery = dictionary["gallery"] as? String
+        media_id = dictionary["media_id"] as? String
         duration = dictionary["duration"] as? String
     }
     
@@ -84,7 +100,7 @@ public class Video {
         dictionary.setValue(self.img_thumb, forKey: "img_thumb")
         dictionary.setValue(self.link, forKey: "link")
         dictionary.setValue(self.title, forKey: "title")
-        dictionary.setValue(self.gallery, forKey: "gallery")
+        dictionary.setValue(self.media_id, forKey: "media_id")
         dictionary.setValue(self.duration, forKey: "duration")
         
         return dictionary

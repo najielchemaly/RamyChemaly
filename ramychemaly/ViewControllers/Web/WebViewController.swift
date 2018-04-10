@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WebViewController: BaseViewController, Storyboardable {
+class WebViewController: BaseViewController, Storyboardable, UIWebViewDelegate {
 
     @IBOutlet weak var webView: UIWebView!
 
@@ -18,6 +18,7 @@ class WebViewController: BaseViewController, Storyboardable {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.setupWebview()
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,6 +34,28 @@ class WebViewController: BaseViewController, Storyboardable {
         } else if WebViewController.comingFrom.hashValue == WebViewComingFrom.privacy.hashValue {
             self.toolbarView.labelTitle.text = "PRIVACY POLICY"
         }
+    }
+    
+    func setupWebview() {
+        self.webView.delegate = self
+        
+        if WebViewController.comingFrom.hashValue == WebViewComingFrom.terms.hashValue {
+            if let termsUrl = URL.init(string: termsUrlString) {
+                self.webView.loadRequest(URLRequest.init(url: termsUrl))
+            }
+        } else if WebViewController.comingFrom.hashValue == WebViewComingFrom.privacy.hashValue {
+            if let privacyUrl = URL.init(string: privacyUrlString) {
+                self.webView.loadRequest(URLRequest.init(url: privacyUrl))
+            }
+        }
+    }
+    
+    func webViewDidStartLoad(_ webView: UIWebView) {
+        self.showLoader()
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        self.hideLoader()
     }
     
     /*

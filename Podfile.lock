@@ -6,6 +6,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - DownloadButton (0.1.0)
   - FBSDKCoreKit (4.29.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.29.0):
@@ -54,6 +55,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - DownloadButton
   - FBSDKLoginKit
   - Firebase/Core
   - Firebase/Messaging
@@ -69,6 +71,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DownloadButton: 49a21a89e0d7d1b42d9134f79aaa40e727cd57c3
   FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
   FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
   Firebase: dbfb98ccec2dcfcd21ab9cc1b4981a3f3c8c5e26
@@ -88,6 +91,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: ee7f07c288b496ba0179f4da5c1ae828427e663b
+PODFILE CHECKSUM: fe46423f97c97e13c4ab7f9b26a14e549eb257ec
 
 COCOAPODS: 1.3.1

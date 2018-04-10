@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-public class Biography {
-    public var id : Int?
+public class Biography: NSObject, NSCoding {
+    public var id : String?
     public var title_short : String?
     public var title_long : String?
     public var img_thumb : String?
     public var img_url : String?
-    public var description : String?
+    public var desc : String?
     
     /**
      Returns an array of models based on given dictionary.
@@ -48,16 +48,32 @@ public class Biography {
      - returns: Notifications Instance.
      */
     
-    required public init() {
-        
+    required public override init() { }
+    
+    required public init(coder decoder: NSCoder) {
+        id = decoder.decodeObject(forKey:"id") as? String
+        title_short = decoder.decodeObject(forKey:"title_short") as? String
+        title_long = decoder.decodeObject(forKey:"title_long") as? String
+        img_thumb = decoder.decodeObject(forKey:"img_thumb") as? String
+        img_url = decoder.decodeObject(forKey:"img_url") as? String
+        desc = decoder.decodeObject(forKey:"description") as? String
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(id, forKey: "id")
+        coder.encode(title_short, forKey: "title_short")
+        coder.encode(title_long, forKey: "title_long")
+        coder.encode(img_thumb, forKey: "img_thumb")
+        coder.encode(img_url, forKey: "img_url")
+        coder.encode(desc, forKey: "description")
     }
     
     required public init?(dictionary: NSDictionary) {
         
-        id = dictionary["id"] as? Int
+        id = dictionary["id"] as? String
         title_short = dictionary["title_short"] as? String
         title_long = dictionary["title_long"] as? String
-        description = dictionary["description"] as? String
+        desc = dictionary["description"] as? String
         img_thumb = dictionary["img_thumb"] as? String
         img_url = dictionary["img_url"] as? String
     }
@@ -75,7 +91,7 @@ public class Biography {
         dictionary.setValue(self.id, forKey: "id")
         dictionary.setValue(self.title_short, forKey: "title_short")
         dictionary.setValue(self.title_long, forKey: "title_long")
-        dictionary.setValue(self.description, forKey: "description")
+        dictionary.setValue(self.desc, forKey: "description")
         dictionary.setValue(self.img_thumb, forKey: "img_thumb")
         dictionary.setValue(self.img_url, forKey: "img_url")
         

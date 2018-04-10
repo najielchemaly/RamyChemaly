@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import MediaPlayer
+import Alamofire
 
 extension UIImageView {
     func setRounded() {
@@ -20,24 +21,25 @@ extension UIImageView {
 
 class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     
-    //Choose background here. Between 1 - 5
-    let selectedBackground = 1
+    let playImage = UIImage(named: "play")
+    let pauseImage = UIImage(named: "pause")
+    
+    var audios: [Audio] = [Audio]()
     
     var audioPlayer:AVAudioPlayer! = nil
-    var currentAudio = ""
-    var currentAudioPath:URL!
-    var audioList:NSArray!
-    var currentAudioIndex = 0
-    var timer:Timer!
-    var audioLength = 0.0
-    var toggle = true
-    var effectToggle = true
-    var totalLengthOfAudio = ""
-    var finalImage:UIImage!
     var isTableViewOnscreen = false
+    var totalLengthOfAudio = ""
+    var shuffleArray = [Int]()
+    var currentAudioIndex = 0
+    var currentAudioPath:URL!
     var shuffleState = false
     var repeatState = false
-    var shuffleArray = [Int]()
+    var effectToggle = true
+    var finalImage:UIImage!
+    var audioLength = 0.0
+    var currentAudio = ""
+    var toggle = true
+    var timer:Timer!
     
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet var lineView : UIView!
@@ -52,15 +54,17 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     @IBOutlet var playButton : UIButton!
     @IBOutlet var nextButton : UIButton!
     @IBOutlet var blurImageView : UIImageView!
-    @IBOutlet var enhancer : UIView!
     @IBOutlet weak var shuffleButton: UIButton!
     @IBOutlet weak var repeatButton: UIButton!
+    @IBOutlet weak var progressView: CircleProgressView!
+    @IBOutlet weak var progressCenterImage: UIImageView!
     
     // This shows media info on lock screen - used currently and perform controls
     func showMediaInfo(){
-        let artistName = readArtistNameFromPlist(currentAudioIndex)
-        let songName = readSongNameFromPlist(currentAudioIndex)
-        MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyArtist : artistName,  MPMediaItemPropertyTitle : songName]
+        let audio = audios[currentAudioIndex]
+        let artistName = audio.artist_name
+        let songName = audio.song_name
+        MPNowPlayingInfoCenter.default().nowPlayingInfo = [MPMediaItemPropertyArtist : artistName ?? "",  MPMediaItemPropertyTitle : songName ?? ""]
     }
     
     override func remoteControlReceived(with event: UIEvent?) {
@@ -81,7 +85,7 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
-        return UIStatusBarStyle.default
+        return UIStatusBarStyle.lightContent
     }
     
     override var prefersStatusBarHidden : Bool {
@@ -94,9 +98,6 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //assing background
-        backgroundImageView.image = UIImage(named: "ramy\(selectedBackground)")
         
         //this sets last listened trach number as current
         self.retrieveSavedTrackNumber()
@@ -104,7 +105,9 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
         self.prepareAudio()
         self.updateLabels()
         self.setRepeatAndShuffle()
+        self.removeAudioObjectsFromUserDefaults()
         self.retrievePlayerProgressSliderValue()
+        self.setupProgressView()
         
         //LockScreen Media control registry
         if UIApplication.shared.responds(to: #selector(UIApplication.beginReceivingRemoteControlEvents)){
@@ -118,6 +121,13 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
         super.viewDidAppear(animated)
         
         backgroundImageView.addBlur()
+    }
+    
+    func setupProgressView() {
+        progressView.progress = 0
+        progressView.alpha = 0
+        
+        progressCenterImage.layer.cornerRadius = progressCenterImage.frame.width/2
     }
     
     func setRepeatAndShuffle(){
@@ -151,19 +161,13 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
         
         self.stopTimer()
         self.stopAudioplayer()
-        
-        UserDefaults.standard.removeObject(forKey: "repeatState")
-        UserDefaults.standard.removeObject(forKey: "shuffleState")
-        UserDefaults.standard.removeObject(forKey: "playerProgressSliderValue")
-        UserDefaults.standard.removeObject(forKey: "currentAudioIndex")
-        UserDefaults.standard.removeObject(forKey: "playerProgressSliderValue")
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+   
     // MARK:- AVAudioPlayer Delegate's Callback method
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool){
         if flag == true {
@@ -176,12 +180,11 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
                 //repeat same song
                 prepareAudio()
                 playAudio()
-                
             } else if shuffleState == true && repeatState == false {
                 //shuffle songs but do not repeat at the end
                 //Shuffle Logic : Create an array and put current song into the array then when next song come randomly choose song from available song and check against the array it is in the array try until you find one if the array and number of songs are same then stop playing as all songs are already played.
                 shuffleArray.append(currentAudioIndex)
-                if shuffleArray.count >= audioList.count {
+                if shuffleArray.count >= audios.count {
                     playButton.setImage( UIImage(named: "play"), for: UIControlState())
                     return
                 }
@@ -189,7 +192,7 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
                 var randomIndex = 0
                 var newIndex = false
                 while newIndex == false {
-                    randomIndex =  Int(arc4random_uniform(UInt32(audioList.count)))
+                    randomIndex =  Int(arc4random_uniform(UInt32(audios.count)))
                     if shuffleArray.contains(randomIndex) {
                         newIndex = false
                     }else{
@@ -202,14 +205,14 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
             } else if shuffleState == true && repeatState == true {
                 //shuffle song endlessly
                 shuffleArray.append(currentAudioIndex)
-                if shuffleArray.count >= audioList.count {
+                if shuffleArray.count >= audios.count {
                     shuffleArray.removeAll()
                 }
                 
                 var randomIndex = 0
                 var newIndex = false
                 while newIndex == false {
-                    randomIndex =  Int(arc4random_uniform(UInt32(audioList.count)))
+                    randomIndex =  Int(arc4random_uniform(UInt32(audios.count)))
                     if shuffleArray.contains(randomIndex) {
                         newIndex = false
                     }else{
@@ -225,8 +228,14 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     
     //Sets audio file URL
     func setCurrentAudioPath(){
-        currentAudio = readSongNameFromPlist(currentAudioIndex)
-        currentAudioPath = URL(fileURLWithPath: Bundle.main.path(forResource: currentAudio, ofType: "mp3")!)
+        let audio = audios[currentAudioIndex]
+        if let songName = audio.song_name {
+            currentAudio = songName
+        }
+        currentAudioPath = nil
+        if let audioPath = audio.audio_path {
+            currentAudioPath = audioPath
+        }
     }
     
     func saveCurrentTrackNumber(){
@@ -237,8 +246,6 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     func retrieveSavedTrackNumber(){
         if let currentAudioIndex_ = UserDefaults.standard.object(forKey: "currentAudioIndex") as? Int{
             currentAudioIndex = currentAudioIndex_
-        }else{
-            currentAudioIndex = 0
         }
     }
     
@@ -254,36 +261,58 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
         } catch _ {}
         
         UIApplication.shared.beginReceivingRemoteControlEvents()
-        audioPlayer = try? AVAudioPlayer(contentsOf: currentAudioPath)
-        audioPlayer.delegate = self
-        audioLength = audioPlayer.duration
-        playerProgressSlider.maximumValue = CFloat(audioPlayer.duration)
-        playerProgressSlider.minimumValue = 0.0
+        
+        progressTimerLabel.text = "00:00"
         playerProgressSlider.value = 0.0
-        audioPlayer.prepareToPlay()
         showTotalSongLength()
         updateLabels()
-        progressTimerLabel.text = "00:00"
+        
+        if let audioPath = currentAudioPath {
+//            if let player = audioPlayer {
+//                if player.isPlaying && player.currentTime > 0 {
+//                    player.play()
+//                    return
+//                }
+//            }
+            audioPlayer = try? AVAudioPlayer(contentsOf: audioPath)
+            if audioPlayer == nil {
+                playButton.setImage(playImage, for: UIControlState())
+                audios[currentAudioIndex].audio_path = nil
+                return
+            }
+            
+            audioPlayer.delegate = self
+            audioLength = audioPlayer.duration
+            playerProgressSlider.maximumValue = CFloat(audioPlayer.duration)
+            playerProgressSlider.minimumValue = 0.0
+            playerProgressSlider.value = 0.0
+            audioPlayer.prepareToPlay()
+        }
     }
     
     //MARK:- Player Controls Methods
-    func  playAudio(){
-        audioPlayer.play()
-        startTimer()
-        updateLabels()
-        saveCurrentTrackNumber()
-        showMediaInfo()
+    func playAudio(){
+        if audioPlayer != nil {
+            audioPlayer.play()
+            startTimer()
+//            updateLabels()
+            saveCurrentTrackNumber()
+            showMediaInfo()
+        }
     }
     
     func playNextAudio(){
         currentAudioIndex += 1
-        if currentAudioIndex>audioList.count-1{
-            currentAudioIndex -= 1
-            return
+        if currentAudioIndex>audios.count-1{
+            currentAudioIndex = 0
         }
-        if audioPlayer.isPlaying{
-            prepareAudio()
-            playAudio()
+        
+        if audioPlayer != nil && audioPlayer.isPlaying{
+            stopAudioplayer()
+            play(playButton)
+            return
+//            prepareAudio()
+//            playAudio()
         }else{
             prepareAudio()
         }
@@ -291,13 +320,15 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     
     func playPreviousAudio(){
         currentAudioIndex -= 1
-        if currentAudioIndex<0{
-            currentAudioIndex += 1
-            return
+        if currentAudioIndex < 0 {
+            currentAudioIndex = audios.count-1
         }
-        if audioPlayer.isPlaying{
-            prepareAudio()
-            playAudio()
+        if audioPlayer != nil && audioPlayer.isPlaying{
+            stopAudioplayer()
+            play(playButton)
+            return
+//            prepareAudio()
+//            playAudio()
         }else{
             prepareAudio()
         }
@@ -305,11 +336,15 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     }
     
     func stopAudioplayer(){
-        audioPlayer.stop();
+        if audioPlayer != nil {
+            audioPlayer.stop()
+        }
     }
     
     func pauseAudioPlayer(){
-        audioPlayer.pause()
+        if audioPlayer != nil {
+            audioPlayer.pause()
+        }
     }
     
     //MARK:-
@@ -327,7 +362,7 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     }
     
     @objc func update(_ timer: Timer){
-        if !audioPlayer.isPlaying{
+        if audioPlayer == nil || !audioPlayer.isPlaying {
             return
         }
         let time = calculateTimeFromNSTimeInterval(audioPlayer.currentTime)
@@ -338,19 +373,21 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     }
     
     func retrievePlayerProgressSliderValue(){
-        let playerProgressSliderValue =  UserDefaults.standard.float(forKey: "playerProgressSliderValue")
+        let playerProgressSliderValue = UserDefaults.standard.float(forKey: "playerProgressSliderValue")
         if playerProgressSliderValue != 0 {
-            playerProgressSlider.value  = playerProgressSliderValue
-            audioPlayer.currentTime = TimeInterval(playerProgressSliderValue)
-            
-            let time = calculateTimeFromNSTimeInterval(audioPlayer.currentTime)
-            progressTimerLabel.text  = "\(time.minute):\(time.second)"
-            playerProgressSlider.value = CFloat(audioPlayer.currentTime)
-            
+            playerProgressSlider.value = playerProgressSliderValue
+            if audioPlayer != nil {
+                audioPlayer.currentTime = TimeInterval(playerProgressSliderValue)
+                let time = calculateTimeFromNSTimeInterval(audioPlayer.currentTime)
+                progressTimerLabel.text  = "\(time.minute):\(time.second)"
+                playerProgressSlider.value = CFloat(audioPlayer.currentTime)
+            }
         }else{
             playerProgressSlider.value = 0.0
-            audioPlayer.currentTime = 0.0
             progressTimerLabel.text = "00:00:00"
+            if audioPlayer != nil {
+                audioPlayer.currentTime = 0.0
+            }
         }
     }
     
@@ -376,85 +413,113 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
         totalLengthOfAudio = "\(time.minute):\(time.second)"
     }
     
-    //Read plist file and creates an array of dictionary
-    func readFromPlist(){
-        let path = Bundle.main.path(forResource: "list", ofType: "plist")
-        audioList = NSArray(contentsOfFile:path!)
-    }
-    
-    func readArtistNameFromPlist(_ indexNumber: Int) -> String {
-        readFromPlist()
-        var infoDict = NSDictionary();
-        infoDict = audioList.object(at: indexNumber) as! NSDictionary
-        let artistName = infoDict.value(forKey: "artistName") as! String
-        return artistName
-    }
-    
-    func readAlbumNameFromPlist(_ indexNumber: Int) -> String {
-        readFromPlist()
-        var infoDict = NSDictionary();
-        infoDict = audioList.object(at: indexNumber) as! NSDictionary
-        let albumName = infoDict.value(forKey: "albumName") as! String
-        return albumName
-    }
-    
-    func readSongNameFromPlist(_ indexNumber: Int) -> String {
-        readFromPlist()
-        var songNameDict = NSDictionary();
-        songNameDict = audioList.object(at: indexNumber) as! NSDictionary
-        let songName = songNameDict.value(forKey: "songName") as! String
-        return songName
-    }
-    
-    func readArtworkNameFromPlist(_ indexNumber: Int) -> String {
-        readFromPlist()
-        var infoDict = NSDictionary();
-        infoDict = audioList.object(at: indexNumber) as! NSDictionary
-        let artworkName = infoDict.value(forKey: "albumArtwork") as! String
-        return artworkName
-    }
-    
     func updateLabels(){
         updateArtistNameLabel()
         updateAlbumNameLabel()
         updateSongNameLabel()
+        updateSongDurationLabel()
         updateAlbumArtwork()
     }
     
     func updateArtistNameLabel(){
-        let artistName = readArtistNameFromPlist(currentAudioIndex)
-        artistNameLabel.text = artistName
+        if let artistName = audios[currentAudioIndex].artist_name {
+            artistNameLabel.text = artistName
+        }
     }
     
     func updateAlbumNameLabel(){
-        let albumName = readAlbumNameFromPlist(currentAudioIndex)
-        albumNameLabel.text = albumName
+        if let albumName = audios[currentAudioIndex].album_name {
+            albumNameLabel.text = albumName
+        }
     }
     
     func updateSongNameLabel(){
-        let songName = readSongNameFromPlist(currentAudioIndex)
-        songNameLabel.text = songName
+        if let songName = audios[currentAudioIndex].song_name {
+            songNameLabel.text = songName
+        }
+    }
+    
+    func updateSongDurationLabel(){
+        if let duration = audios[currentAudioIndex].duration {
+            totalLengthOfAudioLabel.text = duration
+        }
     }
     
     func updateAlbumArtwork(){
-        let artworkName = readArtworkNameFromPlist(currentAudioIndex)
-        albumArtworkImageView.image = UIImage(named: artworkName)
-        backgroundImageView.image = UIImage(named: artworkName)
+        if let artworkName = audios[currentAudioIndex].album_artwork {
+            let albumArtwork = artworkName.isEmpty ? defaultBackground : artworkName
+            albumArtworkImageView.kf.setImage(with: URL(string: Services.getMediaUrl() + albumArtwork!))
+            backgroundImageView.kf.setImage(with: URL(string: Services.getMediaUrl() + albumArtwork!))
+        }
     }
     
     @IBAction func play(_ sender : AnyObject) {
         if shuffleState == true {
             shuffleArray.removeAll()
         }
-        let play = UIImage(named: "play")
-        let pause = UIImage(named: "pause")
-        if audioPlayer.isPlaying{
+    
+        if audioPlayer != nil && audioPlayer.isPlaying{
             pauseAudioPlayer()
-            audioPlayer.isPlaying ? "\(playButton.setImage( pause, for: UIControlState()))" : "\(playButton.setImage(play , for: UIControlState()))"
-            
+            playButton.setImage(playImage, for: UIControlState())
         }else{
-            playAudio()
-            audioPlayer.isPlaying ? "\(playButton.setImage( pause, for: UIControlState()))" : "\(playButton.setImage(play , for: UIControlState()))"
+            let audio = audios[currentAudioIndex]
+            if let audioPath = audio.audio_path {
+                self.currentAudioPath = audioPath
+                self.prepareAudio()
+                self.playAudio()
+                
+                DispatchQueue.main.async {
+                    self.playButton.setImage(self.pauseImage, for: UIControlState())
+                }
+            } else {
+                if let urlString = audio.audio_url{ //?.safeAddingPercentEncoding(withAllowedCharacters: .urlPathAllowed) {
+                    if let url = URL(string: Services.getMediaUrl() + urlString) {
+                        let destination = DownloadRequest.suggestedDownloadDestination(for: .documentDirectory)
+                        
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.progressView.alpha = 1
+                            self.nextButton.isEnabled(enable: false)
+                            self.previousButton.isEnabled(enable: false)
+                        })
+                        
+                        if let image = albumArtworkImageView.image {
+                            progressCenterImage.image = image
+                        }
+                        
+                        Alamofire.download(
+                            url,
+                            method: .get,
+                            parameters: nil,
+                            encoding: JSONEncoding.default,
+                            headers: nil,
+                            to: destination).downloadProgress(closure: { (progress) in
+                                let totalUnit = progress.totalUnitCount
+                                let completedUnit = progress.completedUnitCount
+                                self.progressView.progress = Double(completedUnit)/Double(totalUnit)
+                            }).response(completionHandler: { (DefaultDownloadResponse) in
+                                DispatchQueue.main.async {
+                                    self.progressCenterImage.image = nil
+                                    UIView.animate(withDuration: 0.5, animations: {
+                                        self.progressView.alpha = 0
+                                        self.nextButton.isEnabled(enable: true)
+                                        self.previousButton.isEnabled(enable: true)
+                                    })
+                                    
+                                    if let audioPath = DefaultDownloadResponse.destinationURL {
+                                        self.currentAudioPath = audioPath
+                                        self.audios[self.currentAudioIndex].audio_path = self.currentAudioPath
+                                        self.playButton.setImage(self.pauseImage, for: UIControlState())
+
+                                        if currentVC is AudioPlayerViewController {
+                                            self.prepareAudio()
+                                            self.playAudio()
+                                        }
+                                    }
+                                }
+                            })
+                    }
+                }
+            }
         }
     }
     
@@ -467,7 +532,9 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func changeAudioLocationSlider(_ sender : UISlider) {
-        audioPlayer.currentTime = TimeInterval(sender.value)
+        if audioPlayer != nil {
+            audioPlayer.currentTime = TimeInterval(sender.value)
+        }
     }
     
     @IBAction func userTapped(_ sender : UITapGestureRecognizer) {
@@ -510,5 +577,13 @@ class AudioPlayerViewController: BaseViewController, AVAudioPlayerDelegate {
     @IBAction func buttonCloseTapped(_ sender: Any) {
         self.dismissVC()
     }
+    
+//    func getSaveFileUrl(fileName: String) -> URL {
+//        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+//        let nameUrl = URL(string: fileName)
+//        let fileURL = documentsURL.appendingPathComponent((nameUrl?.lastPathComponent)!)
+//        NSLog(fileURL.absoluteString)
+//        return fileURL;
+//    }
     
 }

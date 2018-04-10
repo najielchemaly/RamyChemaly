@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-public class Social {
-    public var id : Int?
+public class Social: NSObject, NSCoding {
+    public var id : String?
     public var img_thumb : String?
     public var title : String?
     public var link : String?
@@ -53,13 +53,27 @@ public class Social {
         self.link = link
     }
     
-    required public init() {
-        
+    required public override init() { }
+    
+    required public init(coder decoder: NSCoder) {
+        id = decoder.decodeObject(forKey:"id") as? String
+        img_thumb = decoder.decodeObject(forKey:"img_thumb") as? String
+        title = decoder.decodeObject(forKey:"title") as? String
+        link = decoder.decodeObject(forKey:"link") as? String
+        image = decoder.decodeObject(forKey:"image") as? UIImage
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(id, forKey: "id")
+        coder.encode(img_thumb, forKey: "img_thumb")
+        coder.encode(title, forKey: "title")
+        coder.encode(link, forKey: "link")
+        coder.encode(image, forKey: "image")
     }
     
     required public init?(dictionary: NSDictionary) {
         
-        id = dictionary["id"] as? Int
+        id = dictionary["id"] as? String
         img_thumb = dictionary["img_thumb"] as? String
         title = dictionary["title"] as? String
         link = dictionary["link"] as? String

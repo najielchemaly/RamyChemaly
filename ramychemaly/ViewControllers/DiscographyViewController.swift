@@ -20,17 +20,19 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
     
     var socials: [Social] = [Social]()
-    var mediaGallery: [MediaGallery] = [MediaGallery]()
+    var audios: [Audio] = [Audio]()
+    var medias: Media = Media()
     
+    var mediaGallery: [MediaGallery] = [MediaGallery]()
     var photosGallery: [MediaGallery] = [MediaGallery]()
     var videosGallery: [MediaGallery] = [MediaGallery]()
-    var audios: [Audio] = [Audio]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.dummyData()
+        self.getDiscography()
         self.initializeViews()
         self.setupCollectionView()
         self.setupTableView()
@@ -45,6 +47,35 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getDiscography() {
+        self.showLoader()
+        DispatchQueue.global(qos: .background).async {
+            let response = appDelegate.services.getDiscography()
+            
+            DispatchQueue.main.async {
+//                self.dummyData()
+                if response?.status == ResponseStatus.SUCCESS.rawValue {
+                    if let json = response?.json?.first {
+                        if let jsonMedia = json["medias"] as? NSDictionary {
+                            let media = Media.init(dictionary: jsonMedia)
+                            self.medias = media!
+                        }
+                    }
+                }
+                
+                self.hideLoader()
+                self.parseMediaData()
+                
+                if self.medias.mediaGallery?.count == 0 {
+                    self.addEmptyView(message: "Something went wrong, try again later!")
+                } else {
+                    self.collectionView.reloadData()
+                    self.removeEmptyView()
+                }
+            }
+        }
     }
     
     @IBAction func buttonImagesTapped(_ sender: Any) {
@@ -92,13 +123,6 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
         self.buttonImages.setSelected(value: true)
         
         self.tableView.isHidden = true
-        
-        self.photosGallery = self.mediaGallery.filter { $0.type?.lowercased() == "photos" }
-        self.videosGallery = self.mediaGallery.filter { $0.type?.lowercased() == "videos" }
-        
-        if let audios = self.mediaGallery.first?.audios {
-            self.audios = audios
-        }
     }
     
     func unselectButtons() {
@@ -142,13 +166,17 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
     @objc func didSelectRow(sender: UITapGestureRecognizer) {
         if let view = sender.view {
             if buttonAudios.isSelected() {
-                self.redirectToVC(storyboardId: StoryboardIds.AudioPlayerViewController, type: .present)
+                if let audioPlayerViewController = storyboard?.instantiateViewController(withIdentifier: StoryboardIds.AudioPlayerViewController) as? AudioPlayerViewController {
+                    audioPlayerViewController.audios = self.audios
+                    audioPlayerViewController.currentAudioIndex = view.tag
+                    self.present(audioPlayerViewController, animated: true, completion: nil)
+                }
             } else if buttonSocials.isSelected() {
                 let social = socials[view.tag]
                 
                 var urlString: String!
                 if let link = social.link {
-                    if !link.contains("http://") {
+                    if !link.contains("http") {
                         urlString = "http://" + link
                     } else {
                         urlString = link
@@ -173,7 +201,7 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
             if let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.AudioTableViewCell) as? AudioTableViewCell {
                 
                 let audio = audios[indexPath.row]
-                cell.labelTitle.text = audio.title
+                cell.labelTitle.text = audio.song_name
                 
                 if let view = cell.contentView.subviews.first {
                     view.layer.cornerRadius = 10
@@ -190,14 +218,16 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
                 
                 let social = socials[indexPath.row]
                 if let imageThumb = social.img_thumb {
-                    cell.imageViewIcon.kf.setImage(with: URL(string: imageThumb))
+                    cell.imageViewIcon.kf.setImage(with: URL(string: Services.getMediaUrl() + imageThumb))
                 }
                 
                 if let image = social.image {
                     cell.imageViewIcon.image = image
                 }
                 
-                cell.labelTitle.text = social.title
+                if let title = social.title {
+                    cell.labelTitle.text = title
+                }
                 
                 if let view = cell.contentView.subviews.first {
                     view.layer.cornerRadius = 10
@@ -268,14 +298,14 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
             if buttonImages.isSelected() {
                 let photoGallery = photosGallery[indexPath.row]
                 if let imgThumb = photoGallery.img_thumb {
-                    cell.imageViewIcon.kf.setImage(with: URL(string: imgThumb))
+                    cell.imageViewIcon.kf.setImage(with: URL(string: Services.getMediaUrl() + imgThumb))
                 }
                 
                 cell.labelTitle.text = photoGallery.title
             } else if buttonVideos.isSelected() {
                 let videoGallery = videosGallery[indexPath.row]
                 if let imgThumb = videoGallery.img_thumb {
-                    cell.imageViewIcon.kf.setImage(with: URL(string: imgThumb))
+                    cell.imageViewIcon.kf.setImage(with: URL(string: Services.getMediaUrl() + imgThumb))
                 }
                 
                 cell.labelTitle.text = videoGallery.title
@@ -287,76 +317,93 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
         return UICollectionViewCell()
     }
     
+    func parseMediaData() {
+        if let mediaGallery = medias.mediaGallery {
+            self.mediaGallery = mediaGallery
+            self.photosGallery = self.mediaGallery.filter { $0.type?.lowercased() == "photo" }
+            self.videosGallery = self.mediaGallery.filter { $0.type?.lowercased() == "video" }
+        }
+        
+        if let audios = self.medias.audios {
+            self.audios = audios
+        }
+        if let socials = self.medias.socials {
+            self.socials = socials
+        }
+    }
+    
     func dummyData() {
         var media = MediaGallery()
         media.title = "@ Starac"
-        media.type = "photos"
+        media.type = "photo"
         media.img_thumb = "http://www.listenarabic.com/arabic-music/wp-content/uploads/2010/07/Ramy-prime15.jpg"
         media.photos = [
-            Photo.init(imgThumb: "http://www.listenarabic.com/arabic-music/wp-content/uploads/2010/07/Ramy-prime15.jpg", gallery: "@ Starac"),
-            Photo.init(imgThumb: "https://pbs.twimg.com/profile_images/847824186957602816/hKfSaa0z.jpg", gallery: "@ Starac"),
-            Photo.init(imgThumb: "http://4.bp.blogspot.com/_z5zRrw40eZA/TDcDiEA-EDI/AAAAAAAAARA/xmV4c4Xpc10/s1600/rami+010.jpg", gallery: "@ Starac"),
-            Photo.init(imgThumb: "http://2.bp.blogspot.com/_z5zRrw40eZA/S86vC7L6oMI/AAAAAAAAAMk/09CPBM5BJ7o/s1600/rami+008.jpg", gallery: "@ Starac")
+            Photo.init(imgThumb: "http://www.listenarabic.com/arabic-music/wp-content/uploads/2010/07/Ramy-prime15.jpg", media_id: "@ Starac"),
+            Photo.init(imgThumb: "https://pbs.twimg.com/profile_images/847824186957602816/hKfSaa0z.jpg", media_id: "@ Starac"),
+            Photo.init(imgThumb: "http://4.bp.blogspot.com/_z5zRrw40eZA/TDcDiEA-EDI/AAAAAAAAARA/xmV4c4Xpc10/s1600/rami+010.jpg", media_id: "@ Starac"),
+            Photo.init(imgThumb: "http://2.bp.blogspot.com/_z5zRrw40eZA/S86vC7L6oMI/AAAAAAAAAMk/09CPBM5BJ7o/s1600/rami+008.jpg", media_id: "@ Starac")
         ]
         mediaGallery.append(media)
         
         media = MediaGallery()
         media.title = "@ Starac New"
-        media.type = "photos"
+        media.type = "photo"
         media.img_thumb = "http://www.listenarabic.com/arabic-music/wp-content/uploads/2010/07/Ramy-prime13.jpg"
         media.photos = [
-            Photo.init(imgThumb: "http://www.listenarabic.com/arabic-music/wp-content/uploads/2010/07/Ramy-prime13.jpg", gallery: "@ Starac"),
-            Photo.init(imgThumb: "http://2.bp.blogspot.com/_z5zRrw40eZA/S86vC7L6oMI/AAAAAAAAAMk/09CPBM5BJ7o/s1600/rami+008.jpg", gallery: "@ Starac"),
-            Photo.init(imgThumb: "https://i.ytimg.com/vi/uDgIwOOB4zw/hqdefault.jpg", gallery: "@ Starac"),
-            Photo.init(imgThumb: "http://img.over-blog.com/600x450/1/50/59/42/chanteurs/chanteur-3/rami-chemalli.jpg", gallery: "@ Starac")
+            Photo.init(imgThumb: "http://www.listenarabic.com/arabic-music/wp-content/uploads/2010/07/Ramy-prime13.jpg", media_id: "@ Starac"),
+            Photo.init(imgThumb: "http://2.bp.blogspot.com/_z5zRrw40eZA/S86vC7L6oMI/AAAAAAAAAMk/09CPBM5BJ7o/s1600/rami+008.jpg", media_id: "@ Starac"),
+            Photo.init(imgThumb: "https://i.ytimg.com/vi/uDgIwOOB4zw/hqdefault.jpg", media_id: "@ Starac"),
+            Photo.init(imgThumb: "http://img.over-blog.com/600x450/1/50/59/42/chanteurs/chanteur-3/rami-chemalli.jpg", media_id: "@ Starac")
         ]
         mediaGallery.append(media)
         
         media = MediaGallery()
         media.title = "@ Sainte Therese"
-        media.type = "photos"
+        media.type = "photo"
         media.img_thumb = "https://i.ytimg.com/vi/hr8uFv12RQk/hqdefault.jpg"
         media.photos = [
-            Photo.init(imgThumb: "https://i.ytimg.com/vi/hr8uFv12RQk/hqdefault.jpg", gallery: "@ Sainte Therese"),
-            Photo.init(imgThumb: "https://i.ytimg.com/vi/qZJFxsUW3GA/hqdefault.jpg", gallery: "@ Sainte Therese"),
-            Photo.init(imgThumb: "https://i.ytimg.com/vi/lHs2nNofVHQ/hqdefault.jpg", gallery: "@ Sainte Therese"),
-            Photo.init(imgThumb: "https://i.ytimg.com/vi/vSV_4MJO4Go/hqdefault.jpg", gallery: "@ Sainte Therese")
+            Photo.init(imgThumb: "https://i.ytimg.com/vi/hr8uFv12RQk/hqdefault.jpg", media_id: "@ Sainte Therese"),
+            Photo.init(imgThumb: "https://i.ytimg.com/vi/qZJFxsUW3GA/hqdefault.jpg", media_id: "@ Sainte Therese"),
+            Photo.init(imgThumb: "https://i.ytimg.com/vi/lHs2nNofVHQ/hqdefault.jpg", media_id: "@ Sainte Therese"),
+            Photo.init(imgThumb: "https://i.ytimg.com/vi/vSV_4MJO4Go/hqdefault.jpg", media_id: "@ Sainte Therese")
         ]
         mediaGallery.append(media)
         
         media = MediaGallery()
         media.title = "@ Sainte Therese New"
-        media.type = "photos"
+        media.type = "photo"
         media.img_thumb = "https://i.ytimg.com/vi/adhn-HX1eRY/hqdefault.jpg"
         media.photos = [
-            Photo.init(imgThumb: "https://i.ytimg.com/vi/adhn-HX1eRY/hqdefault.jpg", gallery: "@ Sainte Therese"),
-            Photo.init(imgThumb: "https://i.ytimg.com/vi/dEj7Ks3V3ts/hqdefault.jpg", gallery: "@ Sainte Therese"),
-            Photo.init(imgThumb: "https://i.ytimg.com/vi/T_vk3QeRbVE/hqdefault.jpg", gallery: "@ Sainte Therese"),
-            Photo.init(imgThumb: "https://i.ytimg.com/vi/3G2ANrxDi3s/hqdefault.jpg", gallery: "@ Sainte Therese")
+            Photo.init(imgThumb: "https://i.ytimg.com/vi/adhn-HX1eRY/hqdefault.jpg", media_id: "@ Sainte Therese"),
+            Photo.init(imgThumb: "https://i.ytimg.com/vi/dEj7Ks3V3ts/hqdefault.jpg", media_id: "@ Sainte Therese"),
+            Photo.init(imgThumb: "https://i.ytimg.com/vi/T_vk3QeRbVE/hqdefault.jpg", media_id: "@ Sainte Therese"),
+            Photo.init(imgThumb: "https://i.ytimg.com/vi/3G2ANrxDi3s/hqdefault.jpg", media_id: "@ Sainte Therese")
         ]
         mediaGallery.append(media)
         
         media = MediaGallery()
         media.title = "Sainte Therese Concert"
-        media.type = "videos"
+        media.type = "video"
         media.img_thumb = "https://i.ytimg.com/vi/hr8uFv12RQk/hqdefault.jpg"
         media.videos = [
-            Video.init(imgThumb: "https://i.ytimg.com/vi/hr8uFv12RQk/hqdefault.jpg", link: "https://www.youtube.com/watch?v=Zy58QkGUSXQ", duration: "4:30", gallery: "Sainte Therese Concert", title: "في الجلجثة"),
-            Video.init(imgThumb: "https://i.ytimg.com/vi/adhn-HX1eRY/hqdefault.jpg", link: "https://www.youtube.com/watch?v=adhn-HX1eRY", duration: "3:34", gallery: "Sainte Therese Concert", title: "أنا بردان"),
-            Video.init(imgThumb: "https://i.ytimg.com/vi/WYzwq8BR3wE/hqdefault.jpg", link: "https://www.youtube.com/watch?v=z1vGyiLHpXg", duration: "3:57", gallery: "Sainte Therese Concert", title: "وسط التجارب")
+            Video.init(imgThumb: "https://i.ytimg.com/vi/hr8uFv12RQk/hqdefault.jpg", link: "https://www.youtube.com/watch?v=Zy58QkGUSXQ", duration: "4:30", media_id: "Sainte Therese Concert", title: "في الجلجثة"),
+            Video.init(imgThumb: "https://i.ytimg.com/vi/adhn-HX1eRY/hqdefault.jpg", link: "https://www.youtube.com/watch?v=adhn-HX1eRY", duration: "3:34", media_id: "Sainte Therese Concert", title: "أنا بردان"),
+            Video.init(imgThumb: "https://i.ytimg.com/vi/WYzwq8BR3wE/hqdefault.jpg", link: "https://www.youtube.com/watch?v=z1vGyiLHpXg", duration: "3:57", media_id: "Sainte Therese Concert", title: "وسط التجارب")
         ]
         mediaGallery.append(media)
         
         media = MediaGallery()
         media.title = "Staracademy Primes"
-        media.type = "videos"
+        media.type = "video"
         media.img_thumb = ""
         media.videos = [
-            Video.init(imgThumb: "https://i.ytimg.com/vi/E88ivMRisGg/hqdefault.jpg", link: "https://www.youtube.com/watch?v=lupnZFOo23w", duration: "3:26", gallery: "Staracademy Primes", title: "shou 3miltilli bil balad"),
-            Video.init(imgThumb: "https://i.ytimg.com/vi/777os9S7_YA/mqdefault.jpg", link: "https://www.youtube.com/watch?v=9fSa4qdjcAI", duration: "4:37", gallery: "Staracademy Primes", title: "الهوا طاير"),
-            Video.init(imgThumb: "https://i.ytimg.com/vi/-sEXob7wrww/hqdefault.jpg", link: "https://www.youtube.com/watch?v=-sEXob7wrww", duration: "3:16", gallery: "Staracademy Primes", title: "بلغي كل مواعيدي")
+            Video.init(imgThumb: "https://i.ytimg.com/vi/E88ivMRisGg/hqdefault.jpg", link: "https://www.youtube.com/watch?v=lupnZFOo23w", duration: "3:26", media_id: "Staracademy Primes", title: "shou 3miltilli bil balad"),
+            Video.init(imgThumb: "https://i.ytimg.com/vi/777os9S7_YA/mqdefault.jpg", link: "https://www.youtube.com/watch?v=9fSa4qdjcAI", duration: "4:37", media_id: "Staracademy Primes", title: "الهوا طاير"),
+            Video.init(imgThumb: "https://i.ytimg.com/vi/-sEXob7wrww/hqdefault.jpg", link: "https://www.youtube.com/watch?v=-sEXob7wrww", duration: "3:16", media_id: "Staracademy Primes", title: "بلغي كل مواعيدي")
         ]
         mediaGallery.append(media)
+        
+        medias.mediaGallery = mediaGallery
         
         socials = [
             Social.init(image: #imageLiteral(resourceName: "fb_icon"), title: "Let's Pray With Ramy Chemaly and for Him", link: "https://www.facebook.com/154008231300143/videos/10150282402985637/"),
@@ -365,9 +412,11 @@ class DiscographyViewController: BaseViewController, UITableViewDelegate, UITabl
         ]
         
         audios = [
-            Audio.init(title: "Audio test 1"),
-            Audio.init(title: "Audio test 2"),
-            Audio.init(title: "Audio test 3")
+            Audio.init(artist_name: "Ramy Chemaly", album_name: "Staracademy", song_name: "Shou 3meltelli bel balad", album_artwork: "http://www.listenarabic.com/arabic-music/wp-content/uploads/2010/07/Ramy-prime13.jpg", audio_url: "https://www.arab2018.com/worker/mp3/Rami%20Chemali%20-shou%203miltilli%20bil%20balad.mp3"),
+            Audio.init(artist_name: "Ramy Chemaly", album_name: "Staracademy", song_name: "Rabbi same7ni", album_artwork: "http://www.listenarabic.com/arabic-music/wp-content/uploads/2010/07/Ramy-prime14-2.jpg", audio_url: "https://www.arab2018.com/worker/mp3/ربي%20سامحني%20-%20رامي%20الشمالي.mp3"),
+            Audio.init(artist_name: "Ramy Chemaly", album_name: "Staracademy", song_name: "a3enni ya kadir", album_artwork: "http://img.over-blog.com/600x450/1/50/59/42/chanteurs/chanteur-3/rami-chemalli.jpg", audio_url: "https://c4.music2017.eu/YTConverter/mp3/2a3enni%20Ya%20Kadir%20Ramy%20Chemaly%20Exclusive.mp3"),
+            Audio.init(artist_name: "Ramy Chemaly", album_name: "Taratil", song_name: "Wasta l tarajerb", album_artwork: "http://www.whopopular.com/content/personimages/o12490.jpg", audio_url: "http://pecah.ndas.se/download-mp3/donlot/159420110/3434787"),
+            Audio.init(artist_name: "Ramy Chemaly", album_name: "Taratil", song_name: "Ya man a7yana", album_artwork: "https://pbs.twimg.com/profile_images/442785228575084544/KE5zQVu3.jpeg", audio_url: "http://pecah.ndas.se/download-mp3/donlot/159420586/2807848")
         ]
     }
     

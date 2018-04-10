@@ -15,13 +15,16 @@ class SelectAvatarViewController: BaseViewController, FSPagerViewDataSource, FSP
     @IBOutlet weak var buttonStart: UIButton!
     @IBOutlet weak var pagerHeightConstraint: NSLayoutConstraint!
     
+    static var comingFrom = SelectAvatarComingFrom.none
+    
     var selectedAvatar: UIImage!
+    var selectedAvatarName: String!
     var avatars: [Avatar] = [
-        Avatar.init(image: #imageLiteral(resourceName: "ramy1")),
-        Avatar.init(image: #imageLiteral(resourceName: "ramy2")),
-        Avatar.init(image: #imageLiteral(resourceName: "ramy3")),
-        Avatar.init(image: #imageLiteral(resourceName: "ramy4")),
-        Avatar.init(image: #imageLiteral(resourceName: "ramy5"))
+        Avatar.init(image: #imageLiteral(resourceName: "ramy1"), name: "ramy1"),
+        Avatar.init(image: #imageLiteral(resourceName: "ramy2"), name: "ramy2"),
+        Avatar.init(image: #imageLiteral(resourceName: "ramy3"), name: "ramy3"),
+        Avatar.init(image: #imageLiteral(resourceName: "ramy4"), name: "ramy4"),
+        Avatar.init(image: #imageLiteral(resourceName: "ramy5"), name: "ramy5")
     ]
     
     override func viewDidLoad() {
@@ -39,15 +42,55 @@ class SelectAvatarViewController: BaseViewController, FSPagerViewDataSource, FSP
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.toolbarView.labelTitle.text = "SELECT YOUR AVATAR"
-        
-        self.toolbarView.buttonBack.setImage(#imageLiteral(resourceName: "back"), for: .normal)
-        self.toolbarView.buttonBack.tag = 1
+        if SelectAvatarViewController.comingFrom == .signup {
+            self.toolbarView.labelTitle.text = "SELECT YOUR AVATAR"
+            
+            self.toolbarView.buttonBack.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            self.toolbarView.buttonBack.tag = 1
+        } else if SelectAvatarViewController.comingFrom == .edit {
+            self.toolbarView.labelTitle.text = "EDIT YOUR AVATAR"
+            
+            self.buttonStart.setTitle("CHANGE", for: .normal)
+        }
     }
     
     @IBAction func buttonStartTapped(_ sender: Any) {
         if selectedAvatar != nil {
+            self.showLoader()
             
+            var userId = ""
+            if let id = currentUser.id {
+                userId = String(id)
+            }
+            
+            DispatchQueue.global(qos: .background).async {
+                appDelegate.services.updateAvatar(userId: userId, image: self.selectedAvatar!, completion: { data in
+                    
+                    DispatchQueue.main.async {
+                        if let json = data.json?.first {
+                            if let avatar = json["avatar"] as? String {
+                                currentUser.avatar = avatar
+                                
+                                self.saveUserInUserDefaults()
+                                
+                                if SelectAvatarViewController.comingFrom == SelectAvatarComingFrom.signup {
+                                    self.redirectToVC(storyboardId: StoryboardIds.InitialMenuViewController, type: .push)
+                                } else if SelectAvatarViewController.comingFrom == SelectAvatarComingFrom.edit {
+                                    if let initialViewController = self.presentingViewController!.childViewControllers.last as? InitialMenuViewController {
+                                        if let homeViewController = initialViewController.childViewControllers.first as? HomeViewController {
+                                            homeViewController.imageViewIcon.image = self.selectedAvatar
+                                        }
+                                    }
+                                    
+                                    self.dismissVC()
+                                }
+                            }
+                        }
+                        
+                        self.hideLoader()
+                    }
+                })
+            }
         } else {
             self.showAlertView(message: "Do not forget to pick your favorite picture :D")
         }
@@ -99,8 +142,12 @@ class SelectAvatarViewController: BaseViewController, FSPagerViewDataSource, FSP
         if let image = avatar.image {
             self.selectedAvatar = image
         }
+        if let name = avatar.image_name {
+            self.selectedAvatarName = name
+        }
         
         self.updateSelectedAvatar(index: index)
+        self.pagerView.scrollToItem(at: index, animated: true)
         self.pagerView.reloadData()
     }
     
@@ -113,6 +160,43 @@ class SelectAvatarViewController: BaseViewController, FSPagerViewDataSource, FSP
             avatar.is_selected = false
         }
         avatars[index].is_selected = true
+    }
+    
+    func dummyData() {
+        currentUser.avatar_name = selectedAvatarName
+        
+        self.hideLoader()
+        self.saveUserInUserDefaults()
+        
+        if SelectAvatarViewController.comingFrom == SelectAvatarComingFrom.signup {
+            self.redirectToVC(storyboardId: StoryboardIds.InitialMenuViewController, type: .push)
+        } else if SelectAvatarViewController.comingFrom == SelectAvatarComingFrom.edit {
+            if let initialViewController = self.presentingViewController!.childViewControllers.last as? InitialMenuViewController {
+                if let homeViewController = initialViewController.contentViewControllers.first as? HomeViewController {
+                    if let imageView = homeViewController.imageViewIcon {
+                        imageView.image = self.selectedAvatar
+                    }
+                }
+                if let menuViewController = initialViewController.menuViewController as? SideMenuViewController {
+                    if let imageView = menuViewController.avatarImageView {
+                        imageView.image = self.selectedAvatar
+                    }
+                }
+            } else if let initialViewController = self.presentingViewController as? InitialMenuViewController {
+                if let homeViewController = initialViewController.contentViewControllers.first as? HomeViewController {
+                    if let imageView = homeViewController.imageViewIcon {
+                        imageView.image = self.selectedAvatar
+                    }
+                }
+                if let menuViewController = initialViewController.menuViewController as? SideMenuViewController {
+                    if let imageView = menuViewController.avatarImageView {
+                        imageView.image = self.selectedAvatar
+                    }
+                }
+            }
+            
+            self.dismissVC()
+        }
     }
     
     /*

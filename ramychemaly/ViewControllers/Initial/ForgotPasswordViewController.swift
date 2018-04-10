@@ -27,7 +27,31 @@ class ForgotPasswordViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func buttonResetPasswordTapped(_ sender: Any) {
-        
+        if isValidData() {
+            self.showLoader()
+            
+            let email = self.textFieldEmail.text
+            DispatchQueue.global(qos: .background).async {
+                let response = appDelegate.services.forgotPassword(email: email!)
+                
+                DispatchQueue.main.async {
+                    var alertTitle: String? = nil
+                    if response?.status == ResponseStatus.SUCCESS.rawValue {
+                        alertTitle = "WOW!"
+                        
+                        self.alertView.buttonDone.addTarget(self, action: #selector(self.dismissVC), for: .touchUpInside)
+                    }
+                    
+                    if let message = response?.message {
+                        self.showAlertView(title: alertTitle, message: message)
+                    }
+                    
+                    self.hideLoader()
+                }
+            }
+        } else {
+            self.showAlertView(message: errorMessage)
+        }
     }
     
     @IBAction func buttonCloseTapped(_ sender: Any) {
@@ -40,7 +64,6 @@ class ForgotPasswordViewController: BaseViewController, UITextFieldDelegate {
     
     var errorMessage: String!
     func isValidData() -> Bool {
-        
         if textFieldEmail.text == nil || textFieldEmail.text == "" {
             errorMessage = "Email field cannot be empty"
             return false

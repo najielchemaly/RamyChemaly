@@ -21,6 +21,23 @@ class MenuTableViewCell: UITableViewCell {
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
+        if self.tag == 0 {
+            let isOn = !switchNotification.isOn
+            switchNotification.setOn(isOn, animated: true)
+            
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(isOn, forKey: "isNotificationOn")
+            userDefaults.synchronize()
+            
+            if isOn {
+                appDelegate.registerForRemoteNotifications()
+            } else {
+                appDelegate.unregisterFromRemoteNotifications()
+            }
+            
+            return
+        }
+        
         super.setSelected(selected, animated: animated)
         
         selectedView.backgroundColor = selected ? Colors.white : UIColor.clear

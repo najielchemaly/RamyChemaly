@@ -97,9 +97,10 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
     
     func saveUserInUserDefaults() {
-        let encodedData = NSKeyedArchiver.archivedData(withRootObject: "")
+        let encodedData = NSKeyedArchiver.archivedData(withRootObject: currentUser)
         let userDefaults = UserDefaults.standard
         userDefaults.set(encodedData, forKey: "user")
+        userDefaults.set(true, forKey: "isUserLoggedIn")
         userDefaults.synchronize()
     }
     
@@ -127,15 +128,25 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     }
 
     @objc func logout() {
-        DispatchQueue.main.async {
-            let userDefaults = UserDefaults.standard
-            userDefaults.removeObject(forKey: "user")
-            userDefaults.synchronize()
-
-            if let window = appDelegate.window {
-                if let loginNavigationController = mainStoryboard.instantiateViewController(withIdentifier: StoryboardIds.LoginNavigationController) as? UINavigationController  {
-                    window.rootViewController = loginNavigationController
+        self.showLoader()
+        
+        let userId = currentUser.id
+        DispatchQueue.global(qos: .background).async {
+            _ = appDelegate.services.logout(id: String(describing: userId))
+            
+            DispatchQueue.main.async {
+                let userDefaults = UserDefaults.standard
+                userDefaults.removeObject(forKey: "user")
+                userDefaults.removeObject(forKey: "isUserLoggedIn")
+                userDefaults.synchronize()
+                
+                if let window = appDelegate.window {
+                    if let loginNavigationController = mainStoryboard.instantiateViewController(withIdentifier: StoryboardIds.LoginNavigationController) as? UINavigationController  {
+                        window.rootViewController = loginNavigationController
+                    }
                 }
+                
+                self.hideLoader()
             }
         }
     }
@@ -144,6 +155,8 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                     color: UIColor? = nil , textColor: UIColor? = nil) {
         let activityData = ActivityData(message: message, type: type, color: color, textColor: textColor)
         NVActivityIndicatorPresenter.sharedInstance.startAnimating(activityData)
+        
+        self.dismissKeyboard()
     }
     
     func hideLoader() {
@@ -281,6 +294,28 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
                 self.alertView.removeFromSuperview()
             })
         }
+    }
+    
+    func setNotificationBadgeNumber(label: UILabel) {
+        if let notificationNumber = UserDefaults.standard.value(forKey: "notificationNumber") as? String {
+            label.text = notificationNumber
+            if notificationNumber.isEmpty || notificationNumber == "0" {
+                label.isHidden = true
+            } else {
+                label.isHidden = false
+            }
+        } else {
+            label.text = nil
+            label.isHidden = true
+        }
+    }
+    
+    func removeAudioObjectsFromUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: "repeatState")
+        UserDefaults.standard.removeObject(forKey: "shuffleState")
+        UserDefaults.standard.removeObject(forKey: "playerProgressSliderValue")
+        UserDefaults.standard.removeObject(forKey: "currentAudioIndex")
+        UserDefaults.standard.removeObject(forKey: "playerProgressSliderValue")
     }
     
     /*

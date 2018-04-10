@@ -9,8 +9,10 @@
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import FirebaseMessaging
 import NVActivityIndicatorView
 import youtube_ios_player_helper
+import CoreData
 
 class LoginViewController: BaseViewController, UITextFieldDelegate {
 
@@ -30,6 +32,33 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
         self.initializeViews()
         self.setupDelegates()
+        
+//        var context: NSManagedObjectContext!
+//        if #available(iOS 10.0, *) {
+//            context = appDelegate.persistentContainer.viewContext
+//        }
+//        let userEntity = NSEntityDescription.entity(forEntityName: "User", in: context)
+//        let user = NSManagedObject(entity: userEntity!, insertInto: context)
+//        user.setValue("Naji El Chemaly", forKey: "fullName")
+//
+//        do {
+//            try context.save()
+//        } catch {
+//            print("Failed saving")
+//        }
+//
+//        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
+//        request.predicate = NSPredicate(format: "fullName = %@", "Naji El Chemaly")
+//        request.returnsObjectsAsFaults = false
+//        do {
+//            let result = try context.fetch(request)
+//            for data in result as! [NSManagedObject] {
+//                print(data.value(forKey: "fullName") as! String)
+//            }
+//
+//        } catch {
+//            print("Failed")
+//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,11 +70,33 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         if isValidData() {
             self.showLoader()
             
-            _ = Timer.scheduledTimer(timeInterval: 2, target: self, selector:#selector(navigateToHome), userInfo: nil, repeats: false)
-            
-            self.dismissKeyboard()
+            let email = self.textFieldEmail.text
+            let password = self.textFieldPassword.text
+            DispatchQueue.global(qos: .background).async {
+                let response = appDelegate.services.login(email: email!, password: password!)
+                
+                DispatchQueue.main.async {
+                    if response?.status == ResponseStatus.SUCCESS.rawValue {
+                        if let json = response?.json?.first {
+                            if let jsonUser = json["user"] as? NSDictionary {
+                                if let user = User.init(dictionary: jsonUser) {
+                                    currentUser = user
+                                    
+                                    self.saveUserInUserDefaults()
+                                    
+                                    self.navigateToHome()
+                                }
+                            }
+                        }
+                    } else if let message = response?.message {
+                        self.showAlertView(message: message)
+                    }
+                    
+                    self.hideLoader()
+                }
+            }
         } else {
-            self.showAlertView(message: errorMessage, doneTitle: "Ok")
+            self.showAlertView(message: errorMessage)
         }
     }
     
@@ -73,6 +124,9 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
                     // hide loader
                 }
             } else if result?.grantedPermissions != nil {
+                currentUser = User()
+                currentUser.facebook_token = result?.token.tokenString
+                
                 self.getFacebookParameters()
             }
         })
@@ -86,9 +140,12 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
         self.loginButton.readPermissions = ["public_profile", "email"]
         
         self.loginManager = FBSDKLoginManager()
+        
+        Messaging.messaging().unsubscribe(fromTopic: "/topics/ramychemalynews")
     }
     
     func getFacebookParameters(){
+        self.showLoader()
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "email, name, gender, location, picture, birthday"])
         graphRequest.start(completionHandler: { (connection, result, error) -> Void in
             
@@ -96,60 +153,59 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
             {
                 if let dict = result as? NSDictionary {
                     if let gender = (dict.object(forKey: "gender") as? String) {
-                        
+                        currentUser.gender = gender
                     }
                     if let id = (dict.object(forKey: "id") as? String) {
-                       
+                       currentUser.facebook_id = id
                     }
                     if let name = (dict.object(forKey: "name") as? String) {
-                       
+                       currentUser.fullname = name
                     }
                     if let email = (dict.object(forKey: "email") as? String) {
-                        
+                       currentUser.email = email
                     }
                     if let picture = (dict.object(forKey: "picture") as? NSDictionary) {
                         if let data = picture.object(forKey: "data") as? NSDictionary {
                             if let url = data.object(forKey: "url") as? String {
-
+                                currentUser.avatar = url
                             }
                         }
                     }
                     DispatchQueue.global(qos: .background).async {
-                        let response = Services.init().facebookLogin()
-                        if response?.status == ResponseStatus.SUCCESS.rawValue {
-                            if let json = response?.json?.first {
-                                if let jsonUser = json["user"] as? NSDictionary {
-                                    self.saveUserInUserDefaults()
-                                    
-                                    DispatchQueue.main.async {
-                                        
+                        let response = appDelegate.services.facebookLogin(user: currentUser)
+                        DispatchQueue.main.async {
+                            if response?.status == ResponseStatus.SUCCESS.rawValue {
+                                if let json = response?.json?.first {
+                                    if let jsonUser = json["user"] as? NSDictionary {
+                                        if let user = User.init(dictionary: jsonUser) {
+                                            currentUser = user
+                                            
+                                            if currentUser.avatar == nil {
+                                                SelectAvatarViewController.comingFrom = .signup
+                                                self.redirectToVC(storyboardId: StoryboardIds.SelectAvatarViewController, type: .push)
+                                            } else {
+                                                self.navigateToHome()
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        } else if response?.status == ResponseStatus.UNAUTHORIZED.rawValue {
-                            DispatchQueue.main.async {
-                                
-                            }
-                        } else {
-                            if let message = response?.message {
-                                DispatchQueue.main.async {
+                            } else {
+                                if let message = response?.message {
                                     self.showAlertView(message: message, doneTitle: "Ok")
                                 }
                             }
-                        }
-                        
-                        DispatchQueue.main.async {
-                            // hide loader
+                            
+                            self.hideLoader()
                         }
                     }
                 } else {
                     DispatchQueue.main.async {
-                        // hide loader
+                        self.hideLoader()
                     }
                 }
             } else {
                 DispatchQueue.main.async {
-                    // hide loader
+                    self.hideLoader()
                 }
             }
         })
@@ -162,7 +218,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     
     var errorMessage: String!
     func isValidData() -> Bool {
-        
         if textFieldEmail.text == nil || textFieldEmail.text == "" {
             errorMessage = "Email field cannot be empty"
             return false
@@ -176,7 +231,6 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         if textField == textFieldEmail {
             textFieldPassword.becomeFirstResponder()
         } else {
@@ -187,8 +241,21 @@ class LoginViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @objc func navigateToHome() {
-        self.hideLoader()
         self.redirectToVC(storyboardId: StoryboardIds.InitialMenuViewController, type: .push)
+    }
+    
+    func dummyData() {
+        currentUser = User()
+        currentUser.id = "1"
+        currentUser.fullname = "Naji Chemaly"
+        currentUser.email = "najielchemaly@gmail.com"
+        currentUser.phone = "+96171169428"
+        currentUser.role = "admin"
+        currentUser.avatar = "ramy1"
+        
+        self.hideLoader()
+        self.saveUserInUserDefaults()
+        self.navigateToHome()
     }
     
     /*

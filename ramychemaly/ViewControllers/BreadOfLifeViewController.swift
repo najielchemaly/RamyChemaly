@@ -24,7 +24,7 @@ class BreadOfLifeViewController: BaseViewController, FSPagerViewDataSource, FSPa
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.dummyData()
+        self.getBreadOfLife()
         self.initializeViews()
         self.setupPagerView()
     }
@@ -38,6 +38,37 @@ class BreadOfLifeViewController: BaseViewController, FSPagerViewDataSource, FSPa
         super.viewWillAppear(animated)
         
         self.toolbarView.labelTitle.text = "BREAD OF LIFE"
+    }
+    
+    func getBreadOfLife() {
+        self.showLoader()
+        DispatchQueue.global(qos: .background).async {
+            let response = appDelegate.services.getBreadOfLife()
+            
+            DispatchQueue.main.async {
+                self.dummyData()
+                if response?.status == ResponseStatus.SUCCESS.rawValue {
+                    if let json = response?.json?.first {
+                        if let jsonArray = json["breadoflife"] as? [NSDictionary] {
+                            self.breadOfLifes = [BreadOfLife]()
+                            for json in jsonArray {
+                                let breadOfLife = BreadOfLife.init(dictionary: json)
+                                self.breadOfLifes.append(breadOfLife!)
+                            }
+                        }
+                    }
+                }
+                
+                self.hideLoader()
+                
+                if self.breadOfLifes.count == 0 {
+                    self.addEmptyView(message: "Something went wrong, try again later!")
+                } else {
+                    self.pagerView.reloadData()
+                    self.removeEmptyView()
+                }
+            }
+        }
     }
     
     @IBAction func buttonPreviousTapped(_ sender: Any) {
@@ -80,7 +111,7 @@ class BreadOfLifeViewController: BaseViewController, FSPagerViewDataSource, FSPa
         self.pagerView.register(UINib.init(nibName: CellIdentifiers.BreadOfLifeViewCell, bundle: nil), forCellWithReuseIdentifier: CellIdentifiers.BreadOfLifeViewCell)
         
         let itemWidth = self.pagerView.frame.size.width*0.8
-        let itemHeight = self.pagerView.frame.size.height
+        let itemHeight = self.pagerView.frame.size.height*0.8
         self.pagerView.itemSize = CGSize(width: itemWidth, height: itemHeight)
         
         self.pagerView.dataSource = self
@@ -95,9 +126,18 @@ class BreadOfLifeViewController: BaseViewController, FSPagerViewDataSource, FSPa
             cell.layer.cornerRadius = 30
             
             let breadOfLife = breadOfLifes[index]
-            cell.labelTitle.text = breadOfLife.title
-            cell.textViewDescription.text = breadOfLife.description
-            cell.labelDate.text = breadOfLife.date
+            
+            if breadOfLife.type?.lowercased() == "quote" {
+                if let imgUrl = breadOfLife.img_url {
+                    cell.imageViewIcon.kf.setImage(with: URL(string: Services.getMediaUrl() + imgUrl))
+                    cell.imageViewIcon.isHidden = false
+                }
+            } else if breadOfLife.type?.lowercased() == "bible" {
+                cell.labelTitle.text = breadOfLife.title
+                cell.textViewDescription.text = breadOfLife.description
+                cell.labelDate.text = breadOfLife.date
+                cell.imageViewIcon.isHidden = true
+            }
             
             return cell
         }
@@ -115,11 +155,11 @@ class BreadOfLifeViewController: BaseViewController, FSPagerViewDataSource, FSPa
     
     func dummyData() {
         breadOfLifes = [
-            BreadOfLife.init(title: "2 Chronicles 7:14", description: "if my people, who are called by my name, will humble themselves and pray and seek my face and turn from their wicked ways, then I will hear from heaven, and I will forgive their sin and will heal their land.", date: "Monday, 5 March 2018"),
-            BreadOfLife.init(title: "Proverbs 14:27", description: "The fear of the LORD is a fountain of life, turning a person from the snares of death.", date: "Tuesday, 6 March 2018"),
-            BreadOfLife.init(title: "Psalm 25:9", description: "He guides the humble in what is right and teaches them his way.", date: "Wednesday, 7 March 2018"),
-            BreadOfLife.init(title: "Daniel 10:12", description: "Then he continued, “Do not be afraid, Daniel. Since the first day that you set your mind to gain understanding and to humble yourself before your God, your words were heard, and I have come in response to them.", date: "Thursday, 8 March 2018"),
-            BreadOfLife.init(title: "Ephesians 3:16-21", description: "I pray that out of his glorious riches he may strengthen you with power through his Spirit in your inner being, 17 so that Christ may dwell in your hearts through faith. And I pray that you, being rooted and established in love, 18 may have power, together with all the Lord’s holy people, to grasp how wide and long and high and deep is the love of Christ, 19 and to know this love that surpasses knowledge—that you may be filled to the measure of all the fullness of God. 20 Now to him who is able to do immeasurably more than all we ask or imagine, according to his power that is at work within us, 21 to him be glory in the church and in Christ Jesus throughout all generations, for ever and ever! Amen.", date: "Friday, 9 March 2018")
+            BreadOfLife.init(title: "2 Chronicles 7:14", desc: "if my people, who are called by my name, will humble themselves and pray and seek my face and turn from their wicked ways, then I will hear from heaven, and I will forgive their sin and will heal their land.", date: "Monday, 5 March 2018"),
+            BreadOfLife.init(title: "Proverbs 14:27", desc: "The fear of the LORD is a fountain of life, turning a person from the snares of death.", date: "Tuesday, 6 March 2018"),
+            BreadOfLife.init(title: "Psalm 25:9", desc: "He guides the humble in what is right and teaches them his way.", date: "Wednesday, 7 March 2018"),
+            BreadOfLife.init(title: "Daniel 10:12", desc: "Then he continued, “Do not be afraid, Daniel. Since the first day that you set your mind to gain understanding and to humble yourself before your God, your words were heard, and I have come in response to them.", date: "Thursday, 8 March 2018"),
+            BreadOfLife.init(title: "Ephesians 3:16-21", desc: "I pray that out of his glorious riches he may strengthen you with power through his Spirit in your inner being, 17 so that Christ may dwell in your hearts through faith. And I pray that you, being rooted and established in love, 18 may have power, together with all the Lord’s holy people, to grasp how wide and long and high and deep is the love of Christ, 19 and to know this love that surpasses knowledge—that you may be filled to the measure of all the fullness of God. 20 Now to him who is able to do immeasurably more than all we ask or imagine, according to his power that is at work within us, 21 to him be glory in the church and in Christ Jesus throughout all generations, for ever and ever! Amen.", date: "Friday, 9 March 2018")
         ]
     }
     

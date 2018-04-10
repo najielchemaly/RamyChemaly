@@ -12,8 +12,11 @@ import InteractiveSideMenu
 class SideMenuViewController: MenuViewController, Storyboardable {
     
     @IBOutlet fileprivate weak var tableView: UITableView!
-    @IBOutlet fileprivate weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet fileprivate weak var avatarImageViewCenterXConstraint: NSLayoutConstraint!
+    @IBOutlet weak var buttonUpload: UIButton!
+    @IBOutlet weak var buttonUploadHeightConstraint: NSLayoutConstraint!
+    
     private var gradientLayer = CAGradientLayer()
     
     private var gradientApplied: Bool = false
@@ -32,7 +35,7 @@ class SideMenuViewController: MenuViewController, Storyboardable {
         // Select the initial row
         tableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: UITableViewScrollPosition.none)
         
-        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width/2
+        self.initializeViews()
     }
     
     override func viewDidLayoutSubviews() {
@@ -51,8 +54,31 @@ class SideMenuViewController: MenuViewController, Storyboardable {
         }
     }
     
+    @IBAction func buttonUploadTapped(_ sender: Any) {
+        DispatchQueue.main.async {
+            self.redirectToVC(storyboard: uploadStoryboard, storyboardId: StoryboardIds.UploadBreadOfLifeViewController, type: .present)
+        }
+    }
+    
     deinit{
         print()
+    }
+    
+    func initializeViews() {
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.size.width/2
+
+        if let avatar = currentUser.avatar {
+            let imageUrl = avatar.isEmpty ? defaultBackground : avatar
+            avatarImageView.kf.setImage(with: URL(string: Services.getMediaUrl() + imageUrl!))
+        }
+        if let avatarName = currentUser.avatar_name {
+            avatarImageView.image = UIImage(named: avatarName)
+        }
+        
+        if currentUser.role?.lowercased() != "admin" {
+            buttonUploadHeightConstraint.constant = 0
+            buttonUpload.isHidden = true
+        }
     }
 }
 
@@ -102,29 +128,33 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let menuContainerViewController = self.menuContainerViewController else {
-            return
-        }
+        DispatchQueue.main.async {
+            guard let menuContainerViewController = self.menuContainerViewController else {
+                return
+            }
 
-        switch indexPath.row {
-        case 0:
-            return
-        case 1:
-            menuContainerViewController.hideSideMenu()
-        case 2:
-            self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.EditProfileViewController, type: .present)
-        case 3:
-            self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.ChangePasswordViewController, type: .present)
-        case 4:
-            WebViewController.comingFrom = WebViewComingFrom.terms
-            self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .present)
-        case 5:
-            WebViewController.comingFrom = WebViewComingFrom.privacy
-            self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .present)
-        case 6:
-            self.redirectToVC(storyboard: contactStoryboard, storyboardId: StoryboardIds.ContactUsViewController, type: .present)
-        default:
-            break
+            switch indexPath.row {
+            case 0:
+                return
+            case 1:
+                menuContainerViewController.hideSideMenu()
+            case 2:
+                self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.EditProfileViewController, type: .present)
+            case 3:
+                self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.ChangePasswordViewController, type: .present)
+            case 4:
+                WebViewController.comingFrom = WebViewComingFrom.terms
+                self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .present)
+            case 5:
+                WebViewController.comingFrom = WebViewComingFrom.privacy
+                self.redirectToVC(storyboard: webStoryboard, storyboardId: StoryboardIds.WebViewController, type: .present)
+            case 6:
+                self.redirectToVC(storyboard: contactStoryboard, storyboardId: StoryboardIds.ContactUsViewController, type: .present)
+            default:
+                break
+            }
+            
+//            tableView.selectRow(at: IndexPath.init(row: 1, section: 0), animated: false, scrollPosition: .none)
         }
     }
     

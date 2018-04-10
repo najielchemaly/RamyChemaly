@@ -94,7 +94,7 @@ class MediaViewController: BaseViewController, UICollectionViewDelegate, UIColle
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.ImageCollectionViewCell, for: indexPath) as? ImageCollectionViewCell {
                 let photo = photos[indexPath.row]
                 if let imgThumb = photo.img_thumb {
-                    cell.imageViewIcon.kf.setImage(with: URL(string: imgThumb))
+                    cell.imageViewIcon.kf.setImage(with: URL(string: Services.getMediaUrl() + imgThumb))
                 }
                 
                 cell.imageViewIcon.tag = indexPath.row
@@ -107,7 +107,7 @@ class MediaViewController: BaseViewController, UICollectionViewDelegate, UIColle
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.VideoCollectionViewCell, for: indexPath) as? VideoCollectionViewCell {
                 let video = videos[indexPath.row]
                 if let imgThumb = video.img_thumb {
-                    cell.imageViewIcon.kf.setImage(with: URL(string: imgThumb))
+                    cell.imageViewIcon.kf.setImage(with: URL(string: Services.getMediaUrl() + imgThumb))
                 }
                 cell.labelTitle.text = video.title
                 cell.labelTime.text = video.duration

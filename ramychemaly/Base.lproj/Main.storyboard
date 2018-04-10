@@ -80,7 +80,7 @@
                                 <color key="textColor" red="0.099914468824863434" green="0.1328999400138855" blue="0.15079808235168457" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rp0-m2-HsS">
+                            <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rp0-m2-HsS">
                                 <rect key="frame" x="254" y="24" width="25" height="25"/>
                                 <color key="backgroundColor" red="0.90444153549999995" green="0.36953222749999998" blue="0.089802123610000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -451,7 +451,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qha-fZ-xwO" customClass="FSPagerView" customModule="FSPagerView">
-                                <rect key="frame" x="0.0" y="210" width="375" height="357"/>
+                                <rect key="frame" x="0.0" y="210" width="375" height="407"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="interitemSpacing">
                                         <real key="value" value="10"/>
@@ -481,7 +481,7 @@
                             <constraint firstItem="b6d-KF-nqP" firstAttribute="top" secondItem="iNn-Ac-7o6" secondAttribute="top" constant="100" id="DmG-aT-gdX"/>
                             <constraint firstItem="iNn-Ac-7o6" firstAttribute="trailing" secondItem="b6d-KF-nqP" secondAttribute="trailing" constant="16" id="Ofo-h5-2sU"/>
                             <constraint firstItem="iNn-Ac-7o6" firstAttribute="trailing" secondItem="qha-fZ-xwO" secondAttribute="trailing" id="Osd-5q-8lo"/>
-                            <constraint firstItem="iNn-Ac-7o6" firstAttribute="bottom" secondItem="qha-fZ-xwO" secondAttribute="bottom" constant="100" id="Ot6-lu-Gpj"/>
+                            <constraint firstItem="iNn-Ac-7o6" firstAttribute="bottom" secondItem="qha-fZ-xwO" secondAttribute="bottom" constant="50" id="Ot6-lu-Gpj"/>
                             <constraint firstItem="iNn-Ac-7o6" firstAttribute="trailing" secondItem="pqu-W2-fWM" secondAttribute="trailing" id="PP3-R1-Mro"/>
                             <constraint firstItem="iNn-Ac-7o6" firstAttribute="bottom" secondItem="pqu-W2-fWM" secondAttribute="bottom" id="R8b-mH-CKu"/>
                             <constraint firstItem="dtO-Io-71d" firstAttribute="leading" secondItem="iNn-Ac-7o6" secondAttribute="leading" constant="16" id="Ubt-I3-qNe"/>
@@ -528,7 +528,7 @@
                                 </constraints>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jsd-ff-5wt">
-                                <rect key="frame" x="16" y="328" width="343" height="261"/>
+                                <rect key="frame" x="16" y="336" width="343" height="253"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0086572552099999991" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -555,7 +555,7 @@
                             <constraint firstItem="Paa-kW-oKt" firstAttribute="top" secondItem="rfS-kO-vlt" secondAttribute="top" constant="50" id="7fc-lu-4OP"/>
                             <constraint firstItem="rfS-kO-vlt" firstAttribute="bottom" secondItem="lO6-1Q-f3j" secondAttribute="bottom" constant="20" id="8Rd-I1-tCf"/>
                             <constraint firstItem="rfS-kO-vlt" firstAttribute="bottom" secondItem="C0a-YU-FKV" secondAttribute="bottom" id="Bgw-9b-ifB"/>
-                            <constraint firstItem="Jsd-ff-5wt" firstAttribute="top" secondItem="Paa-kW-oKt" secondAttribute="bottom" constant="8" id="BzF-Q7-05C"/>
+                            <constraint firstItem="Jsd-ff-5wt" firstAttribute="top" secondItem="Paa-kW-oKt" secondAttribute="bottom" constant="16" id="BzF-Q7-05C"/>
                             <constraint firstItem="lO6-1Q-f3j" firstAttribute="leading" secondItem="rfS-kO-vlt" secondAttribute="leading" constant="16" id="GkN-Xh-dUB"/>
                             <constraint firstItem="C0a-YU-FKV" firstAttribute="top" secondItem="rfS-kO-vlt" secondAttribute="top" id="JHv-wl-8uy"/>
                             <constraint firstItem="Paa-kW-oKt" firstAttribute="leading" secondItem="rfS-kO-vlt" secondAttribute="leading" id="JQM-Cp-Whh"/>
@@ -697,7 +697,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -846,7 +846,7 @@
                                         <rect key="frame" x="0.0" y="60" width="343" height="50"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -934,7 +934,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -948,7 +948,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -976,7 +976,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -990,7 +990,7 @@
                                         </constraints>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                                 <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1106,7 +1106,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1120,7 +1120,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1232,7 +1232,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1246,7 +1246,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1260,7 +1260,7 @@
                                 </constraints>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="placeHolderColor">
                                         <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1436,7 +1436,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mfg-e0-xS7" userLabel="Album Name">
-                                <rect key="frame" x="20" y="388" width="0.0" height="45"/>
+                                <rect key="frame" x="20" y="358" width="0.0" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="5Ty-Te-6vO"/>
                                 </constraints>
@@ -1445,7 +1445,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="4DM-oH-8j6" userLabel="Song Name">
-                                <rect key="frame" x="25" y="436" width="0.0" height="35"/>
+                                <rect key="frame" x="25" y="406" width="0.0" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="7rM-di-uxI"/>
                                 </constraints>
@@ -1454,7 +1454,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e9s-fM-WYG">
-                                <rect key="frame" x="271" y="452.5" width="25" height="25"/>
+                                <rect key="frame" x="271" y="422.5" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="GxD-yN-4vC"/>
                                     <constraint firstAttribute="width" constant="25" id="wvp-Ru-ldg"/>
@@ -1466,7 +1466,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZU-GX-bd2">
-                                <rect key="frame" x="310" y="452" width="25" height="25"/>
+                                <rect key="frame" x="310" y="422" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="Nsc-J1-izI"/>
                                     <constraint firstAttribute="width" constant="25" id="Vly-G7-bPj"/>
@@ -1478,7 +1478,7 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="2" translatesAutoresizingMaskIntoConstraints="NO" id="9WL-Dz-tCJ">
-                                <rect key="frame" x="31" y="473" width="313" height="31"/>
+                                <rect key="frame" x="31" y="443" width="313" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="og2-zo-QCw"/>
                                 </constraints>
@@ -1489,19 +1489,19 @@
                                 </connections>
                             </slider>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RE6-eH-vyp">
-                                <rect key="frame" x="33" y="511" width="33.5" height="17.5"/>
+                                <rect key="frame" x="33" y="481" width="33.5" height="17.5"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <color key="textColor" red="0.89085310699999998" green="0.90571790929999996" blue="0.91457635159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fln-XG-zXp">
-                                <rect key="frame" x="308" y="511" width="33.5" height="17.5"/>
+                                <rect key="frame" x="308" y="481" width="33.5" height="17.5"/>
                                 <fontDescription key="fontDescription" name="GillSans" family="Gill Sans" pointSize="15"/>
                                 <color key="textColor" red="0.89085310699999998" green="0.90571790929999996" blue="0.91457635159999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rDZ-6w-uJ5" userLabel="Button previous">
-                                <rect key="frame" x="57.5" y="538" width="60" height="60"/>
+                                <rect key="frame" x="57.5" y="508" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="LbF-P4-mqf"/>
                                     <constraint firstAttribute="width" constant="60" id="oa7-kj-ioM"/>
@@ -1515,21 +1515,19 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eoI-Bo-5ix" userLabel="Button play">
-                                <rect key="frame" x="147.5" y="528" width="80" height="80"/>
+                                <rect key="frame" x="147.5" y="498" width="80" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="Y0I-Ws-PbW"/>
                                     <constraint firstAttribute="height" constant="80" id="hbN-uz-sX1"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" image="play">
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                                <state key="normal" image="play"/>
                                 <connections>
                                     <action selector="play:" destination="mEd-fn-A9O" eventType="touchUpInside" id="Yre-Ih-6jd"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NKT-A0-Ntx" userLabel="Button next">
-                                <rect key="frame" x="257.5" y="538" width="60" height="60"/>
+                                <rect key="frame" x="257.5" y="508" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="Qhi-O1-ep7"/>
                                     <constraint firstAttribute="height" constant="60" id="Uee-E4-o0B"/>
@@ -1542,14 +1540,50 @@
                                     <action selector="next:" destination="mEd-fn-A9O" eventType="touchUpInside" id="WO4-Sb-uoD"/>
                                 </connections>
                             </button>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="raZ-kj-anT" customClass="CircleProgressView" customModule="ramychemaly" customModuleProvider="target">
+                                <rect key="frame" x="148" y="498" width="80" height="80"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="1MR-bM-y1r"/>
+                                    <constraint firstAttribute="height" constant="80" id="jrH-uc-Fwf"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="progress">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="clockwise" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackWidth">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="centerImage"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackBackgroundColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="trackFillColor">
+                                        <color key="value" red="0.20317992570000001" green="0.58061903719999997" blue="0.72301834819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="trackBorderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E7D-nt-cTg">
+                                <rect key="frame" x="152" y="503" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="5y5-sq-qbc"/>
+                                    <constraint firstAttribute="height" constant="70" id="YJ5-Hu-xrT"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="NKT-A0-Ntx" firstAttribute="centerY" secondItem="eoI-Bo-5ix" secondAttribute="centerY" id="0ra-5E-8Dq"/>
                             <constraint firstItem="B0t-Q3-PmD" firstAttribute="leading" secondItem="mGm-h6-IXO" secondAttribute="leading" id="16R-wO-tHd"/>
                             <constraint firstItem="eoI-Bo-5ix" firstAttribute="centerX" secondItem="mGm-h6-IXO" secondAttribute="centerX" id="7Ky-VC-sWG"/>
                             <constraint firstItem="4DM-oH-8j6" firstAttribute="leading" secondItem="mGm-h6-IXO" secondAttribute="leading" constant="25" id="7wR-Xm-Vw2"/>
+                            <constraint firstItem="raZ-kj-anT" firstAttribute="centerX" secondItem="mGm-h6-IXO" secondAttribute="centerX" id="8kB-53-aad"/>
                             <constraint firstItem="fln-XG-zXp" firstAttribute="centerY" secondItem="RE6-eH-vyp" secondAttribute="centerY" id="BiG-Yx-dDw"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="RE6-eH-vyp" secondAttribute="trailing" constant="20" symbolic="YES" id="C3h-9u-6xM"/>
+                            <constraint firstItem="E7D-nt-cTg" firstAttribute="centerX" secondItem="mGm-h6-IXO" secondAttribute="centerX" id="DwC-We-x6H"/>
                             <constraint firstItem="LZU-GX-bd2" firstAttribute="top" secondItem="4DM-oH-8j6" secondAttribute="bottom" constant="-19" id="E0s-nz-KTh"/>
                             <constraint firstItem="B0t-Q3-PmD" firstAttribute="top" secondItem="ocO-nn-tBn" secondAttribute="top" id="FTL-CX-blC"/>
                             <constraint firstItem="0V0-Hp-gJj" firstAttribute="top" secondItem="GSF-jJ-AMO" secondAttribute="bottom" constant="60" id="Fhj-5Z-lcU"/>
@@ -1572,6 +1606,7 @@
                             <constraint firstItem="8hw-o0-g8j" firstAttribute="top" secondItem="ErE-b3-1W2" secondAttribute="bottom" constant="10" id="ZOa-cg-oJn"/>
                             <constraint firstItem="RE6-eH-vyp" firstAttribute="leading" secondItem="9WL-Dz-tCJ" secondAttribute="leading" id="b66-Dm-aqc"/>
                             <constraint firstItem="e9s-fM-WYG" firstAttribute="centerY" secondItem="LZU-GX-bd2" secondAttribute="centerY" id="bCk-lp-pba"/>
+                            <constraint firstItem="raZ-kj-anT" firstAttribute="top" secondItem="9WL-Dz-tCJ" secondAttribute="bottom" constant="25" id="dtk-gZ-8So"/>
                             <constraint firstItem="mGm-h6-IXO" firstAttribute="trailing" secondItem="8De-VQ-pvF" secondAttribute="trailing" constant="25" id="eQZ-4e-hYl"/>
                             <constraint firstItem="Mfg-e0-xS7" firstAttribute="leading" secondItem="mGm-h6-IXO" secondAttribute="leading" constant="20" id="f7N-Pe-xFp"/>
                             <constraint firstItem="ErE-b3-1W2" firstAttribute="top" secondItem="0V0-Hp-gJj" secondAttribute="bottom" constant="8" id="fj5-Nk-eQZ"/>
@@ -1579,10 +1614,11 @@
                             <constraint firstItem="8hw-o0-g8j" firstAttribute="centerX" secondItem="mGm-h6-IXO" secondAttribute="centerX" id="gel-JM-VLd"/>
                             <constraint firstItem="mGm-h6-IXO" firstAttribute="trailing" secondItem="fln-XG-zXp" secondAttribute="trailing" constant="33.5" id="gnr-0v-l5z"/>
                             <constraint firstItem="LZU-GX-bd2" firstAttribute="leading" secondItem="e9s-fM-WYG" secondAttribute="trailing" constant="14" id="hB5-d3-RkH"/>
-                            <constraint firstItem="Mfg-e0-xS7" firstAttribute="top" secondItem="8hw-o0-g8j" secondAttribute="bottom" constant="50" id="kU8-JG-N94"/>
+                            <constraint firstItem="Mfg-e0-xS7" firstAttribute="top" secondItem="8hw-o0-g8j" secondAttribute="bottom" constant="20" id="kU8-JG-N94"/>
                             <constraint firstItem="UzC-UK-yq6" firstAttribute="trailing" secondItem="mGm-h6-IXO" secondAttribute="trailing" id="kri-v5-vmv"/>
                             <constraint firstItem="UzC-UK-yq6" firstAttribute="leading" secondItem="mGm-h6-IXO" secondAttribute="leading" id="lJ0-kw-zz5"/>
                             <constraint firstItem="mGm-h6-IXO" firstAttribute="trailing" secondItem="9WL-Dz-tCJ" secondAttribute="trailing" constant="33" id="q6w-Tx-9Zg"/>
+                            <constraint firstItem="E7D-nt-cTg" firstAttribute="top" secondItem="9WL-Dz-tCJ" secondAttribute="bottom" constant="30" id="qSk-Xs-tdc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ErE-b3-1W2" secondAttribute="trailing" constant="4" id="rRW-7W-IWO"/>
                             <constraint firstItem="eoI-Bo-5ix" firstAttribute="top" secondItem="9WL-Dz-tCJ" secondAttribute="bottom" constant="25" id="sdy-gZ-2ID"/>
                             <constraint firstItem="fln-XG-zXp" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ocO-nn-tBn" secondAttribute="leading" constant="20" symbolic="YES" id="tSo-ai-gVD"/>
@@ -1609,7 +1645,9 @@
                         <outlet property="playButton" destination="eoI-Bo-5ix" id="aNd-AL-zG4"/>
                         <outlet property="playerProgressSlider" destination="9WL-Dz-tCJ" id="ztR-nT-NbU"/>
                         <outlet property="previousButton" destination="rDZ-6w-uJ5" id="S2a-ve-IGd"/>
+                        <outlet property="progressCenterImage" destination="E7D-nt-cTg" id="Ydt-xP-jFD"/>
                         <outlet property="progressTimerLabel" destination="RE6-eH-vyp" id="pBb-6p-q2B"/>
+                        <outlet property="progressView" destination="raZ-kj-anT" id="Vtn-yA-r8M"/>
                         <outlet property="repeatButton" destination="LZU-GX-bd2" id="hJl-UY-TBh"/>
                         <outlet property="shuffleButton" destination="e9s-fM-WYG" id="6dm-1e-Vbi"/>
                         <outlet property="songNameLabel" destination="4DM-oH-8j6" id="enk-lI-UNM"/>
@@ -1655,10 +1693,10 @@
         <image name="forgot_background_blur" width="1080" height="1920"/>
         <image name="login_background_blur" width="1080" height="1920"/>
         <image name="logo_text" width="409" height="566"/>
-        <image name="next" width="129" height="129"/>
+        <image name="next" width="432" height="432"/>
         <image name="or_lines" width="383" height="34"/>
-        <image name="play" width="178" height="178"/>
-        <image name="previous" width="129" height="129"/>
+        <image name="play" width="432" height="432"/>
+        <image name="previous" width="432" height="432"/>
         <image name="register_background" width="1080" height="1920"/>
         <image name="repeat" width="256" height="256"/>
         <image name="repeat_s.png" width="16" height="16"/>

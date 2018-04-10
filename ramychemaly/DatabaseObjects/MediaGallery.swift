@@ -9,13 +9,12 @@
 import Foundation
 import UIKit
 
-public class MediaGallery {
-    public var id : Int?
+public class MediaGallery: NSObject, NSCoding {
+    public var id : String?
     public var title : String?
     public var img_thumb : String?
-    public var photos : [Photo]?
+    public var photos : Array<Photo>?
     public var videos : Array<Video>?
-    public var audios : Array<Audio>?
     public var type : String?
     
     /**
@@ -49,23 +48,37 @@ public class MediaGallery {
      - returns: Notifications Instance.
      */
     
-    required public init() {
-        
+    required public override init() { }
+    
+    required public init(coder decoder: NSCoder) {
+        id = decoder.decodeObject(forKey:"id") as? String
+        title = decoder.decodeObject(forKey:"title") as? String
+        img_thumb = decoder.decodeObject(forKey:"img_thumb") as? String
+        photos = decoder.decodeObject(forKey:"photos") as? Array<Photo>
+        videos = decoder.decodeObject(forKey:"videos") as? Array<Video>
+        type = decoder.decodeObject(forKey:"type") as? String
+    }
+    
+    public func encode(with coder: NSCoder) {
+        coder.encode(id, forKey: "id")
+        coder.encode(title, forKey: "title")
+        coder.encode(img_thumb, forKey: "img_thumb")
+        coder.encode(photos, forKey: "photos")
+        coder.encode(videos, forKey: "videos")
+        coder.encode(type, forKey: "type")
     }
     
     required public init?(dictionary: NSDictionary) {
         
-        id = dictionary["id"] as? Int
+        id = dictionary["id"] as? String
         title = dictionary["title"] as? String
         img_thumb = dictionary["img_thumb"] as? String
+        type = dictionary["type"] as? String
         if (dictionary["photos"] != nil) {
             photos = Photo.modelsFromDictionaryArray(array: dictionary["photos"] as! NSArray)
         }
         if (dictionary["videos"] != nil) {
             videos = Video.modelsFromDictionaryArray(array: dictionary["videos"] as! NSArray)
-        }
-        if (dictionary["audios"] != nil) {
-            audios = Audio.modelsFromDictionaryArray(array: dictionary["audios"] as! NSArray)
         }
     }
     

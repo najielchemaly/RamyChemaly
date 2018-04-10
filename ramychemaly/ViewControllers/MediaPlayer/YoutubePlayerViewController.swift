@@ -38,7 +38,7 @@ class YoutubePlayerViewController: BaseViewController, YTPlayerViewDelegate {
         
         let playerVars = [
             "autoplay" : 0,
-            "controls" : 1,
+            "controls" : 0,
             "rel" : 0,
             "fs" : 0
         ]
@@ -46,7 +46,7 @@ class YoutubePlayerViewController: BaseViewController, YTPlayerViewDelegate {
     }
     
     func playerViewDidBecomeReady(_ playerView: YTPlayerView) {
-        
+        playerView.playVideo()
     }
     
     func playerView(_ playerView: YTPlayerView, didChangeTo state: YTPlayerState) {

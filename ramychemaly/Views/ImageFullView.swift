@@ -42,9 +42,8 @@ class ImageFullView: UIView, FSPagerViewDelegate, FSPagerViewDataSource {
         if let cell = pagerView.dequeueReusableCell(withReuseIdentifier: CellIdentifiers.ImageFullCollectionViewCell, at: index) as? ImageFullCollectionViewCell {
             
             let photo = photos[index]
-            // TODO change to img_url
-            if let imgUrl = photo.img_thumb {
-                cell.imageViewIcon.kf.setImage(with: URL(string: imgUrl))
+            if let imgUrl = photo.img_url {
+                cell.imageViewIcon.kf.setImage(with: URL(string: Services.getMediaUrl() + imgUrl))
             }
             
             return cell

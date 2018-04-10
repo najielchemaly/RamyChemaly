@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseMessaging
 import InteractiveSideMenu
 
 class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardable {
@@ -21,6 +22,8 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var stackViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageViewIcon: UIImageView!
+    @IBOutlet weak var imageOverlayView: UIView!
     
     let padding: CGFloat = 10
     
@@ -28,8 +31,7 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        let screenWidth = self.view.frame.size.width
-        self.stackViewHeightConstraint.constant = (screenWidth-padding)*1.1
+        self.initializeViews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -39,6 +41,13 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setNotificationBadgeNumber(label: labelBadge)
+        labelUsername.text = currentUser.fullname
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,6 +80,28 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     
     @IBAction func buttonDiscographyTapped(_ sender: Any) {
         self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.DiscographyViewController, type: .present)
+    }
+    
+    @IBAction func buttonChangeAvatarTapped(_ sender: Any) {
+        SelectAvatarViewController.comingFrom = .edit
+        self.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.SelectAvatarViewController, type: .present)
+    }
+    
+    func initializeViews() {
+        let screenWidth = self.view.frame.size.width
+        stackViewHeightConstraint.constant = (screenWidth-padding)*1.1
+        
+        imageViewIcon.layer.cornerRadius = imageViewIcon.frame.size.width/2
+        imageOverlayView.layer.cornerRadius = imageOverlayView.frame.size.width/2
+        if let avatar = currentUser.avatar {
+            let imageUrl = avatar.isEmpty ? defaultBackground : avatar
+            imageViewIcon.kf.setImage(with: URL(string: Services.getMediaUrl() + imageUrl!))
+        }
+        if let avatarName = currentUser.avatar_name {
+            imageViewIcon.image = UIImage(named: avatarName)
+        }
+        
+        Messaging.messaging().subscribe(toTopic: "/topics/ramychemalynews")
     }
     
     /*

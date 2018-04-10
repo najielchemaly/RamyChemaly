@@ -11,40 +11,83 @@ import CoreData
 import Firebase
 import UserNotifications
 import FBSDKCoreKit
+import SwiftyJSON
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
+    private var _services: Services!
+    var services: Services {
+        get {
+            if _services == nil {
+                _services = Services.init()
+            }
+        
+            return _services
+        }
+    }
+    
     var window: UIWindow?
-
-    let gcmMessageIDKey: String = "message"
+    
+    let gcmMessageIDKey: String = "gcm.message_id"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        getConfig() { data in
+            if let jsonData = data as Data? {
+                if let json = String(data: jsonData, encoding: .utf8) {
+                    if let dict = JSON.init(parseJSON: json).dictionary {
+                        if let base_url = dict["base_url"] {
+                            Services.setBaseUrl(url: base_url.stringValue)
+                        }
+                        if let media_url = dict["media_url"] {
+                            Services.setMediaUrl(url: media_url.stringValue)
+                        }
+                        if let default_background = dict["default_background"] {
+                            defaultBackground = default_background.stringValue
+                        }
+                    }
+                }
+            }
+
+            if let data = UserDefaults.standard.data(forKey: "user"),
+                let user = NSKeyedUnarchiver.unarchiveObject(with: data) as? User {
+                if let initialViewController = mainStoryboard.instantiateViewController(withIdentifier: StoryboardIds.InitialMenuViewController) as? InitialMenuViewController {
+                    currentUser = user
+                    DispatchQueue.main.async {
+                        self.window?.rootViewController = initialViewController
+                    }
+                }
+            }
+        }
         
 //        Localization.doTheExchange()
         
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        FirebaseApp.configure()
-        
-        if #available(iOS 10.0, *) {
-            // For iOS 10 display notification (sent via APNS)
-            UNUserNotificationCenter.current().delegate = self
+        let isNotificationOn = UserDefaults.standard.value(forKey: "isNotificationOn")
+        if let isOn = isNotificationOn as? Bool, isOn || isNotificationOn == nil {
+            FirebaseApp.configure()
             
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
-        } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
+            if #available(iOS 10.0, *) {
+                // For iOS 10 display notification (sent via APNS)
+                UNUserNotificationCenter.current().delegate = self
+                
+                let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+                UNUserNotificationCenter.current().requestAuthorization(
+                    options: authOptions,
+                    completionHandler: {_, _ in })
+            } else {
+                let settings: UIUserNotificationSettings =
+                    UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+                application.registerUserNotificationSettings(settings)
+            }
+            
+            self.registerForRemoteNotifications()
+            
+            Messaging.messaging().delegate = self
         }
-        
-        application.registerForRemoteNotifications()
-        
-        Messaging.messaging().delegate = self
         
 //        GMSServices.provideAPIKey(GMS_APIKEY)
 //        GMSPlacesClient.provideAPIKey(GMS_APIKEY)
@@ -52,15 +95,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
 //        let lang = Localization.currentLanguage()
 //        Localization.setLanguageTo(lang)
         
-//        let storyboard = UIStoryboard.init(name: "Main", bundle: .main)
-//        if let data = UserDefaults.standard.data(forKey: "user"),
-//            let user = NSKeyedUnarchiver.unarchiveObject(with: data) as? User {
-//            if let navTabBar = storyboard.instantiateViewController(withIdentifier: "navTabBar") as? UINavigationController {
-//                self.window?.rootViewController = navTabBar
-//            }
-//        }
-        
         return true
+    }
+    
+    func getConfig(completion:@escaping (NSData?) -> ()) {
+        var request = URLRequest(url: URL(string: Services.ConfigUrl)!)
+        request.httpMethod = "POST"
+        let session = URLSession.shared
+        
+        session.dataTask(with: request) { data, response, error in
+            if error == nil{
+                return completion(data as NSData?)
+            }else{
+                return completion(nil)
+            }
+            }.resume()
+    }
+    
+    func unregisterFromRemoteNotifications() {
+        UIApplication.shared.unregisterForRemoteNotifications()
+    }
+    
+    func registerForRemoteNotifications() {
+        UIApplication.shared.registerForRemoteNotifications()
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
@@ -107,13 +164,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
-        // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
+            
+            DispatchQueue.main.async {
+                updateNotificationBadge()
+                
+                if let baseVC = currentVC as? BaseViewController {
+                    baseVC.redirectToVC(storyboard: mainStoryboard, storyboardId: StoryboardIds.NotificationsViewController, type: .present)
+                }
+            }
         }
-        
-        // Print full message.
-        print(userInfo)
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
@@ -125,13 +186,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
-        // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
+            
+            DispatchQueue.main.async {
+                updateNotificationBadge()
+                
+                if let homeVC = currentVC as? HomeViewController {
+                    homeVC.setNotificationBadgeNumber(label: homeVC.labelBadge)
+                }
+                if let notificationsVC = currentVC as? NotificationsViewController {
+                    notificationsVC.handleRefresh()
+                }
+            }
         }
-        
-        // Print full message.
-        print(userInfo)
         
         completionHandler(UIBackgroundFetchResult.newData)
     }
@@ -164,6 +232,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUser
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+        
+        if let baseVC = currentVC as? BaseViewController {
+            baseVC.removeAudioObjectsFromUserDefaults()
+        }
     }
 
     // MARK: - Core Data stack

@@ -32,8 +32,35 @@ class SignupViewController: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func buttonSignupTapped(_ sender: Any) {
-        if !isValidData() {
-            self.redirectToVC(storyboardId: StoryboardIds.SelectAvatarViewController, type: .push)
+        if isValidData() {
+            self.showLoader()
+            
+            let fullname = self.textFieldFullName.text
+            let email = self.textFieldEmail.text
+            let password = self.textFieldPassword.text
+            let phoneNumber = self.textFieldPhoneNumber.text
+            
+            DispatchQueue.global(qos: .background).async {
+                let response = appDelegate.services.registerUser(fullname: fullname!, email: email!, password: password!, phoneNumber: phoneNumber!)
+                
+                DispatchQueue.main.async {
+                    if response?.status == ResponseStatus.SUCCESS.rawValue {
+                        if let json = response?.json?.first {
+                            if let jsonUser = json["user"] as? NSDictionary {
+                                if let user = User.init(dictionary: jsonUser) {
+                                    currentUser = user
+                                    SelectAvatarViewController.comingFrom = .signup
+                                    self.redirectToVC(storyboardId: StoryboardIds.SelectAvatarViewController, type: .push)
+                                }
+                            }
+                        }
+                    } else if let message = response?.message {
+                        self.showAlertView(message: message)
+                    }
+                    
+                    self.hideLoader()
+                }
+            }
         } else {
             self.showAlertView(message: errorMessage, doneTitle: "Ok")
         }
@@ -51,7 +78,7 @@ class SignupViewController: BaseViewController, UITextFieldDelegate {
     var errorMessage: String!
     func isValidData() -> Bool {
         if textFieldFullName.text == nil || textFieldFullName.text == "" {
-            errorMessage = "Full name field cannot be empty"
+            errorMessage = "Fullname field cannot be empty"
             return false
         }
         if textFieldEmail.text == nil || textFieldEmail.text == "" {
@@ -79,14 +106,32 @@ class SignupViewController: BaseViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
-        if textField == textFieldEmail {
+        if textField == textFieldFullName {
+            textFieldEmail.becomeFirstResponder()
+        } else if textField == textFieldEmail {
+            textFieldPhoneNumber.becomeFirstResponder()
+        } else if textField == textFieldPhoneNumber {
             textFieldPassword.becomeFirstResponder()
+        } else if textField == textFieldPassword {
+            textFieldConfirmPassword.becomeFirstResponder()
         } else {
             self.dismissKeyboard()
         }
         
         return true
+    }
+    
+    func dummyData() {
+        currentUser = User()
+        currentUser.id = "1"
+        currentUser.fullname = self.textFieldFullName.text
+        currentUser.email = self.textFieldEmail.text
+        currentUser.phone = self.textFieldPhoneNumber.text
+        currentUser.role = "admin"
+        
+        self.hideLoader()
+        SelectAvatarViewController.comingFrom = .signup
+        self.redirectToVC(storyboardId: StoryboardIds.SelectAvatarViewController, type: .push)
     }
     
     /*

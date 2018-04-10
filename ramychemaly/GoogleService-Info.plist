@@ -11,7 +11,7 @@
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.588595079023-tl1naov70vlkfijpo0c8t99e1195uc9q</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCvRXl7zHrFGKPbLjhchxDzih1oa2V49qc</string>
+	<string>AIzaSyCowLoQDafxd8UlFBq2FrpEoL29GciDs0w</string>
 	<key>GCM_SENDER_ID</key>
 	<string>588595079023</string>
 	<key>PLIST_VERSION</key>
@@ -23,15 +23,15 @@
 	<key>STORAGE_BUCKET</key>
 	<string>ramychemaly-489be.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:588595079023:ios:cee16c1e57e1bce1</string>
 	<key>DATABASE_URL</key>

@@ -71,8 +71,8 @@ class NotificationsViewController: BaseViewController, UITableViewDelegate, UITa
         self.refreshControl.addTarget(self, action: #selector(handleRefresh), for: UIControlEvents.valueChanged)
     }
     
-    @objc func handleRefresh() {
-        if self.notifications.count == 0 {
+    @objc func handleRefresh(fromNotification: Bool = false) {
+        if self.notifications.count == 0 && !fromNotification {
             self.showLoader()
         }
         
@@ -81,24 +81,22 @@ class NotificationsViewController: BaseViewController, UITableViewDelegate, UITa
     
     func getNotifications() {
         DispatchQueue.global(qos: .background).async {
-            let response = Services.init().getNotifications()
-            if response?.status == ResponseStatus.SUCCESS.rawValue {
-                if let json = response?.json?.first {
-                    if let jsonArray = json["notifications"] as? [NSDictionary] {
-                        self.notifications = [Notification]()
-                        for json in jsonArray {
-                            let notification = Notification.init(dictionary: json)
-                            self.notifications.append(notification!)
+            let response = appDelegate.services.getNotifications()
+            
+            DispatchQueue.main.async {
+//                self.dummyData()
+                if response?.status == ResponseStatus.SUCCESS.rawValue {
+                    if let json = response?.json?.first {
+                        if let jsonArray = json["notifications"] as? [NSDictionary] {
+                            self.notifications = [Notification]()
+                            for json in jsonArray {
+                                let notification = Notification.init(dictionary: json)
+                                self.notifications.append(notification!)
+                            }
                         }
                     }
                 }
-            } else if response?.status == ResponseStatus.UNAUTHORIZED.rawValue {
-                self.logout()
-            }
             
-            self.dummyData()
-            
-            DispatchQueue.main.async {
                 self.hideLoader()
                 self.refreshControl.endRefreshing()
                 
@@ -109,9 +107,16 @@ class NotificationsViewController: BaseViewController, UITableViewDelegate, UITa
                 } else {
                     self.tableView.reloadData()
                     self.removeEmptyView()
+                    self.updateNotificationBadge()
                 }
             }
         }
+    }
+    
+    func updateNotificationBadge() {
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        UserDefaults.standard.removeObject(forKey: "notificationNumber")
+        UserDefaults.standard.synchronize()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -125,7 +130,7 @@ class NotificationsViewController: BaseViewController, UITableViewDelegate, UITa
         }
         if let estimatedHeight = notification.rowHeight {
             if indexPath.row == 0 {
-                return tableRowHeight/2 + (estimatedHeight < tableRowHeight ? tableRowHeight : estimatedHeight)
+                return tableRowHeight + (estimatedHeight < tableRowHeight ? tableRowHeight : estimatedHeight)
             }
             
             return tableRowHeight + (estimatedHeight < tableRowHeight ? tableRowHeight : estimatedHeight)
@@ -139,17 +144,24 @@ class NotificationsViewController: BaseViewController, UITableViewDelegate, UITa
             cell.selectionStyle = .none
             
             let notification = notifications[indexPath.row]
-            cell.labelDescription.text = notification.description
-            cell.labelTime.text = notification.date
+            cell.labelDescription.text = notification.desc
+            
+            if let dateString = notification.date {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                if let date = formatter.date(from: dateString) {
+                    cell.labelTime.text = timeAgoSince(date)
+                }
+            }
             
             var height: Int = 0
-            if let descriptionHeight = notification.description?.height(width: cell.labelDescription.frame.size.width, font: cell.labelDescription.font!) {
+            if let descriptionHeight = notification.desc?.height(width: cell.labelDescription.frame.size.width, font: cell.labelDescription.font!) {
                 height += Int(descriptionHeight)
             }
             
             notifications[indexPath.row].rowHeight = CGFloat(height)
 
-            if notification.isRead! {
+            if notification.isRead != nil && notification.isRead! {
                 cell.backgroundColor = Colors.readNotif
                 cell.unreadView.isHidden = true
             } else {
@@ -188,13 +200,13 @@ class NotificationsViewController: BaseViewController, UITableViewDelegate, UITa
         for var i in (0..<5)
         {
             let notification = Notification()
-            notification.description = description
+            notification.desc = description
             
             if i < 2 {
                 notification.isRead = false
                 notification.date = "Just now"
                 if i == 0 {
-                    notification.description = "'أنا لا أموت بل أدخل الحياة' سنحتفل بالذّبيحة الإلاهيّة لراحة نفس ملاكنا رامي، نهار الخميس الواقع فيه ٨/٣/٢٠١٨ في تمام السّاعة الثّامنة مساءً في كنيسة مار يوسف - سهيله"
+                    notification.desc = "'أنا لا أموت بل أدخل الحياة' سنحتفل بالذّبيحة الإلاهيّة لراحة نفس ملاكنا رامي، نهار الخميس الواقع فيه ٨/٣/٢٠١٨ في تمام السّاعة الثّامنة مساءً في كنيسة مار يوسف - سهيله"
                     notification.type = "mass"
                     notification.location = "33.958557, 35.670012"
                     notification.img_url = "https://lh3.googleusercontent.com/-2hUlZ8eF6Xc/UwOk62B6RmI/AAAAAAAAAGI/ltiBlu40KeM/w530-h527-n/1957547_279596762190133_1508036990_n.jpg"

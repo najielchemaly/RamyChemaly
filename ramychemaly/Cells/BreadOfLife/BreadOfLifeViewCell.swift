@@ -14,6 +14,7 @@ class BreadOfLifeViewCell: FSPagerViewCell {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var textViewDescription: UITextView!
+    @IBOutlet weak var imageViewIcon: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
