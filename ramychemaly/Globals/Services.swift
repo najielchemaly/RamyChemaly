@@ -70,8 +70,8 @@ class Services {
         }
     }
     
-    static let ConfigUrl = "http://config.ramychemaly.com/"
-//    private let ConfigUrl = "http://localhost/ramychemaly/services/getConfig/"
+//    static let ConfigUrl = "http://config.ramychemaly.com/"
+    static let ConfigUrl = "http://localhost/ramychemaly/services/getConfig/"
     
     private static var _BaseUrl: String = ""
     var BaseUrl: String {

@@ -129,11 +129,7 @@ class NotificationsViewController: BaseViewController, UITableViewDelegate, UITa
             return tableRowHeight*2
         }
         if let estimatedHeight = notification.rowHeight {
-            if indexPath.row == 0 {
-                return tableRowHeight + (estimatedHeight < tableRowHeight ? tableRowHeight : estimatedHeight)
-            }
-            
-            return tableRowHeight + (estimatedHeight < tableRowHeight ? tableRowHeight : estimatedHeight)
+            return estimatedHeight < tableRowHeight ? tableRowHeight : estimatedHeight
         }
         
         return UITableViewAutomaticDimension

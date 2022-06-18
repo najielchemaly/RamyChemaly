@@ -88,8 +88,8 @@ class HomeViewController: BaseViewController, SideMenuItemContent, Storyboardabl
     }
     
     func initializeViews() {
-        let screenWidth = self.view.frame.size.width
-        stackViewHeightConstraint.constant = (screenWidth-padding)*1.1
+//        let screenWidth = self.view.frame.size.width
+//        stackViewHeightConstraint.constant = (screenWidth-padding)*1.1
         
         imageViewIcon.layer.cornerRadius = imageViewIcon.frame.size.width/2
         imageOverlayView.layer.cornerRadius = imageOverlayView.frame.size.width/2

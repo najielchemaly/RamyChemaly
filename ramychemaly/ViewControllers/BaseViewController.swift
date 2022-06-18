@@ -190,6 +190,8 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         if let toolbarView = view?.first as? ToolbarView {
             self.toolbarView = toolbarView
             self.toolbarView.frame.size.width = self.view.frame.size.width
+            let statusBarHeight = UIApplication.shared.statusBarFrame.height/2
+            self.toolbarView.frame.size.height = self.toolbarView.frame.size.height + statusBarHeight
             self.toolbarView.frame.origin = CGPoint(x: 0, y: 0)
             self.view.addSubview(self.toolbarView)
         }
@@ -268,17 +270,14 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.alertView.viewContent.layer.cornerRadius = 20
         self.alertView.frame = self.view.bounds
         self.alertView.viewOverlay.alpha = 0
+        self.alertView.viewContent.alpha = 0
         self.view.addSubview(self.alertView)
         
-        let originalTopConstraint = self.alertView.contentTopConstraint.constant
-        self.alertView.contentTopConstraint.constant = self.alertView.frame.size.height
-        
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.2, animations: {
             self.alertView.viewOverlay.alpha = 1
         }, completion: { success in
-            self.alertView.contentTopConstraint.constant = originalTopConstraint
-            UIView.animate(withDuration: 0.2, animations: {
-                self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.alertView.viewContent.alpha = 1
             })
         })
         
@@ -287,9 +286,9 @@ class BaseViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     func hideAlertView() {
         if self.alertView != nil {
-            self.alertView.contentTopConstraint.constant = self.alertView.frame.size.height
             UIView.animate(withDuration: 0.2, animations: {
-                self.view.layoutIfNeeded()
+                self.alertView.viewOverlay.alpha = 1
+                self.alertView.viewContent.alpha = 0
             }, completion: { success in
                 self.alertView.removeFromSuperview()
             })
